@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:valorant_intel/config/theme/app_theme.dart';
+import 'package:valorant_intel/service_locator.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
+  await initGetIt();
   runApp(const MyApp());
 }
 
@@ -11,10 +13,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      home: const Placeholder(),
+      title: 'Valorant Intel',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.dark,
+      home: const Scaffold(
+        body: Center(
+          child: Text('Hello World'),
+        ),
+      ),
     );
   }
 }
