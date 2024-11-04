@@ -5,7 +5,7 @@ class AgentRemoteDatasource {
 
   AgentRemoteDatasource({required Dio dio}) : _dio = dio;
 
-  Future<Response> getAgents() async {
+  Future<Response> getAllAgents() async {
     Map<String, dynamic> queryParameters = {
       'language': 'en-US',
       'isPlayableCharacter': true
