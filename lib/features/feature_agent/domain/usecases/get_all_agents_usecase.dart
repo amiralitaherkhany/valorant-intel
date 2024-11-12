@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:valorant_intel/core/usecases/use_case.dart';
-import 'package:valorant_intel/features/agents/domain/entities/agent_entity.dart';
-import 'package:valorant_intel/features/agents/domain/repositories/agent_repository.dart';
+import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
+import 'package:valorant_intel/features/feature_agent/domain/repositories/agent_repository.dart';
 
 class GetAllAgentsUsecase
     implements UseCase<Future<Either<String, List<AgentEntity>>>, NoParams> {

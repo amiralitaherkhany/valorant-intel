@@ -1,4 +1,4 @@
-import 'package:valorant_intel/features/agents/domain/entities/agent_entity.dart';
+import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
 
 import 'ability.dart';
 import 'role.dart';

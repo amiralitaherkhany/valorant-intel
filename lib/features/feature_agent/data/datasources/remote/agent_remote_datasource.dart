@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:valorant_intel/core/errors/api_exception.dart';
-import 'package:valorant_intel/features/agents/data/datasources/agent_datasource.dart';
-import 'package:valorant_intel/features/agents/data/models/agent_model/agent_model.dart';
+import 'package:valorant_intel/features/feature_agent/data/datasources/agent_datasource.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent_model/agent_model.dart';
 
 class AgentRemoteDatasource implements AgentDatasource {
   final Dio _dio;

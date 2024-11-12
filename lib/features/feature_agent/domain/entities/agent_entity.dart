@@ -1,5 +1,5 @@
-import 'package:valorant_intel/features/agents/data/models/agent_model/ability.dart';
-import 'package:valorant_intel/features/agents/data/models/agent_model/role.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent_model/ability.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent_model/role.dart';
 
 class AgentEntity {
   final String? uuid;
