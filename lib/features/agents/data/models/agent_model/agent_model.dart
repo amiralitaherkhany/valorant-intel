@@ -52,7 +52,7 @@ class AgentModel {
     required this.voiceLine,
   });
 
-  factory AgentModel.fromJson(Map<String, dynamic> json) => AgentModel(
+  factory AgentModel.fromMap(Map<String, dynamic> json) => AgentModel(
         uuid: json['uuid'] as String?,
         displayName: json['displayName'] as String?,
         description: json['description'] as String?,
