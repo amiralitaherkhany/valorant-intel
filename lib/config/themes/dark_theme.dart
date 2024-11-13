@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:valorant_intel/config/theme/colors.dart';
-import 'package:valorant_intel/config/theme/typography.dart';
+import 'package:valorant_intel/config/themes/colors.dart';
+import 'package:valorant_intel/config/themes/typography.dart';
 
 final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,

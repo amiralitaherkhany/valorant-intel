@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:valorant_intel/config/theme/colors.dart';
+import 'package:valorant_intel/config/themes/colors.dart';
 
 class AppTypography {
   // Headline styles

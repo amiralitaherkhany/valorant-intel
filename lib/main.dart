@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:valorant_intel/config/theme/app_theme.dart';
+import 'package:valorant_intel/config/routes/app_router.dart';
+import 'package:valorant_intel/config/themes/app_theme.dart';
 import 'package:valorant_intel/service_locator.dart';
 
 void main(List<String> args) async {
@@ -12,17 +13,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
       title: 'Valorant Intel',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.dark,
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World'),
-        ),
-      ),
     );
   }
 }
