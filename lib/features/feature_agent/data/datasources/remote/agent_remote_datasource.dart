@@ -23,7 +23,7 @@ class AgentRemoteDatasource implements AgentDatasource {
           .toList();
     } on DioException catch (e) {
       throw ApiException(
-        e.response?.data['error'] ?? 'unknown error',
+        e.response?.data['error'] ?? 'something went wrong',
         e.response?.data['status'] ?? e.response?.statusCode,
       );
     } catch (e) {
