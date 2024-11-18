@@ -2,61 +2,73 @@ import 'package:flutter/material.dart';
 import 'package:valorant_intel/config/themes/colors.dart';
 
 class AppTypography {
+  final Brightness brightness;
+
+  AppTypography(this.brightness);
+
   // Headline styles
-  static const TextStyle headline1 = TextStyle(
-    fontFamily: 'Tungsten',
-    fontSize: 32,
-    fontWeight: FontWeight.bold,
-    color: AppColors.white, // استفاده از رنگ سفید برای عنوان‌های بزرگ
-  );
+  TextStyle get headline1 => TextStyle(
+        fontFamily: 'Tungsten',
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+        color: brightness == Brightness.dark
+            ? AppColors.white
+            : AppColors.darkBlue,
+      );
 
-  static const TextStyle headline2 = TextStyle(
-    fontFamily: 'DINNext',
-    fontSize: 28,
-    fontWeight: FontWeight.bold,
-    color: AppColors.mainRed, // استفاده از رنگ قرمز اصلی برای عنوان‌های دوم
-  );
+  TextStyle get headline2 => const TextStyle(
+        fontFamily: 'DINNext',
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: AppColors.mainRed, // رنگ ثابت برای عنوان‌های دوم
+      );
 
-  static const TextStyle headline3 = TextStyle(
-    fontFamily: 'FFMark',
-    fontSize: 24,
-    fontWeight: FontWeight.w600,
-    color: AppColors.white, // استفاده از رنگ سفید برای عنوان‌های سوم
-  );
+  TextStyle get headline3 => TextStyle(
+        fontFamily: 'FFMark',
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: brightness == Brightness.dark
+            ? AppColors.white
+            : AppColors.darkBlue,
+      );
 
   // Body text styles
-  static const TextStyle bodyText1 = TextStyle(
-    fontFamily: 'ProximaNova',
-    fontSize: 16,
-    fontWeight: FontWeight.normal,
-    color: AppColors.grey, // استفاده از رنگ خاکستری برای متن‌های اصلی
-  );
+  TextStyle get bodyText1 => TextStyle(
+        fontFamily: 'ProximaNova',
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+        color: brightness == Brightness.dark
+            ? AppColors.white
+            : AppColors.darkBlue,
+      );
 
-  static const TextStyle bodyText2 = TextStyle(
-    fontFamily: 'Arial',
-    fontSize: 14,
-    fontWeight: FontWeight.normal,
-    color: AppColors.white, // استفاده از رنگ سفید برای متن‌های فرعی
-  );
+  TextStyle get bodyText2 => TextStyle(
+        fontFamily: 'Arial',
+        fontSize: 14,
+        fontWeight: FontWeight.normal,
+        color: brightness == Brightness.dark
+            ? AppColors.white
+            : AppColors.darkBlue,
+      );
 
   // Button text styles
-  static const TextStyle button = TextStyle(
-    fontFamily: 'DINNext',
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-    color: AppColors.darkBlue, // استفاده از رنگ آبی تیره برای متن دکمه‌ها
-  );
+  TextStyle get button => const TextStyle(
+        fontFamily: 'DINNext',
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: AppColors.darkBlue, // رنگ ثابت برای دکمه‌ها
+      );
 
   // Caption or small text
-  static const TextStyle caption = TextStyle(
-    fontFamily: 'ProximaNova',
-    fontSize: 12,
-    fontWeight: FontWeight.normal,
-    color: AppColors.grey, // استفاده از رنگ خاکستری برای متن‌های توضیحی کوچک
-  );
+  TextStyle get caption => TextStyle(
+        fontFamily: 'ProximaNova',
+        fontSize: 12,
+        fontWeight: FontWeight.normal,
+        color: brightness == Brightness.dark ? AppColors.white : AppColors.grey,
+      );
 
-  // Apply the custom text theme to an overall TextTheme
-  static TextTheme get textTheme => const TextTheme(
+  // Apply the custom text theme to an overall TextTheme based on current brightness
+  TextTheme get textTheme => TextTheme(
         displayLarge: headline1,
         displayMedium: headline2,
         displaySmall: headline3,
