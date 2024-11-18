@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:valorant_intel/core/presentation/main_wrapper.dart';
+import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
+import 'package:valorant_intel/features/feature_agent/presentation/pages/agent_page.dart';
+import 'package:valorant_intel/service_locator.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/home',
+    initialLocation: '/Home',
     routes: [
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => MainWrapper(
@@ -14,27 +18,53 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/home',
-                pageBuilder: (context, state) =>
-                    const MaterialPage(child: HomePage()),
+                path: '/Home',
+                pageBuilder: (context, state) => MaterialPage(
+                  child: BlocProvider<AgentBloc>(
+                    create: (context) => locator()..add(GetAllAgentsEvent()),
+                    child: const AgentsPage(),
+                  ),
+                ),
               ),
             ],
           ),
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/search',
-                pageBuilder: (context, state) =>
-                    const MaterialPage(child: SearchPage()),
+                path: '/Collections',
+                pageBuilder: (context, state) => const MaterialPage(
+                  child: Center(child: Text('Collections Page')),
+                ),
               ),
             ],
           ),
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/profile',
-                pageBuilder: (context, state) =>
-                    const MaterialPage(child: ProfilePage()),
+                path: '/Game',
+                pageBuilder: (context, state) => const MaterialPage(
+                  child: Center(child: Text('Game Page')),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/Profile',
+                pageBuilder: (context, state) => const MaterialPage(
+                  child: Center(child: Text('Profile Page')),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/Settings',
+                pageBuilder: (context, state) => const MaterialPage(
+                  child: Center(child: Text('Settings Page')),
+                ),
               ),
             ],
           )
