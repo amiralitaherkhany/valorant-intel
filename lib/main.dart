@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:valorant_intel/config/routes/app_router.dart';
 import 'package:valorant_intel/config/themes/app_theme.dart';
 import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc/settings_bloc.dart';
@@ -7,7 +8,8 @@ import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc
 import 'package:valorant_intel/service_locator.dart';
 
 void main(List<String> args) async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await initGetIt();
   runApp(
     BlocProvider<SettingsBloc>(
@@ -27,9 +29,14 @@ class MyApp extends StatelessWidget {
         ThemeMode themeMode;
         if (state.themeStatus is DarkThemeState) {
           themeMode = ThemeMode.dark;
-        } else {
+          FlutterNativeSplash.remove();
+        } else if (state.themeStatus is LightThemeState) {
           themeMode = ThemeMode.light;
+          FlutterNativeSplash.remove();
+        } else {
+          themeMode = ThemeMode.system;
         }
+
         return MaterialApp.router(
           routerConfig: AppRouter.router,
           title: 'Valorant Intel',
