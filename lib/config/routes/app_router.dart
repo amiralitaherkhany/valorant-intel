@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:valorant_intel/core/presentation/main_wrapper.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/pages/agent_page.dart';
+import 'package:valorant_intel/features/feature_settings/presentation/pages/settings_page.dart';
 import 'package:valorant_intel/service_locator.dart';
 
 class AppRouter {
@@ -63,7 +64,7 @@ class AppRouter {
               GoRoute(
                 path: '/Settings',
                 pageBuilder: (context, state) => const MaterialPage(
-                  child: Center(child: Text('Settings Page')),
+                  child: SettingsPage(),
                 ),
               ),
             ],

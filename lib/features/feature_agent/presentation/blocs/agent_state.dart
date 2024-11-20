@@ -1,7 +1,10 @@
 part of 'agent_bloc.dart';
 
-sealed class AgentState {
+sealed class AgentState extends Equatable {
   const AgentState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 final class AgentLoading extends AgentState {}
