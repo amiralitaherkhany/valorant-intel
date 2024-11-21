@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:valorant_intel/core/widgets/custom_loading_widget.dart';
 import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
@@ -75,6 +76,7 @@ class AgentSuccessView extends StatelessWidget {
       color: Theme.of(context).indicatorColor,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       onRefresh: () async {
+        HapticFeedback.vibrate();
         context.read<AgentBloc>().add(GetAllAgentsEvent());
       },
       child: ListView.builder(
