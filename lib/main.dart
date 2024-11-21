@@ -19,8 +19,21 @@ void main(List<String> args) async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isThemeApplied = false;
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => isThemeApplied ? FlutterNativeSplash.remove() : null);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +42,10 @@ class MyApp extends StatelessWidget {
         ThemeMode themeMode;
         if (state.themeStatus is DarkThemeState) {
           themeMode = ThemeMode.dark;
-          FlutterNativeSplash.remove();
+          isThemeApplied = true;
         } else if (state.themeStatus is LightThemeState) {
           themeMode = ThemeMode.light;
-          FlutterNativeSplash.remove();
+          isThemeApplied = true;
         } else {
           themeMode = ThemeMode.system;
         }
