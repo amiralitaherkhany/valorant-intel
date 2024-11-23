@@ -12,6 +12,7 @@ class MainWrapper extends StatelessWidget {
       child: Scaffold(
         body: navigationShell,
         bottomNavigationBar: BottomNavigationBar(
+          enableFeedback: true,
           currentIndex: navigationShell.currentIndex,
           onTap: (index) {
             navigationShell.goBranch(
