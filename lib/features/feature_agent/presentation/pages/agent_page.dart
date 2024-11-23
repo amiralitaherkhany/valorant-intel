@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:valorant_intel/config/themes/colors.dart';
 import 'package:valorant_intel/core/widgets/custom_loading_widget.dart';
 import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
@@ -72,21 +74,38 @@ class AgentSuccessView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      color: Theme.of(context).indicatorColor,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      onRefresh: () async {
-        HapticFeedback.vibrate();
-        context.read<AgentBloc>().add(GetAllAgentsEvent());
-      },
-      child: ListView.builder(
-        itemCount: agentEntityList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(agentEntityList[index].displayName!),
-          );
-        },
-      ),
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      slivers: [
+        CupertinoSliverRefreshControl(
+          refreshIndicatorExtent: 50,
+          refreshTriggerPullDistance: 100,
+          onRefresh: () async {
+            HapticFeedback.vibrate();
+            context.read<AgentBloc>().add(GetAllAgentsEvent());
+          },
+          builder: (context, refreshState, pulledExtent,
+                  refreshTriggerPullDistance, refreshIndicatorExtent) =>
+              Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: AppColors.mainRed,
+            child: const Center(
+              child: Text(
+                'Pull to refresh',
+              ),
+            ),
+          ),
+        ),
+        SliverList.builder(
+          itemCount: agentEntityList.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(agentEntityList[index].displayName!),
+            );
+          },
+        )
+      ],
     );
   }
 }
