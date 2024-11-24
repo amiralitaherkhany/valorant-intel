@@ -79,7 +79,7 @@ class AgentSuccessView extends StatelessWidget {
       slivers: [
         CupertinoSliverRefreshControl(
           refreshIndicatorExtent: 50,
-          refreshTriggerPullDistance: 100,
+          refreshTriggerPullDistance: 50,
           onRefresh: () async {
             HapticFeedback.vibrate();
             context.read<AgentBloc>().add(GetAllAgentsEvent());
