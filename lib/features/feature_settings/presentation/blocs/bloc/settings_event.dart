@@ -7,13 +7,13 @@ sealed class SettingsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SetThemeEvent extends SettingsEvent {
+class SetThemeModeEvent extends SettingsEvent {
   final bool isDarkMode;
 
-  const SetThemeEvent({required this.isDarkMode});
+  const SetThemeModeEvent({required this.isDarkMode});
 
   @override
   List<Object> get props => [isDarkMode];
 }
 
-class GetThemeEvent extends SettingsEvent {}
+class GetThemeModeEvent extends SettingsEvent {}

@@ -13,7 +13,7 @@ void main(List<String> args) async {
   await initGetIt();
   runApp(
     BlocProvider<SettingsBloc>(
-      create: (_) => locator()..add(GetThemeEvent()),
+      create: (_) => locator()..add(GetThemeModeEvent()),
       child: const MyApp(),
     ),
   );
@@ -31,7 +31,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
-        (_) => isThemeApplied ? FlutterNativeSplash.remove() : null);
+      (_) => isThemeApplied ? FlutterNativeSplash.remove() : null,
+    );
     super.initState();
   }
 
@@ -39,15 +40,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
-        ThemeMode themeMode;
-        if (state.themeStatus is DarkThemeState) {
-          themeMode = ThemeMode.dark;
+        if (state.themeStatus is ThemeChanged) {
           isThemeApplied = true;
-        } else if (state.themeStatus is LightThemeState) {
-          themeMode = ThemeMode.light;
-          isThemeApplied = true;
-        } else {
-          themeMode = ThemeMode.system;
         }
 
         return MaterialApp.router(
@@ -56,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
-          themeMode: themeMode,
+          themeMode: state.themeStatus.themeMode,
         );
       },
     );

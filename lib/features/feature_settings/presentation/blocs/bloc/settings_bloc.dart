@@ -15,22 +15,25 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc({
     required this.getThemeModeUsecase,
     required this.setThemeModeUsecase,
-  }) : super(SettingsState(themeStatus: ThemeInitial())) {
-    on<GetThemeEvent>((event, emit) async {
-      final result = await getThemeModeUsecase(NoParams());
-      if (result == ThemeMode.dark) {
-        emit(state.copyWith(newThemeStatus: DarkThemeState()));
-      } else {
-        emit(state.copyWith(newThemeStatus: LightThemeState()));
-      }
+  }) : super(
+          SettingsState(
+            themeStatus: ThemeInitial(),
+          ),
+        ) {
+    on<GetThemeModeEvent>((event, emit) async {
+      final themeMode = await getThemeModeUsecase(NoParams());
+      emit(state.copyWith(newThemeStatus: ThemeChanged(themeMode: themeMode)));
     });
-    on<SetThemeEvent>((event, emit) async {
+
+    on<SetThemeModeEvent>((event, emit) async {
       await setThemeModeUsecase(
           event.isDarkMode ? ThemeMode.dark : ThemeMode.light);
       if (event.isDarkMode) {
-        emit(state.copyWith(newThemeStatus: DarkThemeState()));
+        emit(state.copyWith(
+            newThemeStatus: ThemeChanged(themeMode: ThemeMode.dark)));
       } else {
-        emit(state.copyWith(newThemeStatus: LightThemeState()));
+        emit(state.copyWith(
+            newThemeStatus: ThemeChanged(themeMode: ThemeMode.light)));
       }
     });
   }

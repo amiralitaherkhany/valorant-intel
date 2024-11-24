@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class ThemeStatus {}
+abstract class ThemeStatus {
+  ThemeMode get themeMode;
+}
 
-final class ThemeInitial extends ThemeStatus {}
+final class ThemeInitial extends ThemeStatus {
+  @override
+  ThemeMode get themeMode => ThemeMode.system;
+}
 
-final class LightThemeState extends ThemeStatus {}
+final class ThemeChanged extends ThemeStatus {
+  @override
+  final ThemeMode themeMode;
 
-final class DarkThemeState extends ThemeStatus {}
+  ThemeChanged({required this.themeMode});
+}
