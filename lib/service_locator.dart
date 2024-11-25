@@ -12,7 +12,9 @@ import 'package:valorant_intel/features/feature_settings/data/datasources/local/
 import 'package:valorant_intel/features/feature_settings/data/datasources/settings_datasource.dart';
 import 'package:valorant_intel/features/feature_settings/data/repositories/settings_repository_impl.dart';
 import 'package:valorant_intel/features/feature_settings/domain/repositories/settings_repository.dart';
+import 'package:valorant_intel/features/feature_settings/domain/usecases/get_language_usecase.dart';
 import 'package:valorant_intel/features/feature_settings/domain/usecases/get_theme_mode_usecase.dart';
+import 'package:valorant_intel/features/feature_settings/domain/usecases/set_language_usecase.dart';
 import 'package:valorant_intel/features/feature_settings/domain/usecases/set_theme_mode_usecase.dart';
 import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc/settings_bloc.dart';
 
@@ -66,6 +68,17 @@ Future<void> initGetIt() async {
     ),
   );
 
+  locator.registerFactory<SetLanguageUsecase>(
+    () => SetLanguageUsecase(
+      settingsRepository: locator(),
+    ),
+  );
+  locator.registerFactory<GetLanguageUsecase>(
+    () => GetLanguageUsecase(
+      settingsRepository: locator(),
+    ),
+  );
+
   //register blocs
   locator.registerFactory<AgentBloc>(
     () => AgentBloc(
@@ -76,6 +89,8 @@ Future<void> initGetIt() async {
     SettingsBloc(
       getThemeModeUsecase: locator(),
       setThemeModeUsecase: locator(),
+      getLanguageUsecase: locator(),
+      setLanguageUsecase: locator(),
     ),
   );
 }

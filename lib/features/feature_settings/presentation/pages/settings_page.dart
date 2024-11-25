@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc/settings_bloc.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) {
           bool isDarkMode;
-
           switch (state.themeStatus.themeMode) {
             case ThemeMode.dark:
               isDarkMode = true;
@@ -23,18 +28,62 @@ class SettingsPage extends StatelessWidget {
                   ? true
                   : false;
           }
+
           return ListView(
             children: [
-              SwitchListTile(
-                value: isDarkMode,
-                onChanged: (value) => context
-                    .read<SettingsBloc>()
-                    .add(SetThemeModeEvent(isDarkMode: value)),
-                title: const Text('Dark Mode'),
+              ThemeSwitcherListTile(isDarkMode: isDarkMode),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.language),
+                trailing: DropdownButton<String>(
+                  value: state.languageStatus.languageCode,
+                  items: [
+                    DropdownMenuItem(
+                      value: "en",
+                      child: Text(
+                        AppLocalizations.of(context)!.english,
+                      ),
+                    ),
+                    DropdownMenuItem(
+                      value: "es",
+                      child: Text(
+                        AppLocalizations.of(context)!.spanish,
+                      ),
+                    ),
+                  ],
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      context
+                          .read<SettingsBloc>()
+                          .add(SetLanguageEvent(languageCode: newValue));
+                    }
+                  },
+                ),
               )
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class ThemeSwitcherListTile extends StatelessWidget {
+  const ThemeSwitcherListTile({
+    super.key,
+    required this.isDarkMode,
+  });
+
+  final bool isDarkMode;
+
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+      value: isDarkMode,
+      onChanged: (value) => context
+          .read<SettingsBloc>()
+          .add(SetThemeModeEvent(isDarkMode: value)),
+      title: Text(
+        AppLocalizations.of(context)!.darkMode,
       ),
     );
   }

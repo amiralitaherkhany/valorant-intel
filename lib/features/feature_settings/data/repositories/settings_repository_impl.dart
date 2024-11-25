@@ -16,4 +16,14 @@ class SettingsRepositoryImpl implements SettingsRepository {
   Future<void> setThemeMode(ThemeMode themeMode) async {
     return await _settingsDatasource.setThemeMode(themeMode);
   }
+
+  @override
+  Future<String> getLanguage() async {
+    return await _settingsDatasource.getLanguage();
+  }
+
+  @override
+  Future<void> setLanguage(String languageCode) async {
+    await _settingsDatasource.setLanguage(languageCode);
+  }
 }

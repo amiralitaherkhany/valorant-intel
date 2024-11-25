@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:valorant_intel/config/themes/colors.dart';
 import 'package:valorant_intel/core/widgets/custom_loading_widget.dart';
 import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
@@ -54,8 +55,8 @@ class AgentErrorView extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () => context.read<AgentBloc>().add(GetAllAgentsEvent()),
-            child: const Text(
-              'Try Again',
+            child: Text(
+              AppLocalizations.of(context)!.tryAgain,
             ),
           ),
         ],
@@ -90,9 +91,9 @@ class AgentSuccessView extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             color: AppColors.mainRed,
-            child: const Center(
+            child: Center(
               child: Text(
-                'Pull to refresh',
+                AppLocalizations.of(context)!.pullToRefresh,
               ),
             ),
           ),
