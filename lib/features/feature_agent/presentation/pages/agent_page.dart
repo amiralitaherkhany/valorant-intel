@@ -102,7 +102,8 @@ class AgentSuccessView extends StatelessWidget {
           itemCount: agentEntityList.length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(agentEntityList[index].displayName!),
+              title:
+                  Text(agentEntityList[index].abilities?[0].displayName ?? ""),
             );
           },
         )
