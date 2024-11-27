@@ -3,8 +3,6 @@
     "appTitle": "Información de Valorant",
     "darkMode": "Modo oscuro",
     "language": "Idioma",
-    "english": "Inglés",
-    "spanish": "Español",
     "pullToRefresh": "Desliza para actualizar",
     "home": "Inicio",
     "collections": "Colecciones",
@@ -12,15 +10,7 @@
     "profile": "Perfil",
     "settings": "Configuración",
     "tryAgain": "Intentar de nuevo",
-    "@collections": {},
-    "@home": {},
-    "@game": {},
-    "@profile": {},
-    "@settings": {},
-    "@pullToRefresh": {},
-    "@english": {},
-    "@spanish": {},
-    "@language": {},
-    "@darkMode": {},
-    "@appTitle": {}
+    "networkFailure": "Verifica tu conexión a internet",
+    "serverError": "Algo salió mal",
+    "unknownError": "Error desconocido"
 }

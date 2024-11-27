@@ -26,12 +26,19 @@ class AgentRemoteDatasource implements AgentDatasource {
           .map<AgentModel>((element) => AgentModel.fromMap(element))
           .toList();
     } on DioException catch (e) {
-      throw ApiException(
-        e.response?.data['error'] ?? 'something went wrong',
-        e.response?.data['status'] ?? e.response?.statusCode,
-      );
+      if (e.type == DioExceptionType.connectionError) {
+        throw ApiException(
+          e.response?.data['error'] ?? 'networkFailure',
+          e.response?.data['status'] ?? e.response?.statusCode,
+        );
+      } else {
+        throw ApiException(
+          e.response?.data['error'] ?? 'serverError',
+          e.response?.data['status'] ?? e.response?.statusCode,
+        );
+      }
     } catch (e) {
-      throw ApiException('something went wrong', null);
+      throw ApiException('unknownError', null);
     }
   }
 }

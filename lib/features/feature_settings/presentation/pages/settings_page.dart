@@ -36,17 +36,17 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: Text(AppLocalizations.of(context)!.language),
                 trailing: DropdownButton<String>(
                   value: state.languageStatus.languageCode,
-                  items: [
+                  items: const [
                     DropdownMenuItem(
                       value: "en",
                       child: Text(
-                        AppLocalizations.of(context)!.english,
+                        "English",
                       ),
                     ),
                     DropdownMenuItem(
                       value: "es",
                       child: Text(
-                        AppLocalizations.of(context)!.spanish,
+                        "español",
                       ),
                     ),
                   ],

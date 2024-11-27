@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:valorant_intel/config/themes/colors.dart';
+import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/core/widgets/custom_loading_widget.dart';
 import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
@@ -47,7 +48,7 @@ class AgentErrorView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            message,
+            context.translate(message),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(
