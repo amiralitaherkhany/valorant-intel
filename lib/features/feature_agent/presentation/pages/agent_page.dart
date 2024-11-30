@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,7 +69,7 @@ class AgentErrorView extends StatelessWidget {
   }
 }
 
-class AgentSuccessView extends StatelessWidget {
+class AgentSuccessView extends StatefulWidget {
   const AgentSuccessView({
     super.key,
     required this.agentEntityList,
@@ -76,42 +78,80 @@ class AgentSuccessView extends StatelessWidget {
   final List<AgentEntity> agentEntityList;
 
   @override
+  State<AgentSuccessView> createState() => _AgentSuccessViewState();
+}
+
+class _AgentSuccessViewState extends State<AgentSuccessView> {
+  var _isAtTop = true;
+
+  final _controller = ScrollController();
+  @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
-      slivers: [
-        CupertinoSliverRefreshControl(
-          refreshIndicatorExtent: 50,
-          refreshTriggerPullDistance: 50,
-          onRefresh: () async {
-            HapticFeedback.vibrate();
-            context.read<AgentBloc>().add(GetAllAgentsEvent());
-          },
-          builder: (context, refreshState, pulledExtent,
-                  refreshTriggerPullDistance, refreshIndicatorExtent) =>
-              Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: AppColors.mainRed,
-            child: Center(
-              child: Text(
-                AppLocalizations.of(context)!.pullToRefresh,
+    return NotificationListener(
+      onNotification: (notification) {
+        /// Check if the scroll view is at the top.
+        ///
+        /// True when scroll offset <= 0. False otherwise.
+        if (notification is ScrollStartNotification) {
+          if (_controller.offset <= 0 && !_isAtTop) {
+            scheduleMicrotask(() {
+              if (mounted) {
+                setState(() {
+                  _isAtTop = true;
+                });
+              }
+            });
+          } else if (_controller.offset > 0 && _isAtTop) {
+            scheduleMicrotask(() {
+              if (mounted) {
+                setState(() {
+                  _isAtTop = false;
+                });
+              }
+            });
+          }
+        }
+        return false;
+      },
+      child: CustomScrollView(
+        controller: _controller,
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          if (_isAtTop) ...{
+            CupertinoSliverRefreshControl(
+              refreshIndicatorExtent: 50,
+              refreshTriggerPullDistance: 50,
+              onRefresh: () async {
+                HapticFeedback.vibrate();
+                context.read<AgentBloc>().add(GetAllAgentsEvent());
+              },
+              builder: (context, refreshState, pulledExtent,
+                      refreshTriggerPullDistance, refreshIndicatorExtent) =>
+                  Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: AppColors.mainRed,
+                child: Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.pullToRefresh,
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        SliverGrid.builder(
-          itemCount: agentEntityList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            mainAxisExtent: 150,
-          ),
-          itemBuilder: (context, index) =>
-              AgentCard(agentEntity: agentEntityList[index]),
-        )
-      ],
+          },
+          SliverGrid.builder(
+            itemCount: widget.agentEntityList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              mainAxisExtent: 150,
+            ),
+            itemBuilder: (context, index) =>
+                AgentCard(agentEntity: widget.agentEntityList[index]),
+          )
+        ],
+      ),
     );
   }
 }
