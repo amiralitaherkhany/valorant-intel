@@ -5,13 +5,13 @@ abstract class LanguageStatus {
   String get languageCode;
 }
 
-final class LanguageInitial extends LanguageStatus {
+final class LanguageInitialState extends LanguageStatus {
   @override
   String get languageCode => "en";
 }
 
-final class LanguageChanged extends LanguageStatus {
+final class LanguageChangedState extends LanguageStatus {
   @override
   final String languageCode;
-  LanguageChanged({required this.languageCode});
+  LanguageChangedState({required this.languageCode});
 }

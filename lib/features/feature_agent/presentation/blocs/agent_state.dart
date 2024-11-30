@@ -7,14 +7,14 @@ sealed class AgentState extends Equatable {
   List<Object?> get props => [];
 }
 
-final class AgentLoading extends AgentState {}
+final class AgentLoadingState extends AgentState {}
 
-final class AgentSuccess extends AgentState {
+final class AgentSuccessState extends AgentState {
   final List<AgentEntity> agentEntityList;
-  const AgentSuccess({required this.agentEntityList});
+  const AgentSuccessState({required this.agentEntityList});
 }
 
-final class AgentError extends AgentState {
+final class AgentErrorState extends AgentState {
   final String message;
-  const AgentError({required this.message});
+  const AgentErrorState({required this.message});
 }

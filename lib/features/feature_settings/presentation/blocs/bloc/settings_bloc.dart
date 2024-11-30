@@ -24,17 +24,17 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     required this.setLanguageUsecase,
   }) : super(
           SettingsState(
-            themeStatus: ThemeInitial(),
-            languageStatus: LanguageInitial(),
+            themeStatus: ThemeInitialState(),
+            languageStatus: LanguageInitialState(),
           ),
         ) {
-    on<InitializeSettings>((event, emit) async {
+    on<InitializeSettingsEvent>((event, emit) async {
       final themeMode = await getThemeModeUsecase(NoParams());
       final languageCode = await getLanguageUsecase(NoParams());
       emit(
         SettingsState(
-          themeStatus: ThemeChanged(themeMode: themeMode),
-          languageStatus: LanguageChanged(languageCode: languageCode),
+          themeStatus: ThemeChangedState(themeMode: themeMode),
+          languageStatus: LanguageChangedState(languageCode: languageCode),
         ),
       );
     });
@@ -44,10 +44,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           event.isDarkMode ? ThemeMode.dark : ThemeMode.light);
       if (event.isDarkMode) {
         emit(state.copyWith(
-            newThemeStatus: ThemeChanged(themeMode: ThemeMode.dark)));
+            newThemeStatus: ThemeChangedState(themeMode: ThemeMode.dark)));
       } else {
         emit(state.copyWith(
-            newThemeStatus: ThemeChanged(themeMode: ThemeMode.light)));
+            newThemeStatus: ThemeChangedState(themeMode: ThemeMode.light)));
       }
     });
 
@@ -56,7 +56,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await setLanguageUsecase(event.languageCode);
         emit(state.copyWith(
             newLanguageStatus:
-                LanguageChanged(languageCode: event.languageCode)));
+                LanguageChangedState(languageCode: event.languageCode)));
       },
     );
   }

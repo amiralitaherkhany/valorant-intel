@@ -5,14 +5,14 @@ abstract class ThemeStatus {
   ThemeMode get themeMode;
 }
 
-final class ThemeInitial extends ThemeStatus {
+final class ThemeInitialState extends ThemeStatus {
   @override
   ThemeMode get themeMode => ThemeMode.system;
 }
 
-final class ThemeChanged extends ThemeStatus {
+final class ThemeChangedState extends ThemeStatus {
   @override
   final ThemeMode themeMode;
 
-  ThemeChanged({required this.themeMode});
+  ThemeChangedState({required this.themeMode});
 }

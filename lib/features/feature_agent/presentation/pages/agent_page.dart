@@ -10,7 +10,7 @@ import 'package:valorant_intel/config/themes/colors.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
-import 'package:valorant_intel/features/feature_settings/presentation/widgets/agent_card.dart';
+import 'package:valorant_intel/features/feature_agent/presentation/pages/agent_card.dart';
 
 class AgentsPage extends StatelessWidget {
   const AgentsPage({super.key});
@@ -21,10 +21,10 @@ class AgentsPage extends StatelessWidget {
       body: BlocBuilder<AgentBloc, AgentState>(
         builder: (context, state) {
           return switch (state) {
-            AgentLoading() => const AgentLoadingView(),
-            AgentSuccess(agentEntityList: final agentEntityList) =>
+            AgentLoadingState() => const AgentLoadingView(),
+            AgentSuccessState(agentEntityList: final agentEntityList) =>
               AgentSuccessView(agentEntityList: agentEntityList),
-            AgentError(message: final message) => Center(
+            AgentErrorState(message: final message) => Center(
                 child: AgentErrorView(message: message),
               )
           };

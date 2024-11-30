@@ -9,14 +9,14 @@ part 'agent_state.dart';
 
 class AgentBloc extends Bloc<AgentEvent, AgentState> {
   final GetAllAgentsUsecase getAllAgentsUsecase;
-  AgentBloc({required this.getAllAgentsUsecase}) : super(AgentLoading()) {
+  AgentBloc({required this.getAllAgentsUsecase}) : super(AgentLoadingState()) {
     on<GetAllAgentsEvent>((event, emit) async {
-      emit(AgentLoading());
+      emit(AgentLoadingState());
       await getAllAgentsUsecase(NoParams()).then(
         (value) => value.fold(
-          (error) => emit(AgentError(message: error)),
+          (error) => emit(AgentErrorState(message: error)),
           (agentEntityList) =>
-              emit(AgentSuccess(agentEntityList: agentEntityList)),
+              emit(AgentSuccessState(agentEntityList: agentEntityList)),
         ),
       );
     });

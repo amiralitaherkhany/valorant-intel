@@ -15,7 +15,7 @@ void main(List<String> args) async {
   await initializeServiceLocator();
   runApp(
     BlocProvider<SettingsBloc>(
-      create: (_) => locator()..add(InitializeSettings()),
+      create: (_) => locator()..add(InitializeSettingsEvent()),
       child: const MyApp(),
     ),
   );
@@ -42,8 +42,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
-        if (state.themeStatus is ThemeChanged &&
-            state.languageStatus is LanguageChanged) {
+        if (state.themeStatus is ThemeChangedState &&
+            state.languageStatus is LanguageChangedState) {
           isSettingsApplied = true;
         }
 
