@@ -8,6 +8,7 @@ import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/core/widgets/custom_loading_widget.dart';
 import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
+import 'package:valorant_intel/features/feature_settings/presentation/widgets/agent_card.dart';
 
 class AgentsPage extends StatelessWidget {
   const AgentsPage({super.key});
@@ -99,14 +100,16 @@ class AgentSuccessView extends StatelessWidget {
             ),
           ),
         ),
-        SliverList.builder(
+        SliverGrid.builder(
           itemCount: agentEntityList.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title:
-                  Text(agentEntityList[index].abilities?[0].displayName ?? ""),
-            );
-          },
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            mainAxisExtent: 150,
+          ),
+          itemBuilder: (context, index) =>
+              AgentCard(agentEntity: agentEntityList[index]),
         )
       ],
     );
