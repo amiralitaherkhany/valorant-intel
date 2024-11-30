@@ -12,7 +12,7 @@ import 'package:valorant_intel/service_locator.dart';
 void main(List<String> args) async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  await initGetIt();
+  await initializeServiceLocator();
   runApp(
     BlocProvider<SettingsBloc>(
       create: (_) => locator()..add(InitializeSettings()),

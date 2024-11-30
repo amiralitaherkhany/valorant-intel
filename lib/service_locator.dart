@@ -21,7 +21,7 @@ import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc
 
 final GetIt locator = GetIt.instance;
 
-Future<void> initGetIt() async {
+Future<void> initializeServiceLocator() async {
   // Register components as a singleton
   locator.registerLazySingleton<Dio>(
     () => Dio(BaseOptions(baseUrl: ApiConstants.baseUrl)),
