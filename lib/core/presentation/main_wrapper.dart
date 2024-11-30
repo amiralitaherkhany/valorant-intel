@@ -13,6 +13,7 @@ class MainWrapper extends StatelessWidget {
       child: Scaffold(
         body: navigationShell,
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           enableFeedback: true,
           currentIndex: navigationShell.currentIndex,
           onTap: (index) {
