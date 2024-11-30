@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:valorant_intel/core/presentation/main_wrapper.dart';
+import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
+import 'package:valorant_intel/features/feature_agent/presentation/pages/agent_detail_page.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/pages/agent_page.dart';
 import 'package:valorant_intel/features/feature_settings/presentation/pages/settings_page.dart';
 import 'package:valorant_intel/service_locator.dart';
@@ -19,14 +21,26 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/Home',
-                pageBuilder: (context, state) => MaterialPage(
-                  child: BlocProvider<AgentBloc>(
-                    create: (context) => locator()..add(GetAllAgentsEvent()),
-                    child: const AgentsPage(),
-                  ),
-                ),
-              ),
+                  path: '/Home',
+                  pageBuilder: (context, state) => MaterialPage(
+                        child: BlocProvider<AgentBloc>(
+                          create: (context) =>
+                              locator()..add(GetAllAgentsEvent()),
+                          child: const AgentsPage(),
+                        ),
+                      ),
+                  routes: [
+                    GoRoute(
+                      path: 'AgentDetail',
+                      pageBuilder: (context, state) {
+                        return MaterialPage(
+                          child: AgentDetailPage(
+                            agentEntity: state.extra as AgentEntity,
+                          ),
+                        );
+                      },
+                    ),
+                  ]),
             ],
           ),
           StatefulShellBranch(
