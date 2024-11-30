@@ -8,7 +8,11 @@ final ThemeData lightTheme = ThemeData(
   primaryColor: AppColors.mainRed,
   scaffoldBackgroundColor: Colors.white,
   textTheme: _lightAppTypography.textTheme,
-  cardColor: AppColors.cardBackground,
+  cardTheme: const CardTheme(
+    color: AppColors.grey,
+    shadowColor: AppColors.mainRed,
+    elevation: 4,
+  ),
   iconTheme: const IconThemeData(color: AppColors.mainRed),
   appBarTheme: AppBarTheme(
     backgroundColor: Colors.white,
