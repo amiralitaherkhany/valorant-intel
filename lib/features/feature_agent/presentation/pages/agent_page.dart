@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:valorant_intel/config/themes/colors.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
-import 'package:valorant_intel/core/widgets/custom_loading_widget.dart';
 import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_settings/presentation/widgets/agent_card.dart';
@@ -21,9 +21,7 @@ class AgentsPage extends StatelessWidget {
       body: BlocBuilder<AgentBloc, AgentState>(
         builder: (context, state) {
           return switch (state) {
-            AgentLoading() => const Center(
-                child: CustomLoadingWidget(),
-              ),
+            AgentLoading() => const AgentLoadingView(),
             AgentSuccess(agentEntityList: final agentEntityList) =>
               AgentSuccessView(agentEntityList: agentEntityList),
             AgentError(message: final message) => Center(
@@ -31,6 +29,35 @@ class AgentsPage extends StatelessWidget {
               )
           };
         },
+      ),
+    );
+  }
+}
+
+class AgentLoadingView extends StatelessWidget {
+  const AgentLoadingView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      itemCount: 10,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        mainAxisExtent: 150,
+      ),
+      itemBuilder: (context, index) => Shimmer.fromColors(
+        baseColor: AppColors.white,
+        highlightColor: AppColors.grey,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.grey,
+          ),
+        ),
       ),
     );
   }
