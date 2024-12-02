@@ -32,7 +32,9 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
-
+  mockito: ^5.0.17
+  build_runner: ^2.3.3
+  bloc_test: ^9.1.7
 flutter:
   generate: true
   uses-material-design: true
