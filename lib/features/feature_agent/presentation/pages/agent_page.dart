@@ -37,27 +37,49 @@ class AgentLoadingView extends StatelessWidget {
   const AgentLoadingView({
     super.key,
   });
+  static late int gridColumnCount;
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: 10,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        mainAxisExtent: 150,
-      ),
-      itemBuilder: (context, index) => Shimmer.fromColors(
-        baseColor: AppColors.white,
-        highlightColor: AppColors.grey,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.grey,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        switch (constraints.maxWidth) {
+          case > 1440:
+            gridColumnCount = 6;
+          case > 1240:
+            gridColumnCount = 5;
+          case > 905:
+            gridColumnCount = 4;
+          case > 600:
+            gridColumnCount = 3;
+          default:
+            gridColumnCount = 2;
+        }
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: gridColumnCount / 0.3),
+          child: Shimmer.fromColors(
+            baseColor: AppColors.grey,
+            highlightColor: AppColors.white,
+            child: GridView.builder(
+              itemCount: 10,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: gridColumnCount,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                mainAxisExtent: 150,
+              ),
+              itemBuilder: (context, index) => Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -108,97 +130,94 @@ class AgentSuccessView extends StatefulWidget {
 }
 
 class _AgentSuccessViewState extends State<AgentSuccessView> {
-  bool _isAtTop = true;
+  final ValueNotifier _isAtTop = ValueNotifier(true);
   late int gridColumnCount;
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        debugPrint(constraints.maxWidth.toString());
-        switch (constraints.maxWidth) {
-          case > 1440:
-            gridColumnCount = 6;
-          case > 1240:
-            gridColumnCount = 5;
-          case > 905:
-            gridColumnCount = 4;
-          case > 600:
-            gridColumnCount = 3;
-          default:
-            gridColumnCount = 2;
-        }
-        return NotificationListener(
-          onNotification: (notification) {
-            /// Check if the scroll view is at the top.
-            ///
-            /// True when scroll offset <= 0. False otherwise.
-            if (notification is ScrollStartNotification) {
-              if (_controller.offset <= 0 && !_isAtTop) {
-                scheduleMicrotask(() {
-                  if (mounted) {
-                    setState(() {
-                      _isAtTop = true;
-                    });
-                  }
-                });
-              } else if (_controller.offset > 0 && _isAtTop) {
-                scheduleMicrotask(() {
-                  if (mounted) {
-                    setState(() {
-                      _isAtTop = false;
-                    });
-                  }
-                });
+    return LayoutBuilder(builder: (context, costraints) {
+      switch (costraints.maxWidth) {
+        case > 1440:
+          gridColumnCount = 6;
+        case > 1240:
+          gridColumnCount = 5;
+        case > 905:
+          gridColumnCount = 4;
+        case > 600:
+          gridColumnCount = 3;
+        default:
+          gridColumnCount = 2;
+      }
+      return NotificationListener<ScrollStartNotification>(
+        onNotification: (notification) {
+          if (_controller.offset <= 0 && !_isAtTop.value) {
+            scheduleMicrotask(() {
+              if (mounted) {
+                _isAtTop.value = true;
               }
-            }
-            return false;
-          },
-          child: CustomScrollView(
-            controller: _controller,
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              if (_isAtTop) ...{
-                CupertinoSliverRefreshControl(
-                  refreshIndicatorExtent: 50,
-                  refreshTriggerPullDistance: 50,
-                  onRefresh: () async {
-                    HapticFeedback.vibrate();
-                    context.read<AgentBloc>().add(GetAllAgentsEvent());
-                  },
-                  builder: (context, refreshState, pulledExtent,
-                          refreshTriggerPullDistance, refreshIndicatorExtent) =>
-                      Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: AppColors.mainRed,
-                    child: Center(
-                      child: Text(
-                        AppLocalizations.of(context)!.pullToRefresh,
+            });
+          } else if (_controller.offset > 0 && _isAtTop.value) {
+            scheduleMicrotask(() {
+              if (mounted) {
+                _isAtTop.value = false;
+              }
+            });
+          }
+          return false;
+        },
+        child: CustomScrollView(
+          controller: _controller,
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            ListenableBuilder(
+              listenable: _isAtTop,
+              builder: (context, child) {
+                return SliverVisibility(
+                  visible: _isAtTop.value,
+                  sliver: CupertinoSliverRefreshControl(
+                    refreshIndicatorExtent: 50,
+                    refreshTriggerPullDistance: 50,
+                    onRefresh: () async {
+                      HapticFeedback.vibrate();
+                      context.read<AgentBloc>().add(GetAllAgentsEvent());
+                    },
+                    builder: (context,
+                            refreshState,
+                            pulledExtent,
+                            refreshTriggerPullDistance,
+                            refreshIndicatorExtent) =>
+                        Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: AppColors.mainRed,
+                      child: Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.pullToRefresh,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                );
               },
-              SliverPadding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: gridColumnCount / 0.3),
-                sliver: SliverGrid.builder(
-                  itemCount: widget.agentEntityList.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: gridColumnCount,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    mainAxisExtent: 150,
-                  ),
-                  itemBuilder: (context, index) =>
-                      AgentCard(agentEntity: widget.agentEntityList[index]),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: gridColumnCount / 0.3),
+              sliver: SliverGrid.builder(
+                itemCount: widget.agentEntityList.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: gridColumnCount,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  mainAxisExtent: 150,
                 ),
-              )
-            ],
-          ),
-        );
-      },
-    );
+                itemBuilder: (context, index) {
+                  return AgentCard(agentEntity: widget.agentEntityList[index]);
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
