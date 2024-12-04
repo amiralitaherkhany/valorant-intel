@@ -26,12 +26,12 @@ class AgentCard extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: Hero(
-              tag: agentEntity.displayName!,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ClipRRect(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Hero(
+                  tag: agentEntity.displayIcon!,
+                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
                       width: 100,
@@ -51,13 +51,16 @@ class AgentCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Spacer(),
-                  Text(
+                ),
+                const Spacer(),
+                Hero(
+                  tag: agentEntity.displayName!,
+                  child: Text(
                     agentEntity.displayName!,
                     style: Theme.of(context).textTheme.bodyMedium,
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
         ),
