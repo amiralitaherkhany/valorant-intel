@@ -24,9 +24,8 @@ class AgentsPage extends StatelessWidget {
             AgentLoadingState() => const AgentLoadingView(),
             AgentSuccessState(agentEntityList: final agentEntityList) =>
               AgentSuccessView(agentEntityList: agentEntityList),
-            AgentErrorState(message: final message) => Center(
-                child: AgentErrorView(message: message),
-              )
+            AgentErrorState(message: final message) =>
+              AgentErrorView(message: message)
           };
         },
       ),
