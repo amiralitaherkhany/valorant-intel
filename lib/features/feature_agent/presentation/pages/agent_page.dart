@@ -109,76 +109,97 @@ class AgentSuccessView extends StatefulWidget {
 }
 
 class _AgentSuccessViewState extends State<AgentSuccessView> {
-  var _isAtTop = true;
-
+  bool _isAtTop = true;
+  late int gridColumnCount;
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return NotificationListener(
-      onNotification: (notification) {
-        /// Check if the scroll view is at the top.
-        ///
-        /// True when scroll offset <= 0. False otherwise.
-        if (notification is ScrollStartNotification) {
-          if (_controller.offset <= 0 && !_isAtTop) {
-            scheduleMicrotask(() {
-              if (mounted) {
-                setState(() {
-                  _isAtTop = true;
-                });
-              }
-            });
-          } else if (_controller.offset > 0 && _isAtTop) {
-            scheduleMicrotask(() {
-              if (mounted) {
-                setState(() {
-                  _isAtTop = false;
-                });
-              }
-            });
-          }
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        debugPrint(constraints.maxWidth.toString());
+        switch (constraints.maxWidth) {
+          case > 1440:
+            gridColumnCount = 6;
+          case > 1240:
+            gridColumnCount = 5;
+          case > 905:
+            gridColumnCount = 4;
+          case > 600:
+            gridColumnCount = 3;
+          default:
+            gridColumnCount = 2;
         }
-        return false;
-      },
-      child: CustomScrollView(
-        controller: _controller,
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          if (_isAtTop) ...{
-            CupertinoSliverRefreshControl(
-              refreshIndicatorExtent: 50,
-              refreshTriggerPullDistance: 50,
-              onRefresh: () async {
-                HapticFeedback.vibrate();
-                context.read<AgentBloc>().add(GetAllAgentsEvent());
-              },
-              builder: (context, refreshState, pulledExtent,
-                      refreshTriggerPullDistance, refreshIndicatorExtent) =>
-                  Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: AppColors.mainRed,
-                child: Center(
-                  child: Text(
-                    AppLocalizations.of(context)!.pullToRefresh,
+        return NotificationListener(
+          onNotification: (notification) {
+            /// Check if the scroll view is at the top.
+            ///
+            /// True when scroll offset <= 0. False otherwise.
+            if (notification is ScrollStartNotification) {
+              if (_controller.offset <= 0 && !_isAtTop) {
+                scheduleMicrotask(() {
+                  if (mounted) {
+                    setState(() {
+                      _isAtTop = true;
+                    });
+                  }
+                });
+              } else if (_controller.offset > 0 && _isAtTop) {
+                scheduleMicrotask(() {
+                  if (mounted) {
+                    setState(() {
+                      _isAtTop = false;
+                    });
+                  }
+                });
+              }
+            }
+            return false;
+          },
+          child: CustomScrollView(
+            controller: _controller,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              if (_isAtTop) ...{
+                CupertinoSliverRefreshControl(
+                  refreshIndicatorExtent: 50,
+                  refreshTriggerPullDistance: 50,
+                  onRefresh: () async {
+                    HapticFeedback.vibrate();
+                    context.read<AgentBloc>().add(GetAllAgentsEvent());
+                  },
+                  builder: (context, refreshState, pulledExtent,
+                          refreshTriggerPullDistance, refreshIndicatorExtent) =>
+                      Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: AppColors.mainRed,
+                    child: Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.pullToRefresh,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          },
-          SliverGrid.builder(
-            itemCount: widget.agentEntityList.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              mainAxisExtent: 150,
-            ),
-            itemBuilder: (context, index) =>
-                AgentCard(agentEntity: widget.agentEntityList[index]),
-          )
-        ],
-      ),
+              },
+              SliverPadding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: gridColumnCount / 0.3),
+                sliver: SliverGrid.builder(
+                  itemCount: widget.agentEntityList.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: gridColumnCount,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    mainAxisExtent: 150,
+                  ),
+                  itemBuilder: (context, index) =>
+                      AgentCard(agentEntity: widget.agentEntityList[index]),
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
