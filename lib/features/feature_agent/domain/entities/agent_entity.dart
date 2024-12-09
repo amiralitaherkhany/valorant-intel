@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent_model/ability.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent_model/role.dart';
 
-class AgentEntity {
+class AgentEntity extends Equatable {
   final String? uuid;
   final String? displayName;
   final String? description;
@@ -25,7 +26,7 @@ class AgentEntity {
   final List<Ability>? abilities;
   final dynamic voiceLine;
 
-  AgentEntity({
+  const AgentEntity({
     required this.uuid,
     required this.displayName,
     required this.description,
@@ -49,4 +50,11 @@ class AgentEntity {
     required this.abilities,
     required this.voiceLine,
   });
+
+  @override
+  List<Object> get props {
+    return [
+      uuid!,
+    ];
+  }
 }
