@@ -33,7 +33,17 @@ class AppRouter {
                     GoRoute(
                       path: 'AgentDetail',
                       pageBuilder: (context, state) {
-                        return MaterialPage(
+                        return CustomTransitionPage(
+                          transitionDuration: const Duration(milliseconds: 800),
+                          reverseTransitionDuration:
+                              const Duration(milliseconds: 800),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            );
+                          },
                           child: AgentDetailPage(
                             agentEntity: state.extra as AgentEntity,
                           ),
