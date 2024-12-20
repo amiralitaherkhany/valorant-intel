@@ -16,7 +16,7 @@ AgentEntity createFakeAgentEntity() {
     fullPortraitV2: 'fullPortraitV2',
     killfeedPortrait: 'killfeedPortrait',
     background: 'background',
-    backgroundGradientColors: ['', '', '', ''],
+    backgroundGradientColors: const ['', '', '', ''],
     assetPath: 'assetPath',
     isFullPortraitRightFacing: true,
     isPlayableCharacter: true,

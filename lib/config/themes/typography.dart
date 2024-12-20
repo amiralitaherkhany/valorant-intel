@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:valorant_intel/config/themes/colors.dart';
+import 'package:valorant_intel/config/themes/app_colors.dart';
 
 class AppTypography {
   final Brightness brightness;
