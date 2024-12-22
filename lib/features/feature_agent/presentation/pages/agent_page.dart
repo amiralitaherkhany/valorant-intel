@@ -99,7 +99,7 @@ class AgentErrorView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            context.translate(message),
+            context.translateError(message),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(
