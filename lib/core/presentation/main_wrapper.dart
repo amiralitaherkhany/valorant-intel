@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:valorant_intel/core/extensions/context_extensions.dart';
 
 class MainWrapper extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -32,23 +32,23 @@ class MainWrapper extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.home),
-            label: AppLocalizations.of(context)!.home,
+            label: context.localizations.home,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.collections),
-            label: AppLocalizations.of(context)!.collections,
+            label: context.localizations.collections,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.gamepad),
-            label: AppLocalizations.of(context)!.game,
+            label: context.localizations.game,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.person),
-            label: AppLocalizations.of(context)!.profile,
+            label: context.localizations.profile,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.settings),
-            label: AppLocalizations.of(context)!.settings,
+            label: context.localizations.settings,
           ),
         ],
       ),

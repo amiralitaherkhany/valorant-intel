@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc/settings_bloc.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               ThemeSwitcherListTile(isDarkMode: isDarkMode),
               ListTile(
-                title: Text(AppLocalizations.of(context)!.language),
+                title: Text(context.localizations.language),
                 trailing: DropdownButton<String>(
                   value: state.languageStatus.languageCode,
                   items: const [
@@ -83,7 +83,7 @@ class ThemeSwitcherListTile extends StatelessWidget {
           .read<SettingsBloc>()
           .add(SetThemeModeEvent(isDarkMode: value)),
       title: Text(
-        AppLocalizations.of(context)!.darkMode,
+        context.localizations.darkMode,
       ),
     );
   }
