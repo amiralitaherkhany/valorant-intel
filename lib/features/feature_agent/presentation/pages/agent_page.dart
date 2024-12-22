@@ -10,7 +10,7 @@ import 'package:valorant_intel/config/themes/app_colors.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
 import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
-import 'package:valorant_intel/features/feature_agent/presentation/pages/agent_card.dart';
+import 'package:valorant_intel/features/feature_agent/presentation/widgets/agent_card.dart';
 
 class AgentsPage extends StatelessWidget {
   const AgentsPage({super.key});
