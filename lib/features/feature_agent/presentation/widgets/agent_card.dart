@@ -30,6 +30,7 @@ class AgentCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Hero(
+                  transitionOnUserGestures: true,
                   tag: agentEntity.displayIcon!,
                   flightShuttleBuilder: (flightContext, animation,
                       flightDirection, fromHeroContext, toHeroContext) {
@@ -65,44 +66,38 @@ class AgentCard extends StatelessWidget {
                       ),
                       errorWidget: (context, url, error) => const Icon(
                         Icons.error,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
                 const Spacer(),
                 Hero(
+                  transitionOnUserGestures: true,
                   tag: agentEntity.displayName!,
                   flightShuttleBuilder: (flightContext, animation,
                       flightDirection, fromHeroContext, toHeroContext) {
                     Animation<double> textAnimation =
                         Tween<double>(begin: 14.0, end: 30.0)
                             .animate(animation);
-                    return AnimatedBuilder(
-                      animation: textAnimation,
-                      builder: (context, child) {
-                        return Text(
-                          agentEntity.displayName!,
+                    return RepaintBoundary(
+                      child: FittedBox(
+                        child: Text(
+                          "${agentEntity.displayName!} ",
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
                               ?.copyWith(fontSize: textAnimation.value),
-                        );
-                      },
-                      child: Text(
-                        agentEntity.displayName!,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(fontSize: 14.0),
+                        ),
                       ),
                     );
                   },
-                  createRectTween: (begin, end) {
-                    return RectTween(begin: begin, end: end);
-                  },
+                  child: FittedBox(
                   child: Text(
-                    agentEntity.displayName!,
+                      "${agentEntity.displayName!} ",
                     style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
                 )
               ],

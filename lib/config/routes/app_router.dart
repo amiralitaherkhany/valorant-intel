@@ -21,36 +21,38 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                  path: '/Home',
-                  pageBuilder: (context, state) => MaterialPage(
-                        child: BlocProvider<AgentBloc>(
-                          create: (context) =>
-                              locator()..add(GetAllAgentsEvent()),
-                          child: const AgentsPage(),
+                path: '/Home',
+                pageBuilder: (context, state) => MaterialPage(
+                  maintainState: true,
+                  child: BlocProvider<AgentBloc>(
+                    create: (context) => locator()..add(GetAllAgentsEvent()),
+                    child: const AgentsPage(),
+                  ),
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'AgentDetail',
+                    pageBuilder: (context, state) {
+                      return CustomTransitionPage(
+                        transitionDuration: const Duration(milliseconds: 800),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 800),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                        child: AgentDetailPage(
+                          agentEntity: state.extra as AgentEntity,
                         ),
-                      ),
-                  routes: [
-                    GoRoute(
-                      path: 'AgentDetail',
-                      pageBuilder: (context, state) {
-                        return CustomTransitionPage(
-                          transitionDuration: const Duration(milliseconds: 800),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 800),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            return FadeTransition(
-                              opacity: animation,
-                              child: child,
-                            );
-                          },
-                          child: AgentDetailPage(
-                            agentEntity: state.extra as AgentEntity,
-                          ),
-                        );
-                      },
-                    ),
-                  ]),
+                        maintainState: true,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
           StatefulShellBranch(
