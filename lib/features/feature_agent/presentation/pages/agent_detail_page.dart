@@ -19,44 +19,38 @@ class AgentDetailPage extends StatelessWidget {
           SliverAppBar(
             flexibleSpace: FlexibleSpaceBar(
               title: Hero(
+                transitionOnUserGestures: true,
                 tag: agentEntity.displayName!,
                 flightShuttleBuilder: (flightContext, animation,
                     flightDirection, fromHeroContext, toHeroContext) {
                   Animation<double> textAnimation =
                       Tween<double>(begin: 14.0, end: 30.0).animate(animation);
-                  return AnimatedBuilder(
-                    animation: textAnimation,
-                    builder: (context, child) {
-                      return Text(
-                        agentEntity.displayName!,
+                  return RepaintBoundary(
+                    child: FittedBox(
+                      child: Text(
+                        "${agentEntity.displayName!} ",
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium
                             ?.copyWith(fontSize: textAnimation.value),
-                      );
-                    },
-                    child: Text(
-                      agentEntity.displayName!,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(fontSize: 30.0),
+                      ),
                     ),
                   );
                 },
-                createRectTween: (begin, end) {
-                  return RectTween(begin: begin, end: end);
-                },
-                child: Text(
-                  agentEntity.displayName!,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(fontSize: 20.0),
+                child: FittedBox(
+                  child: Text(
+                    "${agentEntity.displayName!} ",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontSize: 20.0),
+                  ),
                 ),
               ),
               centerTitle: true,
               background: Container(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.viewPaddingOf(context).top, bottom: 50),
                 width: double.infinity,
                 height: double.infinity,
                 decoration: BoxDecoration(
@@ -71,63 +65,86 @@ class AgentDetailPage extends StatelessWidget {
                     end: AlignmentDirectional.bottomCenter,
                   ),
                 ),
+                child: CachedNetworkImage(
+                  imageUrl: agentEntity.fullPortrait!,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
-            elevation: 5,
+            elevation: 0,
+            scrolledUnderElevation: 4,
             pinned: true,
             floating: false,
-            expandedHeight: 200,
-            centerTitle: true,
+            expandedHeight: 450,
             snap: false,
             stretch: true,
           ),
-          SliverToBoxAdapter(
-            child: Hero(
-              tag: agentEntity.displayIcon!,
-              flightShuttleBuilder: (flightContext, animation, flightDirection,
-                  fromHeroContext, toHeroContext) {
-                Animation<double> scaleAnimation = TweenSequence<double>([
-                  TweenSequenceItem(
-                      tween: Tween(begin: 1, end: 2), weight: 0.5),
-                  TweenSequenceItem(
-                      tween: Tween(begin: 2, end: 1), weight: 0.5),
-                ]).animate(animation);
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Hero(
+                      transitionOnUserGestures: true,
+                      tag: agentEntity.displayIcon!,
+                      // flightShuttleBuilder: (flightContext, animation,
+                      //     flightDirection, fromHeroContext, toHeroContext) {
+                      //   Animation<double> scaleAnimation =
+                      //       TweenSequence<double>([
+                      //     TweenSequenceItem(
+                      //         tween: Tween(begin: 1, end: 1.5), weight: 0.5),
+                      //     TweenSequenceItem(
+                      //         tween: Tween(begin: 1.5, end: 1), weight: 0.5),
+                      //   ]).animate(animation);
 
-                return ScaleTransition(
-                  scale: scaleAnimation,
-                  child: fromHeroContext.widget,
-                );
-              },
-              createRectTween: (begin, end) {
-                return RectTween(begin: begin, end: end);
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: CachedNetworkImage(
-                  width: 100,
-                  height: 100,
-                  imageUrl: agentEntity.displayIcon!,
-                  placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: AppColors.white,
-                    highlightColor: AppColors.grey,
-                    child: Container(
-                      color: Colors.grey,
-                      width: 100,
-                      height: 100,
+                      //   return RepaintBoundary(
+                      //     child: ScaleTransition(
+                      //       scale: scaleAnimation,
+                      //       child: fromHeroContext.widget,
+                      //     ),
+                      //   );
+                      // },
+                      // createRectTween: (begin, end) {
+                      //   return RectTween(begin: begin, end: end);
+                      // },
+                      child: FittedBox(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: CachedNetworkImage(
+                            width: 100,
+                            height: 100,
+                            imageUrl: agentEntity.displayIcon!,
+                            placeholder: (context, url) => Shimmer.fromColors(
+                              baseColor: AppColors.white,
+                              highlightColor: AppColors.grey,
+                              child: Container(
+                                color: Colors.grey,
+                                width: 100,
+                                height: 100,
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.error,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  errorWidget: (context, url, error) => const Icon(
-                    Icons.error,
-                  ),
-                ),
+                  Text(agentEntity.description!),
+                ],
               ),
             ),
           ),
           SliverList.builder(
-            itemCount: 20,
-            itemBuilder: (context, index) => ListTile(
-              title: Text(index.toString()),
-            ),
+            itemCount: 15,
+            itemBuilder: (context, index) {
+              return const ListTile(
+                title: Text('data'),
+              );
+            },
           )
         ],
       ),
