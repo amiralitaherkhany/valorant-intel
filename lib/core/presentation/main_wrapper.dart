@@ -10,11 +10,6 @@ class MainWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        toolbarHeight: 0,
-        scrolledUnderElevation: 0,
-      ),
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         elevation: 5,
