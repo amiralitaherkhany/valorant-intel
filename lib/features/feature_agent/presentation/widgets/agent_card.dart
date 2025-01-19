@@ -32,41 +32,43 @@ class AgentCard extends StatelessWidget {
                 Hero(
                   transitionOnUserGestures: true,
                   tag: agentEntity.displayIcon!,
-                  flightShuttleBuilder: (flightContext, animation,
-                      flightDirection, fromHeroContext, toHeroContext) {
-                    Animation<double> scaleAnimation = TweenSequence<double>([
-                      TweenSequenceItem(
-                          tween: Tween(begin: 1, end: 2), weight: 0.5),
-                      TweenSequenceItem(
-                          tween: Tween(begin: 2, end: 1), weight: 0.5),
-                    ]).animate(animation);
+                  // flightShuttleBuilder: (flightContext, animation,
+                  //     flightDirection, fromHeroContext, toHeroContext) {
+                  //   Animation<double> scaleAnimation = TweenSequence<double>([
+                  //     TweenSequenceItem(
+                  //         tween: Tween(begin: 1, end: 1.5), weight: 0.5),
+                  //     TweenSequenceItem(
+                  //         tween: Tween(begin: 1.5, end: 1), weight: 0.5),
+                  //   ]).animate(animation);
 
-                    return ScaleTransition(
-                      scale: scaleAnimation,
-                      child: fromHeroContext.widget,
-                    );
-                  },
-                  createRectTween: (begin, end) {
-                    return RectTween(begin: begin, end: end);
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      width: 100,
-                      height: 100,
-                      imageUrl: agentEntity.displayIcon!,
-                      placeholder: (context, url) => Shimmer.fromColors(
-                        baseColor: AppColors.white,
-                        highlightColor: AppColors.grey,
-                        child: Container(
-                          color: Colors.grey,
-                          width: 100,
-                          height: 100,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => const Icon(
-                        Icons.error,
+                  //   return RepaintBoundary(
+                  //     child: ScaleTransition(
+                  //       scale: scaleAnimation,
+                  //       child: fromHeroContext.widget,
+                  //     ),
+                  //   );
+                  // },
+                  // createRectTween: (begin, end) {
+                  //   return RectTween(begin: begin, end: end);
+                  // },
+                  child: FittedBox(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: CachedNetworkImage(
+                        width: 100,
+                        height: 100,
+                        imageUrl: agentEntity.displayIcon!,
+                        placeholder: (context, url) => Shimmer.fromColors(
+                          baseColor: AppColors.white,
+                          highlightColor: AppColors.grey,
+                          child: Container(
+                            color: Colors.grey,
+                            width: 100,
+                            height: 100,
                           ),
+                        ),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.error,
                         ),
                       ),
                     ),
@@ -94,9 +96,9 @@ class AgentCard extends StatelessWidget {
                     );
                   },
                   child: FittedBox(
-                  child: Text(
+                    child: Text(
                       "${agentEntity.displayName!} ",
-                    style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 )
