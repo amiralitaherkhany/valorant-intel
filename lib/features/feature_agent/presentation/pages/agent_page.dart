@@ -18,6 +18,16 @@ class AgentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agents'),
+        centerTitle: true,
+        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+      ),
       body: BlocBuilder<AgentBloc, AgentState>(
         builder: (context, state) {
           return switch (state) {
@@ -55,29 +65,39 @@ class AgentLoadingView extends StatelessWidget {
           default:
             gridColumnCount = 2;
         }
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: gridColumnCount / 0.3),
-          child: Shimmer.fromColors(
-            baseColor: AppColors.grey,
-            highlightColor: AppColors.white,
-            child: GridView.builder(
-              itemCount: 10,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: gridColumnCount,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                mainAxisExtent: 150,
-              ),
-              itemBuilder: (context, index) => Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Colors.white,
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: gridColumnCount / 0.3, vertical: 30),
+              sliver: SliverToBoxAdapter(
+                child: Shimmer.fromColors(
+                  baseColor: AppColors.grey,
+                  highlightColor: AppColors.white,
+                  child: GridView.builder(
+                    addRepaintBoundaries: true,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 10,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: gridColumnCount,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      mainAxisExtent: 150,
+                    ),
+                    itemBuilder: (context, index) => Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         );
       },
     );
@@ -130,6 +150,12 @@ class AgentSuccessView extends StatefulWidget {
 }
 
 class _AgentSuccessViewState extends State<AgentSuccessView> {
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   final ValueNotifier _isAtTop = ValueNotifier(true);
   late int gridColumnCount;
   final _controller = ScrollController();
@@ -201,7 +227,8 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
               },
             ),
             SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: gridColumnCount / 0.3),
+              padding: EdgeInsets.symmetric(
+                  horizontal: gridColumnCount / 0.3, vertical: 30),
               sliver: SliverGrid.builder(
                 itemCount: widget.agentEntityList.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
