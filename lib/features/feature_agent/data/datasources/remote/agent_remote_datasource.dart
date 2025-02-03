@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:valorant_intel/core/errors/api_exception.dart';
 import 'package:valorant_intel/core/utils/network_utils.dart';
 import 'package:valorant_intel/features/feature_agent/data/datasources/agent_datasource.dart';
-import 'package:valorant_intel/features/feature_agent/data/models/agent_model/agent_model.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
 
 class AgentRemoteDatasource implements AgentDatasource {
   final Dio _dio;
@@ -13,32 +13,31 @@ class AgentRemoteDatasource implements AgentDatasource {
         _networkUtils = networkUtils;
 
   @override
-  Future<List<AgentModel>> getAllAgents() async {
+  Future<List<Agent>> getAllAgents() async {
     Map<String, dynamic> queryParameters = {
       'language': await _networkUtils.getLanguageCode(),
       'isPlayableCharacter': true
     };
     try {
-      Response response =
-          await _dio.get('/agents', queryParameters: queryParameters);
-
-      return (response.data['data'] as List<dynamic>)
-          .map<AgentModel>((element) => AgentModel.fromMap(element))
-          .toList();
-    } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionError) {
+      return await _dio.get('/agents', queryParameters: queryParameters).then(
+            (response) => (response.data['data'] as List<dynamic>)
+                .map<Agent>((element) => Agent.fromMap(element))
+                .toList(),
+          );
+    } on DioException catch (exception) {
+      if (exception.type == DioExceptionType.connectionError) {
         throw ApiException(
-          e.response?.data['error'] ?? 'networkFailure',
-          e.response?.data['status'] ?? e.response?.statusCode,
+          exception.response?.data['error'] ?? 'networkFailure',
+          exception.response?.data['status'] ?? exception.response?.statusCode,
         );
       } else {
         throw ApiException(
-          e.response?.data['error'] ?? 'serverError',
-          e.response?.data['status'] ?? e.response?.statusCode,
+          exception.response?.data['error'] ?? 'serverError',
+          exception.response?.data['status'] ?? exception.response?.statusCode,
         );
       }
-    } catch (e) {
-      throw ApiException('unknownError', null);
+    } catch (exception) {
+      throw ApiException(exception.toString(), null);
     }
   }
 }

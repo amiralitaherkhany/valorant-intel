@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:valorant_intel/core/presentation/main_wrapper.dart';
-import 'package:valorant_intel/features/feature_agent/domain/entities/agent_entity.dart';
-import 'package:valorant_intel/features/feature_agent/presentation/blocs/agent_bloc.dart';
-import 'package:valorant_intel/features/feature_agent/presentation/pages/agent_detail_page.dart';
-import 'package:valorant_intel/features/feature_agent/presentation/pages/agent_page.dart';
-import 'package:valorant_intel/features/feature_settings/presentation/pages/settings_page.dart';
+import 'package:valorant_intel/features/feature_agent/blocs/agent_bloc.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
+import 'package:valorant_intel/features/feature_agent/view/pages/agent_detail_page.dart';
+import 'package:valorant_intel/features/feature_agent/view/pages/agent_page.dart';
+import 'package:valorant_intel/features/feature_settings/view/pages/settings_page.dart';
 import 'package:valorant_intel/service_locator.dart';
 
 class AppRouter {
@@ -45,7 +45,7 @@ class AppRouter {
                           );
                         },
                         child: AgentDetailPage(
-                          agentEntity: state.extra as AgentEntity,
+                          agent: state.extra as Agent,
                         ),
                         maintainState: true,
                       );

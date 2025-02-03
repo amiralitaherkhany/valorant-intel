@@ -5,9 +5,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:valorant_intel/config/routes/app_router.dart';
 import 'package:valorant_intel/config/themes/app_theme.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
-import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc/language_status.dart';
-import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc/settings_bloc.dart';
-import 'package:valorant_intel/features/feature_settings/presentation/blocs/bloc/theme_status.dart';
+import 'package:valorant_intel/features/feature_settings/blocs/bloc/language_status.dart';
+import 'package:valorant_intel/features/feature_settings/blocs/bloc/settings_bloc.dart';
+import 'package:valorant_intel/features/feature_settings/blocs/bloc/theme_status.dart';
 import 'package:valorant_intel/service_locator.dart';
 
 void main(List<String> args) async {

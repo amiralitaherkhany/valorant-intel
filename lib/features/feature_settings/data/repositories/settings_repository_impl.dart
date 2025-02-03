@@ -1,6 +1,6 @@
-import 'package:flutter/src/material/app.dart';
+import 'package:flutter/material.dart';
 import 'package:valorant_intel/features/feature_settings/data/datasources/settings_datasource.dart';
-import 'package:valorant_intel/features/feature_settings/domain/repositories/settings_repository.dart';
+import 'package:valorant_intel/features/feature_settings/data/repositories/settings_repository.dart';
 
 class SettingsRepositoryImpl implements SettingsRepository {
   final SettingsDatasource _settingsDatasource;
