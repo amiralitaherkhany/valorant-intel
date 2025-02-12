@@ -136,53 +136,128 @@ class AbilityList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemExtent: 120,
         itemBuilder: (context, index) {
-          return SizedBox(
-            height: 100,
-            child: Card(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              shadowColor: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    if (abilities[index].displayIcon != "") ...{
-                      CachedNetworkImage(
-                        imageUrl: abilities[index].displayIcon,
-                        height: 50,
-                        placeholder: (context, url) {
-                          return Shimmer.fromColors(
-                            baseColor: AppColors.grey,
-                            highlightColor: AppColors.white,
-                            child: Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.white,
-                              ),
-                            ),
-                          );
-                        },
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                      ),
-                    } else ...{
-                      const Text('No Image'),
-                    },
-                    const Spacer(),
-                    Text(
-                      abilities[index].displayName,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontSize: 11,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+          return AbilityItem(ability: abilities[index]);
         },
+      ),
+    );
+  }
+}
+
+class AbilityItem extends StatelessWidget {
+  const AbilityItem({
+    super.key,
+    required this.ability,
+  });
+
+  final Ability ability;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => AbilityBottomSheetContent(ability: ability),
+        );
+      },
+      child: SizedBox(
+        height: 100,
+        child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          shadowColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                if (ability.displayIcon != "") ...{
+                  CachedNetworkImage(
+                    imageUrl: ability.displayIcon,
+                    height: 50,
+                    placeholder: (context, url) {
+                      return Shimmer.fromColors(
+                        baseColor: AppColors.grey,
+                        highlightColor: AppColors.white,
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    },
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                } else ...{
+                  const Text('No Image'),
+                },
+                const Spacer(),
+                Text(
+                  ability.displayName,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontSize: 11,
+                      ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AbilityBottomSheetContent extends StatelessWidget {
+  const AbilityBottomSheetContent({
+    super.key,
+    required this.ability,
+  });
+
+  final Ability ability;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0, bottom: 20.0, left: 20.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 3,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: CachedNetworkImage(
+                    imageUrl: ability.displayIcon,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(ability.displayName),
+                ),
+              ],
+            ),
+          ),
+          const Spacer(
+            flex: 1,
+          ),
+          Expanded(
+            flex: 6,
+            child: Text(
+              ability.description,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -202,7 +277,7 @@ class AgentDescribtion extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Text(
         agent.description,
-        textAlign: TextAlign.justify,
+        textAlign: TextAlign.left,
       ),
     );
   }

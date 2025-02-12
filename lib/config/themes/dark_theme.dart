@@ -72,4 +72,15 @@ final ThemeData darkTheme = ThemeData(
     trackColor: WidgetStateProperty.all(AppColors.grey),
   ),
   indicatorColor: AppColors.mainRed,
+  bottomSheetTheme: const BottomSheetThemeData(
+    modalBackgroundColor: AppColors.cardBackground,
+    shape: BeveledRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
+      ),
+    ),
+    dragHandleColor: Colors.white,
+    showDragHandle: true,
+  ),
 );
