@@ -1,0 +1,2 @@
+C:/projects/flutterProjects/valorant_intel/android/app/.cxx/Debug/1g446m3z/x86/CMakeFiles/edit_cache.dir
+C:/projects/flutterProjects/valorant_intel/android/app/.cxx/Debug/1g446m3z/x86/CMakeFiles/rebuild_cache.dir
