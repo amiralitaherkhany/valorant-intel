@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
-import 'package:valorant_intel/features/feature_settings/blocs/bloc/settings_bloc.dart';
+import 'package:valorant_intel/features/feature_settings/bloc/settings_bloc.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

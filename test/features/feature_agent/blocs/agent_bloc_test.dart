@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:valorant_intel/features/feature_agent/blocs/agent_bloc.dart';
+import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/repositories/agent_repository_impl.dart';
 
 // Generate mock class using Mockito

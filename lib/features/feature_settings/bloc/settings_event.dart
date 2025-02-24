@@ -1,13 +1,12 @@
 part of 'settings_bloc.dart';
 
+@immutable
 sealed class SettingsEvent extends Equatable {
   const SettingsEvent();
 
   @override
   List<Object> get props => [];
 }
-
-class InitializeSettingsEvent extends SettingsEvent {}
 
 class SetThemeModeEvent extends SettingsEvent {
   final bool isDarkMode;

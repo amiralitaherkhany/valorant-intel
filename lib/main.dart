@@ -1,54 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:valorant_intel/config/routes/app_router.dart';
 import 'package:valorant_intel/config/themes/app_theme.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
-import 'package:valorant_intel/features/feature_settings/blocs/bloc/language_status.dart';
-import 'package:valorant_intel/features/feature_settings/blocs/bloc/settings_bloc.dart';
-import 'package:valorant_intel/features/feature_settings/blocs/bloc/theme_status.dart';
+import 'package:valorant_intel/features/feature_settings/bloc/settings_bloc.dart';
 import 'package:valorant_intel/service_locator.dart';
 
 import 'config/l10n/app_localizations.dart' show AppLocalizations;
 
 void main(List<String> args) async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
   await initializeServiceLocator();
   runApp(
     BlocProvider<SettingsBloc>(
-      create: (_) => locator()..add(InitializeSettingsEvent()),
+      create: (_) => locator(),
       child: const MyApp(),
     ),
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool isSettingsApplied = false;
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => isSettingsApplied ? FlutterNativeSplash.remove() : null,
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
-        if (state.themeStatus is ThemeChangedState &&
-            state.languageStatus is LanguageChangedState) {
-          isSettingsApplied = true;
-        }
-
         return MaterialApp.router(
           locale: Locale(state.languageStatus.languageCode),
           localizationsDelegates: AppLocalizations.localizationsDelegates,

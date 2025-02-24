@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:valorant_intel/config/themes/app_colors.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
-import 'package:valorant_intel/features/feature_agent/blocs/agent_bloc.dart';
+import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/widgets/agent_card.dart';
 
