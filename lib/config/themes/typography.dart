@@ -20,7 +20,7 @@ class AppTypography {
         fontFamily: 'DINNext',
         fontSize: 28,
         fontWeight: FontWeight.bold,
-        color: AppColors.mainRed, // رنگ ثابت برای عنوان‌های دوم
+        color: AppColors.mainRed, 
       );
 
   TextStyle get headline3 => TextStyle(
@@ -56,7 +56,7 @@ class AppTypography {
         fontFamily: 'DINNext',
         fontSize: 18,
         fontWeight: FontWeight.bold,
-        color: AppColors.darkBlue, // رنگ ثابت برای دکمه‌ها
+        color: AppColors.darkBlue, 
       );
 
   // Caption or small text

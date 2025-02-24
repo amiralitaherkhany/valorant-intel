@@ -4,13 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:valorant_intel/config/themes/app_colors.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/features/feature_agent/blocs/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/widgets/agent_card.dart';
+
+import '../../../../config/l10n/app_localizations.dart' show AppLocalizations;
 
 class AgentsPage extends StatelessWidget {
   const AgentsPage({super.key});

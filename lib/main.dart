@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:valorant_intel/config/routes/app_router.dart';
 import 'package:valorant_intel/config/themes/app_theme.dart';
@@ -9,6 +8,8 @@ import 'package:valorant_intel/features/feature_settings/blocs/bloc/language_sta
 import 'package:valorant_intel/features/feature_settings/blocs/bloc/settings_bloc.dart';
 import 'package:valorant_intel/features/feature_settings/blocs/bloc/theme_status.dart';
 import 'package:valorant_intel/service_locator.dart';
+
+import 'config/l10n/app_localizations.dart' show AppLocalizations;
 
 void main(List<String> args) async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
