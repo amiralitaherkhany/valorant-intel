@@ -1,6 +1,7 @@
 {
     "@@locale": "es",
     "appTitle": "Información de Valorant",
+    "agents": "Agentes",
     "darkMode": "Modo oscuro",
     "language": "Idioma",
     "pullToRefresh": "Desliza para actualizar",

@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Valorant Intel';
 
   @override
+  String get agents => 'Agents';
+
+  @override
   String get darkMode => 'Dark Mode';
 
   @override

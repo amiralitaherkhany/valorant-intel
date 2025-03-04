@@ -11,8 +11,6 @@ import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/widgets/agent_card.dart';
 
-import '../../../../config/l10n/app_localizations.dart' show AppLocalizations;
-
 class AgentsPage extends StatelessWidget {
   const AgentsPage({super.key});
 
@@ -20,7 +18,7 @@ class AgentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agents'),
+        title: Text(context.localizations.agents),
         centerTitle: true,
         titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
@@ -129,7 +127,7 @@ class AgentErrorView extends StatelessWidget {
           ElevatedButton(
             onPressed: () => context.read<AgentBloc>().add(GetAllAgentsEvent()),
             child: Text(
-              AppLocalizations.of(context)!.tryAgain,
+              context.localizations.tryAgain,
             ),
           ),
         ],
@@ -219,7 +217,7 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
                       color: AppColors.mainRed,
                       child: Center(
                         child: Text(
-                          AppLocalizations.of(context)!.pullToRefresh,
+                          context.localizations.pullToRefresh,
                         ),
                       ),
                     ),

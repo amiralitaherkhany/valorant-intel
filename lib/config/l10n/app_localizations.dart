@@ -101,6 +101,12 @@ abstract class AppLocalizations {
   /// **'Valorant Intel'**
   String get appTitle;
 
+  /// No description provided for @agents.
+  ///
+  /// In en, this message translates to:
+  /// **'Agents'**
+  String get agents;
+
   /// No description provided for @darkMode.
   ///
   /// In en, this message translates to:

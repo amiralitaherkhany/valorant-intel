@@ -1,6 +1,8 @@
 {
     "@@locale": "en",
     "appTitle": "Valorant Intel",
+    "agents": "Agents",
+    "@agents": {},
     "darkMode": "Dark Mode",
     "language": "Language",
     "pullToRefresh": "Pull to refresh",

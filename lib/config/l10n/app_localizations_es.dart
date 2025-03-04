@@ -12,6 +12,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get appTitle => 'Información de Valorant';
 
   @override
+  String get agents => 'Agentes';
+
+  @override
   String get darkMode => 'Modo oscuro';
 
   @override
