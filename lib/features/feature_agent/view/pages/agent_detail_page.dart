@@ -68,17 +68,21 @@ class AgentDetailPage extends StatelessWidget {
                   ),
                 ),
                 child: Stack(
+                  fit: StackFit.expand,
                   alignment: Alignment.center,
                   children: [
                     Positioned(
-                      left: 0,
+                      left: -10,
                       bottom: 0,
                       top: 0,
-                      child: CachedNetworkImage(
-                        imageUrl: agent.background,
-                        fit: BoxFit.fitHeight,
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                      child: Transform.scale(
+                        scale: 1.1,
+                        child: CachedNetworkImage(
+                          imageUrl: agent.background,
+                          fit: BoxFit.contain,
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
                       ),
                     ),
                     CachedNetworkImage(
@@ -103,7 +107,7 @@ class AgentDetailPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             sliver: SliverToBoxAdapter(
               child: SizedBox(
-                height: 150,
+                height: 110,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,31 +123,28 @@ class AgentDetailPage extends StatelessWidget {
                         children: [
                           Expanded(
                             flex: 4,
-                            child: Center(
-                              child: FittedBox(
-                                child: CachedNetworkImage(
-                                  color: Colors.grey,
-                                  width: 100,
-                                  height: 100,
-                                  imageUrl: agent.role.displayIcon,
-                                  placeholder: (context, url) {
-                                    return Shimmer.fromColors(
-                                      baseColor: AppColors.grey,
-                                      highlightColor: AppColors.white,
-                                      child: Container(
-                                        width: 100,
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: Colors.white,
-                                        ),
+                            child: FittedBox(
+                              child: CachedNetworkImage(
+                                color: Colors.grey,
+                                width: 100,
+                                height: 100,
+                                imageUrl: agent.role.displayIcon,
+                                placeholder: (context, url) {
+                                  return Shimmer.fromColors(
+                                    baseColor: AppColors.grey,
+                                    highlightColor: AppColors.white,
+                                    child: Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.white,
                                       ),
-                                    );
-                                  },
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
+                                    ),
+                                  );
+                                },
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                               ),
                             ),
                           ),
@@ -152,7 +153,7 @@ class AgentDetailPage extends StatelessWidget {
                           ),
                           Expanded(
                             flex: 1,
-                            child: Center(
+                            child: FittedBox(
                               child: Text(
                                 agent.role.displayName,
                                 style: Theme.of(context)
