@@ -33,8 +33,8 @@ class AgentsPage extends StatelessWidget {
         builder: (context, state) {
           return switch (state) {
             AgentLoadingState() => const AgentLoadingView(),
-            AgentSuccessState(agentList: final agentEntityList) =>
-              AgentSuccessView(agentList: agentEntityList),
+            AgentSuccessState(agentList: final agentList) =>
+              AgentSuccessView(agentList: agentList),
             AgentErrorState(message: final message) =>
               AgentErrorView(message: message)
           };

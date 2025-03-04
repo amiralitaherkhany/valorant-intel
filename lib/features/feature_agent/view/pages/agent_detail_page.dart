@@ -12,6 +12,7 @@ class AgentDetailPage extends StatelessWidget {
     required this.agent,
   });
   final Agent agent;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,14 +63,31 @@ class AgentDetailPage extends StatelessWidget {
                         (colorString as String).parseToColor
                       }
                     ],
-                    begin: AlignmentDirectional.topCenter,
-                    end: AlignmentDirectional.bottomCenter,
+                    begin: AlignmentDirectional.topEnd,
+                    end: AlignmentDirectional.bottomStart,
                   ),
                 ),
-                child: CachedNetworkImage(
-                  imageUrl: agent.fullPortrait,
-                  fit: BoxFit.fitHeight,
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      left: 0,
+                      bottom: 0,
+                      top: 0,
+                      child: CachedNetworkImage(
+                        imageUrl: agent.background,
+                        fit: BoxFit.fitHeight,
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
+                    ),
+                    CachedNetworkImage(
+                      imageUrl: agent.fullPortrait,
+                      fit: BoxFit.fitHeight,
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -84,20 +102,84 @@ class AgentDetailPage extends StatelessWidget {
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             sliver: SliverToBoxAdapter(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: AnimatedDisplayIcon(agent: agent),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: AgentDescribtion(agent: agent),
-                  ),
-                ],
+              child: SizedBox(
+                height: 150,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: AnimatedDisplayIcon(agent: agent),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: Center(
+                              child: FittedBox(
+                                child: CachedNetworkImage(
+                                  color: Colors.grey,
+                                  width: 100,
+                                  height: 100,
+                                  imageUrl: agent.role.displayIcon,
+                                  placeholder: (context, url) {
+                                    return Shimmer.fromColors(
+                                      baseColor: AppColors.grey,
+                                      highlightColor: AppColors.white,
+                                      child: Container(
+                                        width: 100,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Spacer(
+                            flex: 1,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                agent.role.displayName,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(fontSize: 20),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Divider(
+              indent: 20,
+              endIndent: 20,
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(10),
+            sliver: SliverToBoxAdapter(
+              child: AgentDescribtion(description: agent.description),
             ),
           ),
           SliverPadding(
@@ -106,14 +188,9 @@ class AgentDetailPage extends StatelessWidget {
               child: AbilityList(abilities: agent.abilities),
             ),
           ),
-          SliverList.builder(
-            itemCount: 15,
-            itemBuilder: (context, index) {
-              return const ListTile(
-                title: Text('data'),
-              );
-            },
-          )
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 50),
+          ),
         ],
       ),
     );
@@ -191,7 +268,15 @@ class AbilityItem extends StatelessWidget {
                         const Icon(Icons.error),
                   ),
                 } else ...{
-                  const Text('No Image'),
+                  const Expanded(
+                    child: Center(
+                      child: Icon(
+                        Icons.image_not_supported,
+                        color: Colors.white,
+                        size: 45,
+                      ),
+                    ),
+                  ),
                 },
                 const Spacer(),
                 Text(
@@ -222,42 +307,58 @@ class AbilityBottomSheetContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20.0, bottom: 20.0, left: 20.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 3,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: CachedNetworkImage(
-                    imageUrl: ability.displayIcon,
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (ability.displayIcon != "") ...{
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: CachedNetworkImage(
+                            imageUrl: ability.displayIcon,
+                          ),
+                        ),
+                      } else ...{
+                        const Icon(
+                          Icons.image_not_supported,
+                          color: Colors.white,
+                          size: 75,
+                        )
+                      },
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          ability.displayName,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                const Spacer(
+                  flex: 1,
                 ),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(ability.displayName),
+                Expanded(
+                  flex: 6,
+                  child: Text(
+                    ability.description,
+                  ),
                 ),
               ],
             ),
-          ),
-          const Spacer(
-            flex: 1,
-          ),
-          Expanded(
-            flex: 6,
-            child: Text(
-              ability.description,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -266,17 +367,28 @@ class AbilityBottomSheetContent extends StatelessWidget {
 class AgentDescribtion extends StatelessWidget {
   const AgentDescribtion({
     super.key,
-    required this.agent,
+    required this.description,
   });
 
-  final Agent agent;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text(
-        agent.description,
+      child: RichText(
+        text: TextSpan(
+          text: 'Description: ',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppColors.mainRed,
+              ),
+          children: [
+            TextSpan(
+              text: description,
+              style: Theme.of(context).textTheme.bodyMedium,
+            )
+          ],
+        ),
         textAlign: TextAlign.left,
       ),
     );

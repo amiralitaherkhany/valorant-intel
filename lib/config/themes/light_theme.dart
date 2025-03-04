@@ -3,79 +3,98 @@ import 'package:valorant_intel/config/themes/app_colors.dart';
 import 'package:valorant_intel/config/themes/typography.dart';
 
 final AppTypography _lightAppTypography = AppTypography(Brightness.light);
+const lightColorScheme = ColorScheme.light(
+  primary: AppColors.mainRed,
+  secondary: AppColors.darkBlue,
+  surface: AppColors.grey,
+  error: Colors.red,
+  onPrimary: Colors.white,
+  onSecondary: AppColors.white,
+  onSurface: AppColors.cardBackground,
+  onError: AppColors.white,
+);
+
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  primaryColor: AppColors.mainRed,
-  scaffoldBackgroundColor: Colors.white,
+  colorScheme: lightColorScheme,
+  scaffoldBackgroundColor: lightColorScheme.onPrimary,
   textTheme: _lightAppTypography.textTheme,
-  cardTheme: const CardTheme(
-    color: AppColors.grey,
-    shadowColor: AppColors.mainRed,
+  cardTheme: CardTheme(
+    color: lightColorScheme.surface,
+    shadowColor: lightColorScheme.primary,
     elevation: 4,
   ),
-  iconTheme: const IconThemeData(color: AppColors.mainRed),
+  iconTheme: IconThemeData(color: lightColorScheme.primary),
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.white,
-    titleTextStyle:
-        _lightAppTypography.headline3.copyWith(color: AppColors.mainRed),
-    iconTheme: const IconThemeData(color: AppColors.mainRed),
+    backgroundColor: lightColorScheme.onPrimary,
+    titleTextStyle: _lightAppTypography.headline3.copyWith(
+      color: lightColorScheme.primary,
+    ),
+    iconTheme: IconThemeData(color: lightColorScheme.primary),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: AppColors.darkBlue,
-      textStyle: _lightAppTypography.button.copyWith(color: Colors.white),
-      foregroundColor: Colors.white,
+      backgroundColor: lightColorScheme.secondary,
+      textStyle: _lightAppTypography.button.copyWith(
+        color: lightColorScheme.onSecondary,
+      ),
+      foregroundColor: lightColorScheme.onSecondary,
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: AppColors.cardBackground,
-    hintStyle: _lightAppTypography.bodyText2.copyWith(color: AppColors.grey),
+    fillColor: lightColorScheme.surface,
+    hintStyle: _lightAppTypography.bodyText2.copyWith(
+      color: lightColorScheme.onSurface,
+    ),
     border: OutlineInputBorder(
-      borderSide: const BorderSide(color: AppColors.mainRed),
+      borderSide: BorderSide(color: lightColorScheme.primary),
       borderRadius: BorderRadius.circular(8),
     ),
   ),
   dialogTheme: DialogTheme(
-    backgroundColor: Colors.white,
-    titleTextStyle:
-        _lightAppTypography.headline2.copyWith(color: AppColors.mainRed),
-    contentTextStyle:
-        _lightAppTypography.bodyText1.copyWith(color: AppColors.grey),
+    backgroundColor: lightColorScheme.surface,
+    titleTextStyle: _lightAppTypography.headline2.copyWith(
+      color: lightColorScheme.primary,
+    ),
+    contentTextStyle: _lightAppTypography.bodyText1.copyWith(
+      color: lightColorScheme.onSurface,
+    ),
   ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: Colors.white,
-    selectedItemColor: AppColors.mainRed,
-    unselectedItemColor: AppColors.grey,
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: lightColorScheme.onPrimary,
+    selectedItemColor: lightColorScheme.primary,
+    unselectedItemColor: lightColorScheme.onSurface,
   ),
   snackBarTheme: SnackBarThemeData(
-    backgroundColor: AppColors.mainRed,
-    contentTextStyle:
-        _lightAppTypography.bodyText1.copyWith(color: Colors.white),
+    backgroundColor: lightColorScheme.primary,
+    contentTextStyle: _lightAppTypography.bodyText1.copyWith(
+      color: lightColorScheme.onPrimary,
+    ),
     actionTextColor: AppColors.yellow,
   ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: AppColors.mainRed,
-    foregroundColor: Colors.white,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: lightColorScheme.primary,
+    foregroundColor: lightColorScheme.onPrimary,
   ),
-  dividerTheme: const DividerThemeData(
-    color: AppColors.grey,
+  dividerTheme: DividerThemeData(
+    color: lightColorScheme.onSurface,
     thickness: 1,
   ),
   switchTheme: SwitchThemeData(
-    thumbColor: WidgetStateProperty.all(AppColors.mainRed),
-    trackColor: WidgetStateProperty.all(AppColors.grey),
+    thumbColor: WidgetStateProperty.all(lightColorScheme.primary),
+    trackColor: WidgetStateProperty.all(lightColorScheme.onSurface),
   ),
-  indicatorColor: AppColors.mainRed,
-  bottomSheetTheme: const BottomSheetThemeData(
-    modalBackgroundColor: AppColors.grey,
-    shape: BeveledRectangleBorder(
+  indicatorColor: lightColorScheme.primary,
+  bottomSheetTheme: BottomSheetThemeData(
+    modalBackgroundColor: lightColorScheme.surface,
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(10),
-        topRight: Radius.circular(10),
+        topLeft: Radius.circular(15),
+        topRight: Radius.circular(15),
       ),
     ),
-    dragHandleColor: Colors.white,
+    dragHandleColor: lightColorScheme.onPrimary,
     showDragHandle: true,
   ),
 );

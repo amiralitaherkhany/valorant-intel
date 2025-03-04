@@ -5,7 +5,8 @@ import 'package:valorant_intel/core/presentation/main_wrapper.dart';
 import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/pages/agent_detail_page.dart';
-import 'package:valorant_intel/features/feature_agent/view/pages/agent_page.dart';
+import 'package:valorant_intel/features/feature_agent/view/pages/agents_page.dart';
+import 'package:valorant_intel/features/feature_home/view/pages/home_page.dart';
 import 'package:valorant_intel/features/feature_settings/view/pages/settings_page.dart';
 import 'package:valorant_intel/service_locator.dart';
 
@@ -22,34 +23,44 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: '/Home',
-                pageBuilder: (context, state) => MaterialPage(
-                  maintainState: true,
-                  child: BlocProvider<AgentBloc>(
-                    create: (context) => locator()..add(GetAllAgentsEvent()),
-                    child: const AgentsPage(),
-                  ),
+                pageBuilder: (context, state) => const MaterialPage(
+                  child: HomePage(),
                 ),
                 routes: [
                   GoRoute(
-                    path: 'AgentDetail',
-                    pageBuilder: (context, state) {
-                      return CustomTransitionPage(
-                        transitionDuration: const Duration(milliseconds: 800),
-                        reverseTransitionDuration:
-                            const Duration(milliseconds: 800),
-                        transitionsBuilder:
-                            (context, animation, secondaryAnimation, child) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: child,
+                    path: 'Agents',
+                    pageBuilder: (context, state) => MaterialPage(
+                      maintainState: true,
+                      child: BlocProvider<AgentBloc>(
+                        create: (context) =>
+                            locator()..add(GetAllAgentsEvent()),
+                        child: const AgentsPage(),
+                      ),
+                    ),
+                    routes: [
+                      GoRoute(
+                        path: 'AgentDetail',
+                        pageBuilder: (context, state) {
+                          return CustomTransitionPage(
+                            transitionDuration:
+                                const Duration(milliseconds: 800),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 800),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              return FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              );
+                            },
+                            child: AgentDetailPage(
+                              agent: state.extra as Agent,
+                            ),
+                            maintainState: true,
                           );
                         },
-                        child: AgentDetailPage(
-                          agent: state.extra as Agent,
-                        ),
-                        maintainState: true,
-                      );
-                    },
+                      ),
+                    ],
                   ),
                 ],
               ),
