@@ -1,13 +1,12 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:valorant_intel/features/feature_settings/bloc/settings_bloc.dart';
 
 class NetworkUtils {
-  final SharedPreferences _sharedPreferences;
-  NetworkUtils({required SharedPreferences sharedPreferences})
-      : _sharedPreferences = sharedPreferences;
-  Future<String> getLanguageCode() async {
-    String languageCode = _sharedPreferences.getString('app_language') ?? 'en';
+  final SettingsBloc _settingsBloc;
+  NetworkUtils({required SettingsBloc settingsBloc})
+      : _settingsBloc = settingsBloc;
 
-    switch (languageCode) {
+  Future<String> getLanguageCode() async {
+    switch (_settingsBloc.state.languageStatus.languageCode) {
       case 'en':
         return 'en-US';
 
