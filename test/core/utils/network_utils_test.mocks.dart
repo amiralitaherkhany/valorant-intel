@@ -5,8 +5,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:hydrated_bloc/hydrated_bloc.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i2;
+import 'package:mockito/src/dummies.dart' as _i4;
+import 'package:valorant_intel/features/feature_settings/bloc/settings_bloc.dart'
+    as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -22,123 +25,152 @@ import 'package:shared_preferences/src/shared_preferences_legacy.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [SharedPreferences].
+class _FakeSettingsState_0 extends _i1.SmartFake implements _i2.SettingsState {
+  _FakeSettingsState_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+/// A class which mocks [SettingsBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreferences extends _i1.Mock implements _i2.SharedPreferences {
-  MockSharedPreferences() {
+class MockSettingsBloc extends _i1.Mock implements _i2.SettingsBloc {
+  MockSettingsBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  Set<String> getKeys() =>
+  _i2.SettingsState get state =>
       (super.noSuchMethod(
-            Invocation.method(#getKeys, []),
-            returnValue: <String>{},
+            Invocation.getter(#state),
+            returnValue: _FakeSettingsState_0(this, Invocation.getter(#state)),
           )
-          as Set<String>);
+          as _i2.SettingsState);
 
   @override
-  Object? get(String? key) =>
-      (super.noSuchMethod(Invocation.method(#get, [key])) as Object?);
-
-  @override
-  bool? getBool(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getBool, [key])) as bool?);
-
-  @override
-  int? getInt(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getInt, [key])) as int?);
-
-  @override
-  double? getDouble(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getDouble, [key])) as double?);
-
-  @override
-  String? getString(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getString, [key])) as String?);
-
-  @override
-  bool containsKey(String? key) =>
+  _i3.Stream<_i2.SettingsState> get stream =>
       (super.noSuchMethod(
-            Invocation.method(#containsKey, [key]),
-            returnValue: false,
+            Invocation.getter(#stream),
+            returnValue: _i3.Stream<_i2.SettingsState>.empty(),
           )
+          as _i3.Stream<_i2.SettingsState>);
+
+  @override
+  bool get isClosed =>
+      (super.noSuchMethod(Invocation.getter(#isClosed), returnValue: false)
           as bool);
 
   @override
-  List<String>? getStringList(String? key) =>
-      (super.noSuchMethod(Invocation.method(#getStringList, [key]))
-          as List<String>?);
-
-  @override
-  _i3.Future<bool> setBool(String? key, bool? value) =>
+  String get id =>
       (super.noSuchMethod(
-            Invocation.method(#setBool, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
+            Invocation.getter(#id),
+            returnValue: _i4.dummyValue<String>(this, Invocation.getter(#id)),
           )
-          as _i3.Future<bool>);
+          as String);
 
   @override
-  _i3.Future<bool> setInt(String? key, int? value) =>
+  String get storagePrefix =>
       (super.noSuchMethod(
-            Invocation.method(#setInt, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
+            Invocation.getter(#storagePrefix),
+            returnValue: _i4.dummyValue<String>(
+              this,
+              Invocation.getter(#storagePrefix),
+            ),
           )
-          as _i3.Future<bool>);
+          as String);
 
   @override
-  _i3.Future<bool> setDouble(String? key, double? value) =>
+  String get storageToken =>
       (super.noSuchMethod(
-            Invocation.method(#setDouble, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
+            Invocation.getter(#storageToken),
+            returnValue: _i4.dummyValue<String>(
+              this,
+              Invocation.getter(#storageToken),
+            ),
           )
-          as _i3.Future<bool>);
+          as String);
 
   @override
-  _i3.Future<bool> setString(String? key, String? value) =>
+  _i2.SettingsState? fromJson(Map<String, dynamic>? json) =>
+      (super.noSuchMethod(Invocation.method(#fromJson, [json]))
+          as _i2.SettingsState?);
+
+  @override
+  Map<String, dynamic>? toJson(_i2.SettingsState? state) =>
+      (super.noSuchMethod(Invocation.method(#toJson, [state]))
+          as Map<String, dynamic>?);
+
+  @override
+  void add(_i2.SettingsEvent? event) => super.noSuchMethod(
+    Invocation.method(#add, [event]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onEvent(_i2.SettingsEvent? event) => super.noSuchMethod(
+    Invocation.method(#onEvent, [event]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void emit(_i2.SettingsState? state) => super.noSuchMethod(
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void on<E extends _i2.SettingsEvent>(
+    _i5.EventHandler<E, _i2.SettingsState>? handler, {
+    _i5.EventTransformer<E>? transformer,
+  }) => super.noSuchMethod(
+    Invocation.method(#on, [handler], {#transformer: transformer}),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onTransition(
+    _i5.Transition<_i2.SettingsEvent, _i2.SettingsState>? transition,
+  ) => super.noSuchMethod(
+    Invocation.method(#onTransition, [transition]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  _i3.Future<void> close() =>
       (super.noSuchMethod(
-            Invocation.method(#setString, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
+            Invocation.method(#close, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
           )
-          as _i3.Future<bool>);
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<bool> setStringList(String? key, List<String>? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setStringList, [key, value]),
-            returnValue: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
+  void onChange(_i5.Change<_i2.SettingsState>? change) => super.noSuchMethod(
+    Invocation.method(#onChange, [change]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i3.Future<bool> remove(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#remove, [key]),
-            returnValue: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i3.Future<bool> commit() =>
-      (super.noSuchMethod(
-            Invocation.method(#commit, []),
-            returnValue: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i3.Future<bool> clear() =>
+  void hydrate() => super.noSuchMethod(
+    Invocation.method(#hydrate, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  _i3.Future<void> clear() =>
       (super.noSuchMethod(
             Invocation.method(#clear, []),
-            returnValue: _i3.Future<bool>.value(false),
-          )
-          as _i3.Future<bool>);
-
-  @override
-  _i3.Future<void> reload() =>
-      (super.noSuchMethod(
-            Invocation.method(#reload, []),
             returnValue: _i3.Future<void>.value(),
             returnValueForMissingStub: _i3.Future<void>.value(),
           )
