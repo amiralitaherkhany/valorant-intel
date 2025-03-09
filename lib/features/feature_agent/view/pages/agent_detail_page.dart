@@ -63,8 +63,8 @@ class AgentDetailPage extends StatelessWidget {
                         (colorString as String).parseToColor
                       }
                     ],
-                    begin: AlignmentDirectional.topEnd,
-                    end: AlignmentDirectional.bottomStart,
+                    begin: AlignmentDirectional.topStart,
+                    end: AlignmentDirectional.bottomEnd,
                   ),
                 ),
                 child: Stack(
@@ -75,13 +75,16 @@ class AgentDetailPage extends StatelessWidget {
                       left: -10,
                       bottom: 0,
                       top: 0,
-                      child: Transform.scale(
-                        scale: 1.1,
-                        child: CachedNetworkImage(
-                          imageUrl: agent.background,
-                          fit: BoxFit.contain,
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                      child: Opacity(
+                        opacity: 0.7,
+                        child: Transform.scale(
+                          scale: 1.1,
+                          child: CachedNetworkImage(
+                            imageUrl: agent.background,
+                            fit: BoxFit.contain,
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
                         ),
                       ),
                     ),
@@ -306,60 +309,44 @@ class AbilityBottomSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 20.0, bottom: 20.0, left: 20.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      if (ability.displayIcon != "") ...{
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: CachedNetworkImage(
-                            imageUrl: ability.displayIcon,
-                          ),
-                        ),
-                      } else ...{
-                        const Icon(
-                          Icons.image_not_supported,
-                          color: Colors.white,
-                          size: 75,
-                        )
-                      },
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          ability.displayName,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-                Expanded(
-                  flex: 6,
-                  child: Text(
-                    ability.description,
-                  ),
-                ),
-              ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (ability.displayIcon != "") ...{
+            CachedNetworkImage(
+              imageUrl: ability.displayIcon,
+              height: 80,
+              width: 80,
             ),
-          ],
-        ),
+          } else ...{
+            const Icon(
+              Icons.image_not_supported,
+              color: Colors.white,
+              size: 75,
+            )
+          },
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              ability.displayName,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 20,
+                    color: AppColors.mainRed,
+                  ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Text(
+              ability.description,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
       ),
     );
   }
