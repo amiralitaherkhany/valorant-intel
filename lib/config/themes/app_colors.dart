@@ -24,4 +24,26 @@ class AppColors {
       0xFFFFC107); //For alert notifications, important messages and warnings.
   static const Color green = Color(
       0xFF4CAF50); //To display positive statuses, such as victories or achievements in the stats section.
+
+  static const darkColorScheme = ColorScheme.dark(
+    primary: AppColors.mainRed,
+    secondary: AppColors.darkBlue,
+    surface: AppColors.cardBackground,
+    error: Colors.red,
+    onPrimary: AppColors.white,
+    onSecondary: AppColors.white,
+    onSurface: AppColors.white,
+    onError: AppColors.white,
+  );
+
+  static const lightColorScheme = ColorScheme.light(
+    primary: AppColors.mainRed,
+    secondary: AppColors.darkBlue,
+    surface: AppColors.grey,
+    error: Colors.red,
+    onPrimary: Colors.white,
+    onSecondary: AppColors.white,
+    onSurface: AppColors.cardBackground,
+    onError: AppColors.white,
+  );
 }
