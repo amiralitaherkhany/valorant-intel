@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
                     height: 200,
                     margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
                       border: Border.all(
                         color: Theme.of(context).colorScheme.primary,
                         width: 3.5,
@@ -54,7 +55,7 @@ class HomePage extends StatelessWidget {
                               sigmaY: 2,
                             ),
                             child: Image.asset(
-                              'assets/images/agents.png',
+                              'assets/images/agents.jpg',
                               fit: BoxFit.cover,
                             ),
                           ),

@@ -29,6 +29,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.wait([
+      precacheImage(const AssetImage('assets/images/agents.jpg'), context),
+    ]);
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
         return MaterialApp.router(
