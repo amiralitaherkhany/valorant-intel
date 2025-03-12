@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
                             child: Image.asset(
                               'assets/images/agents.jpg',
                               fit: BoxFit.cover,
+                              filterQuality: FilterQuality.low,
                             ),
                           ),
                         ),
