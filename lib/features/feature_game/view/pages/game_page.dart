@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class GamePage extends StatelessWidget {
+  const GamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.localizations.home),
+        title: Text(
+          context.localizations.game,
+        ),
         centerTitle: true,
         titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,

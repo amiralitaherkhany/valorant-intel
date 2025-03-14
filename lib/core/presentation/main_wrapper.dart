@@ -38,10 +38,6 @@ class MainWrapper extends StatelessWidget {
             label: context.localizations.game,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
-            label: context.localizations.profile,
-          ),
-          BottomNavigationBarItem(
             icon: const Icon(Icons.settings),
             label: context.localizations.settings,
           ),

@@ -6,6 +6,8 @@ import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/pages/agent_detail_page.dart';
 import 'package:valorant_intel/features/feature_agent/view/pages/agents_page.dart';
+import 'package:valorant_intel/features/feature_collections/view/pages/collections_page.dart';
+import 'package:valorant_intel/features/feature_game/view/pages/game_page.dart';
 import 'package:valorant_intel/features/feature_home/view/pages/home_page.dart';
 import 'package:valorant_intel/features/feature_settings/view/pages/settings_page.dart';
 import 'package:valorant_intel/service_locator.dart';
@@ -25,6 +27,16 @@ class AppRouter {
                 path: '/Home',
                 pageBuilder: (context, state) => const MaterialPage(
                   child: HomePage(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/Collections',
+                pageBuilder: (context, state) => const MaterialPage(
+                  child: CollectionsPage(),
                 ),
                 routes: [
                   GoRoute(
@@ -69,29 +81,9 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/Collections',
-                pageBuilder: (context, state) => const MaterialPage(
-                  child: Center(child: Text('Collections Page')),
-                ),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
                 path: '/Game',
                 pageBuilder: (context, state) => const MaterialPage(
-                  child: Center(child: Text('Game Page')),
-                ),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: '/Profile',
-                pageBuilder: (context, state) => const MaterialPage(
-                  child: Center(child: Text('Profile Page')),
+                  child: GamePage(),
                 ),
               ),
             ],

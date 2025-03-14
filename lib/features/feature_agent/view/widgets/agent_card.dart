@@ -18,7 +18,7 @@ class AgentCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.go(
-          '/Home/Agents/AgentDetail',
+          '/Collections/Agents/AgentDetail',
           extra: agent,
         );
       },
