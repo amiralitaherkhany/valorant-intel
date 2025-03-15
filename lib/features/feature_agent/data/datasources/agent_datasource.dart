@@ -1,5 +1,5 @@
-import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 
-abstract class AgentDatasource {
+abstract interface class AgentDatasource {
   Future<List<Agent>> getAllAgents();
 }

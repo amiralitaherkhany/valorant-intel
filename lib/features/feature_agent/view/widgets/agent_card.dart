@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:valorant_intel/config/themes/app_colors.dart';
-import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 
 class AgentCard extends StatelessWidget {
   const AgentCard({

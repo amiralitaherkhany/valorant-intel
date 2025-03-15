@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:valorant_intel/core/presentation/main_wrapper.dart';
 import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
-import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/pages/agent_detail_page.dart';
 import 'package:valorant_intel/features/feature_agent/view/pages/agents_page.dart';
 import 'package:valorant_intel/features/feature_collections/view/pages/collections_page.dart';

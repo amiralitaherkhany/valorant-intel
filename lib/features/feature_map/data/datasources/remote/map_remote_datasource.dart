@@ -1,24 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:valorant_intel/core/errors/api_exception.dart';
 import 'package:valorant_intel/core/network/dio_client.dart';
-import 'package:valorant_intel/features/feature_agent/data/datasources/agent_datasource.dart';
-import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
+import 'package:valorant_intel/features/feature_map/data/datasources/map_datasource.dart';
+import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
 
-class AgentRemoteDatasource implements AgentDatasource {
+class MapRemoteDatasource implements MapDatasource {
   final DioClient _dioClient;
 
-  AgentRemoteDatasource({required DioClient dioClient})
-      : _dioClient = dioClient;
+  MapRemoteDatasource({required DioClient dioClient}) : _dioClient = dioClient;
 
   @override
-  Future<List<Agent>> getAllAgents() async {
-    Map<String, dynamic> queryParameters = {'isPlayableCharacter': true};
+  Future<List<GameMap>> getAllMaps() async {
     try {
-      return await _dioClient.dio
-          .get('/agents', queryParameters: queryParameters)
-          .then(
+      return await _dioClient.dio.get('/maps').then(
             (response) => (response.data['data'] as List<dynamic>)
-                .map<Agent>((element) => Agent.fromMap(element))
+                .map<GameMap>((element) => GameMap.fromMap(element))
                 .toList(),
           );
     } on DioException catch (exception) {

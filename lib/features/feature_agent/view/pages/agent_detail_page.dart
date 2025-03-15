@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:valorant_intel/config/themes/app_colors.dart';
 import 'package:valorant_intel/core/extensions/string_extensions.dart';
-import 'package:valorant_intel/features/feature_agent/data/models/agent/ability.dart';
-import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/ability.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 
 class AgentDetailPage extends StatelessWidget {
   const AgentDetailPage({

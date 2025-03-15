@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:valorant_intel/features/feature_agent/data/models/agent/agent.dart';
+import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 import 'package:valorant_intel/features/feature_agent/data/repositories/agent_repository.dart';
 
 part 'agent_event.dart';
