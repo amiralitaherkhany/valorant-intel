@@ -2,6 +2,8 @@
     "@@locale": "en",
     "appTitle": "Valorant Intel",
     "agents": "Agents",
+    "maps": "Maps",
+    "@maps": {},
     "@agents": {},
     "darkMode": "Dark Mode",
     "language": "Language",

@@ -15,6 +15,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get agents => 'Agents';
 
   @override
+  String get maps => 'Maps';
+
+  @override
   String get darkMode => 'Dark Mode';
 
   @override

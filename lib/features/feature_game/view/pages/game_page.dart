@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 
 class GamePage extends StatelessWidget {
@@ -19,11 +20,16 @@ class GamePage extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: const CustomScrollView(
+      body: CustomScrollView(
         slivers: [
           SliverList(
             delegate: SliverChildListDelegate.fixed(
-              [],
+              [
+                ElevatedButton(
+                  onPressed: () => context.go("/Game/Maps"),
+                  child: Text(context.localizations.maps),
+                )
+              ],
             ),
           )
         ],

@@ -1,5 +1,6 @@
 {
     "@@locale": "es",
+    "maps": "mapas",
     "appTitle": "Información de Valorant",
     "agents": "Agentes",
     "darkMode": "Modo oscuro",

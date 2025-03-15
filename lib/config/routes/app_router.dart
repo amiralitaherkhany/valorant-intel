@@ -9,6 +9,8 @@ import 'package:valorant_intel/features/feature_agent/view/pages/agents_page.dar
 import 'package:valorant_intel/features/feature_collections/view/pages/collections_page.dart';
 import 'package:valorant_intel/features/feature_game/view/pages/game_page.dart';
 import 'package:valorant_intel/features/feature_home/view/pages/home_page.dart';
+import 'package:valorant_intel/features/feature_map/bloc/map_bloc.dart';
+import 'package:valorant_intel/features/feature_map/view/pages/maps_page.dart';
 import 'package:valorant_intel/features/feature_settings/view/pages/settings_page.dart';
 import 'package:valorant_intel/service_locator.dart';
 
@@ -42,7 +44,6 @@ class AppRouter {
                   GoRoute(
                     path: 'Agents',
                     pageBuilder: (context, state) => MaterialPage(
-                      maintainState: true,
                       child: BlocProvider<AgentBloc>(
                         create: (context) =>
                             locator()..add(GetAllAgentsEvent()),
@@ -85,6 +86,17 @@ class AppRouter {
                 pageBuilder: (context, state) => const MaterialPage(
                   child: GamePage(),
                 ),
+                routes: [
+                  GoRoute(
+                    path: 'Maps',
+                    pageBuilder: (context, state) => MaterialPage(
+                      child: BlocProvider<MapBloc>(
+                        create: (context) => locator()..add(GetAllMapsEvent()),
+                        child: const MapsPage(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
