@@ -72,14 +72,43 @@ class Agent extends Equatable {
         isPlayableCharacter: json['isPlayableCharacter'] as bool,
         isAvailableForTest: json['isAvailableForTest'] as bool,
         isBaseContent: json['isBaseContent'] as bool,
-        role: Role.fromJson(json['role'] as Map<String, dynamic>),
+        role: Role.fromMap(json['role'] as Map<String, dynamic>),
         recruitmentData: json['recruitmentData'] as dynamic,
         abilities: (json['abilities'] as List<dynamic>)
-            .map((e) => Ability.fromJson(e as Map<String, dynamic>))
+            .map((e) => Ability.fromMap(e as Map<String, dynamic>))
             .toList(),
         voiceLine: json['voiceLine'] as dynamic,
       );
 
   @override
   List<Object?> get props => [];
+
+  Map<String, dynamic> toMap() {
+    final result = <String, dynamic>{};
+
+    result.addAll({'uuid': uuid});
+    result.addAll({'displayName': displayName});
+    result.addAll({'description': description});
+    result.addAll({'developerName': developerName});
+    result.addAll({'characterTags': characterTags});
+    result.addAll({'displayIcon': displayIcon});
+    result.addAll({'displayIconSmall': displayIconSmall});
+    result.addAll({'bustPortrait': bustPortrait});
+    result.addAll({'fullPortrait': fullPortrait});
+    result.addAll({'fullPortraitV2': fullPortraitV2});
+    result.addAll({'killfeedPortrait': killfeedPortrait});
+    result.addAll({'background': background});
+    result.addAll({'backgroundGradientColors': backgroundGradientColors});
+    result.addAll({'assetPath': assetPath});
+    result.addAll({'isFullPortraitRightFacing': isFullPortraitRightFacing});
+    result.addAll({'isPlayableCharacter': isPlayableCharacter});
+    result.addAll({'isAvailableForTest': isAvailableForTest});
+    result.addAll({'isBaseContent': isBaseContent});
+    result.addAll({'role': role.toMap()});
+    result.addAll({'recruitmentData': recruitmentData});
+    result.addAll({'abilities': abilities.map((x) => x.toMap()).toList()});
+    result.addAll({'voiceLine': voiceLine});
+
+    return result;
+  }
 }

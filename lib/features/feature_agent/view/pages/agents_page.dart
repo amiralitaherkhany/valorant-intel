@@ -27,7 +27,16 @@ class AgentsPage extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: BlocBuilder<AgentBloc, AgentState>(
+      body: BlocConsumer<AgentBloc, AgentState>(
+        listener: (context, state) {
+          if (state is AgentSuccessState && state.isFromCache) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Updating data failed showing cached data"),
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           return switch (state) {
             AgentLoadingState() => const AgentLoadingView(),

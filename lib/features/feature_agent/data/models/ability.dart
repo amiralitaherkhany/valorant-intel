@@ -11,10 +11,17 @@ class Ability {
     required this.displayIcon,
   });
 
-  factory Ability.fromJson(Map<String, dynamic> json) => Ability(
+  factory Ability.fromMap(Map<String, dynamic> json) => Ability(
         slot: json['slot'] as String,
         displayName: json['displayName'] as String,
         description: json['description'] as String,
         displayIcon: json['displayIcon'] ?? "",
       );
+
+  Map<String, dynamic> toMap() => {
+        'slot': slot,
+        'displayName': displayName,
+        'description': description,
+        'displayIcon': displayIcon,
+      };
 }

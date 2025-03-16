@@ -13,11 +13,19 @@ class Role {
     required this.assetPath,
   });
 
-  factory Role.fromJson(Map<String, dynamic> json) => Role(
+  factory Role.fromMap(Map<String, dynamic> json) => Role(
         uuid: json['uuid'] as String,
         displayName: json['displayName'] as String,
         description: json['description'] as String,
         displayIcon: json['displayIcon'] as String,
         assetPath: json['assetPath'] as String,
       );
+
+  Map<String, dynamic> toMap() => {
+        'uuid': uuid,
+        'displayName': displayName,
+        'description': description,
+        'displayIcon': displayIcon,
+        'assetPath': assetPath,
+      };
 }

@@ -11,10 +11,11 @@ final class AgentLoadingState extends AgentState {}
 
 final class AgentSuccessState extends AgentState {
   final List<Agent> agentList;
-  const AgentSuccessState({required this.agentList});
+  final bool isFromCache;
+  const AgentSuccessState({required this.agentList, this.isFromCache = false});
 
   @override
-  List<Object?> get props => [agentList];
+  List<Object?> get props => [agentList, isFromCache];
 }
 
 final class AgentErrorState extends AgentState {
