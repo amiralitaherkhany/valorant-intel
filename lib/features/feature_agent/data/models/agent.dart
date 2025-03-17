@@ -81,7 +81,7 @@ class Agent extends Equatable {
       );
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [uuid];
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
