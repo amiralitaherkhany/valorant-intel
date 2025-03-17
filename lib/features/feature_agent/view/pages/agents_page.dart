@@ -31,8 +31,8 @@ class AgentsPage extends StatelessWidget {
         listener: (context, state) {
           if (state is AgentSuccessState && state.isFromCache) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Updating data failed showing cached data"),
+              SnackBar(
+                content: Text(context.localizations.cachedContent),
               ),
             );
           }
@@ -58,41 +58,41 @@ class AgentLoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: EdgeInsets.symmetric(
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: EdgeInsets.symmetric(
             horizontal: context.width / 35,
             vertical: 30,
           ),
-              sliver: SliverToBoxAdapter(
-                child: Shimmer.fromColors(
-                  baseColor: AppColors.grey,
-                  highlightColor: AppColors.white,
-                  child: GridView.builder(
-                    addRepaintBoundaries: true,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          sliver: SliverToBoxAdapter(
+            child: Shimmer.fromColors(
+              baseColor: AppColors.grey,
+              highlightColor: AppColors.white,
+              child: GridView.builder(
+                addRepaintBoundaries: true,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 10,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: context.width ~/ 200,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      mainAxisExtent: 150,
-                    ),
-                    itemBuilder: (context, index) => Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.white,
-                      ),
-                    ),
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  mainAxisExtent: 150,
+                ),
+                itemBuilder: (context, index) => Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white,
                   ),
                 ),
               ),
             ),
-          ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -153,75 +153,75 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-      return NotificationListener<ScrollStartNotification>(
-        onNotification: (notification) {
-          if (_controller.offset <= 0 && !_isAtTop.value) {
-            scheduleMicrotask(() {
-              if (mounted) {
-                _isAtTop.value = true;
-              }
-            });
-          } else if (_controller.offset > 0 && _isAtTop.value) {
-            scheduleMicrotask(() {
-              if (mounted) {
-                _isAtTop.value = false;
-              }
-            });
-          }
-          return false;
-        },
-        child: CustomScrollView(
-          controller: _controller,
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            ListenableBuilder(
-              listenable: _isAtTop,
-              builder: (context, child) {
-                return SliverVisibility(
-                  visible: _isAtTop.value,
-                  sliver: CupertinoSliverRefreshControl(
-                    refreshIndicatorExtent: 50,
-                    refreshTriggerPullDistance: 50,
-                    onRefresh: () async {
-                      HapticFeedback.vibrate();
-                      context.read<AgentBloc>().add(GetAllAgentsEvent());
-                    },
+    return NotificationListener<ScrollStartNotification>(
+      onNotification: (notification) {
+        if (_controller.offset <= 0 && !_isAtTop.value) {
+          scheduleMicrotask(() {
+            if (mounted) {
+              _isAtTop.value = true;
+            }
+          });
+        } else if (_controller.offset > 0 && _isAtTop.value) {
+          scheduleMicrotask(() {
+            if (mounted) {
+              _isAtTop.value = false;
+            }
+          });
+        }
+        return false;
+      },
+      child: CustomScrollView(
+        controller: _controller,
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          ListenableBuilder(
+            listenable: _isAtTop,
+            builder: (context, child) {
+              return SliverVisibility(
+                visible: _isAtTop.value,
+                sliver: CupertinoSliverRefreshControl(
+                  refreshIndicatorExtent: 50,
+                  refreshTriggerPullDistance: 50,
+                  onRefresh: () async {
+                    HapticFeedback.vibrate();
+                    context.read<AgentBloc>().add(GetAllAgentsEvent());
+                  },
                   builder: (context, refreshState, pulledExtent,
                           refreshTriggerPullDistance, refreshIndicatorExtent) =>
-                        Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      color: AppColors.mainRed,
-                      child: Center(
-                        child: Text(
-                          context.localizations.pullToRefresh,
-                        ),
+                      Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: AppColors.mainRed,
+                    child: Center(
+                      child: Text(
+                        context.localizations.pullToRefresh,
                       ),
                     ),
                   ),
-                );
-              },
-            ),
-            SliverPadding(
-              padding: EdgeInsets.symmetric(
+                ),
+              );
+            },
+          ),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
               horizontal: context.width / 35,
               vertical: 30,
             ),
-              sliver: SliverGrid.builder(
-                itemCount: widget.agentList.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            sliver: SliverGrid.builder(
+              itemCount: widget.agentList.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: context.width ~/ 200,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  mainAxisExtent: 150,
-                ),
-                itemBuilder: (context, index) {
-                  return AgentCard(agent: widget.agentList[index]);
-                },
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                mainAxisExtent: 150,
               ),
+              itemBuilder: (context, index) {
+                return AgentCard(agent: widget.agentList[index]);
+              },
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 }

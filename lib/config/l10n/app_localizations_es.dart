@@ -52,4 +52,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get unknownError => 'Error desconocido';
+
+  @override
+  String get cachedContent => 'No se pudieron obtener los datos más recientes. Mostrando contenido almacenado.';
 }

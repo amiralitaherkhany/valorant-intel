@@ -29,5 +29,7 @@
     "@pullToRefresh": {},
     "@language": {},
     "@darkMode": {},
-    "@appTitle": {}
+    "@appTitle": {},
+    "cachedContent": "Unable to fetch latest data. Displaying cached content.",
+    "@cachedContent": {}
 }

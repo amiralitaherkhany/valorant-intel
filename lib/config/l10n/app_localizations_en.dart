@@ -52,4 +52,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknownError => 'Unknown Error';
+
+  @override
+  String get cachedContent => 'Unable to fetch latest data. Displaying cached content.';
 }

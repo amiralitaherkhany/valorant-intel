@@ -14,5 +14,6 @@
     "tryAgain": "Intentar de nuevo",
     "networkFailure": "Verifica tu conexión a internet",
     "serverError": "Algo salió mal",
-    "unknownError": "Error desconocido"
+    "unknownError": "Error desconocido",
+    "cachedContent": "No se pudieron obtener los datos más recientes. Mostrando contenido almacenado."
 }

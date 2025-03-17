@@ -184,6 +184,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown Error'**
   String get unknownError;
+
+  /// No description provided for @cachedContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to fetch latest data. Displaying cached content.'**
+  String get cachedContent;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
