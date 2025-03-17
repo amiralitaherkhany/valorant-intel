@@ -55,29 +55,16 @@ class AgentLoadingView extends StatelessWidget {
   const AgentLoadingView({
     super.key,
   });
-  static late int gridColumnCount;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        switch (constraints.maxWidth) {
-          case > 1440:
-            gridColumnCount = 6;
-          case > 1240:
-            gridColumnCount = 5;
-          case > 905:
-            gridColumnCount = 4;
-          case > 600:
-            gridColumnCount = 3;
-          default:
-            gridColumnCount = 2;
-        }
         return CustomScrollView(
           slivers: [
             SliverPadding(
               padding: EdgeInsets.symmetric(
-                  horizontal: gridColumnCount / 0.3, vertical: 30),
+            horizontal: context.width / 35,
+            vertical: 30,
+          ),
               sliver: SliverToBoxAdapter(
                 child: Shimmer.fromColors(
                   baseColor: AppColors.grey,
@@ -88,7 +75,7 @@ class AgentLoadingView extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: 10,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: gridColumnCount,
+                  crossAxisCount: context.width ~/ 200,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
                       mainAxisExtent: 150,
@@ -106,8 +93,6 @@ class AgentLoadingView extends StatelessWidget {
               ),
             ),
           ],
-        );
-      },
     );
   }
 }
@@ -165,23 +150,9 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
   }
 
   final ValueNotifier _isAtTop = ValueNotifier(true);
-  late int gridColumnCount;
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, costraints) {
-      switch (costraints.maxWidth) {
-        case > 1440:
-          gridColumnCount = 6;
-        case > 1240:
-          gridColumnCount = 5;
-        case > 905:
-          gridColumnCount = 4;
-        case > 600:
-          gridColumnCount = 3;
-        default:
-          gridColumnCount = 2;
-      }
       return NotificationListener<ScrollStartNotification>(
         onNotification: (notification) {
           if (_controller.offset <= 0 && !_isAtTop.value) {
@@ -215,11 +186,8 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
                       HapticFeedback.vibrate();
                       context.read<AgentBloc>().add(GetAllAgentsEvent());
                     },
-                    builder: (context,
-                            refreshState,
-                            pulledExtent,
-                            refreshTriggerPullDistance,
-                            refreshIndicatorExtent) =>
+                  builder: (context, refreshState, pulledExtent,
+                          refreshTriggerPullDistance, refreshIndicatorExtent) =>
                         Container(
                       width: double.infinity,
                       height: double.infinity,
@@ -236,11 +204,13 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
             ),
             SliverPadding(
               padding: EdgeInsets.symmetric(
-                  horizontal: gridColumnCount / 0.3, vertical: 30),
+              horizontal: context.width / 35,
+              vertical: 30,
+            ),
               sliver: SliverGrid.builder(
                 itemCount: widget.agentList.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: gridColumnCount,
+                crossAxisCount: context.width ~/ 200,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   mainAxisExtent: 150,
@@ -253,6 +223,5 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
           ],
         ),
       );
-    });
   }
 }
