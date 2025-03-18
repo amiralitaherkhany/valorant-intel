@@ -20,3 +20,13 @@ extension LocalizationExtension on BuildContext {
 
   AppLocalizations get localizations => AppLocalizations.of(this)!;
 }
+
+extension SnackBarExtension on BuildContext {
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+}

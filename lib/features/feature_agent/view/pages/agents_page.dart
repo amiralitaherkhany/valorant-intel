@@ -22,10 +22,8 @@ class AgentsPage extends StatelessWidget {
       body: BlocConsumer<AgentBloc, AgentState>(
         listener: (context, state) {
           if (state is AgentSuccessState && state.isFromCache) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(context.localizations.cachedContent),
-              ),
+            context.showSnackBar(
+              context.localizations.cachedContent,
             );
           }
         },
