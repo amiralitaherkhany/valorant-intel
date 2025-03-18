@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
+import 'package:valorant_intel/core/widgets/category_card.dart';
+import 'package:valorant_intel/core/widgets/simple_app_bar.dart';
 
 class GamePage extends StatelessWidget {
   const GamePage({super.key});
@@ -8,27 +10,30 @@ class GamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          context.localizations.game,
-        ),
-        centerTitle: true,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-            ),
-        elevation: 0,
-        scrolledUnderElevation: 0,
+      appBar: SimpleAppBar(
+        title: Text(context.localizations.game),
       ),
       body: CustomScrollView(
         slivers: [
-          SliverList(
+          SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: context.width > 300 ? context.width ~/ 300 : 1,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              mainAxisExtent: 250,
+            ),
             delegate: SliverChildListDelegate.fixed(
               [
-                ElevatedButton(
-                  onPressed: () => context.go("/Game/Maps"),
-                  child: Text(context.localizations.maps),
-                )
+                CategoryCard(
+                  title: context.localizations.maps,
+                  image: Image.asset(
+                    'assets/images/maps.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                  onTap: () {
+                    context.go("/Game/Maps");
+                  },
+                ),
               ],
             ),
           )

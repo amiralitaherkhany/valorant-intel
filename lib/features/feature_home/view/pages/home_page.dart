@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
+import 'package:valorant_intel/core/widgets/simple_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,15 +8,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: SimpleAppBar(
         title: Text(context.localizations.home),
-        centerTitle: true,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-            ),
-        elevation: 0,
-        scrolledUnderElevation: 0,
       ),
       body: const CustomScrollView(
         slivers: [

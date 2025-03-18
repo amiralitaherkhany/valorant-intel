@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
+import 'package:valorant_intel/core/widgets/custom_error_view.dart';
+import 'package:valorant_intel/core/widgets/custom_sliver_refresh_control.dart';
+import 'package:valorant_intel/core/widgets/simple_app_bar.dart';
 import 'package:valorant_intel/features/feature_map/bloc/map_bloc.dart';
 import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
 import 'package:valorant_intel/features/feature_map/view/widgets/maps_card.dart';
@@ -11,15 +14,8 @@ class MapsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: SimpleAppBar(
         title: Text(context.localizations.maps),
-        centerTitle: true,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-            ),
-        elevation: 0,
-        scrolledUnderElevation: 0,
       ),
       body: BlocBuilder<MapBloc, MapState>(
         builder: (context, state) {
@@ -27,8 +23,11 @@ class MapsPage extends StatelessWidget {
             MapLoadingState() => const MapLoadingView(),
             MapSuccessState(mapList: final mapList) =>
               MapSuccessView(mapList: mapList),
-            MapErrorState(message: final message) =>
-              MapErrorView(message: message)
+            MapErrorState(message: final message) => CustomErrorView(
+                message: message,
+                onTryAgain: () =>
+                    context.read<MapBloc>().add(GetAllMapsEvent()),
+              )
           };
         },
       ),
@@ -47,50 +46,51 @@ class MapLoadingView extends StatelessWidget {
   }
 }
 
-class MapSuccessView extends StatelessWidget {
+class MapSuccessView extends StatefulWidget {
   final List<GameMap> mapList;
   const MapSuccessView({super.key, required this.mapList});
 
   @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverList.builder(
-          itemBuilder: (context, index) {
-            return MapsCard(map: mapList[index]);
-          },
-          itemCount: mapList.length,
-        ),
-      ],
-    );
-  }
+  State<MapSuccessView> createState() => _MapSuccessViewState();
 }
 
-class MapErrorView extends StatelessWidget {
-  final String message;
-  const MapErrorView({super.key, required this.message});
+class _MapSuccessViewState extends State<MapSuccessView> {
+  final _controller = ScrollController();
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            context.translateError(message),
-            style: Theme.of(context).textTheme.bodyMedium,
+    return CustomScrollView(
+      controller: _controller,
+      physics: const BouncingScrollPhysics(),
+      slivers: [
+        CustomSliverRefreshControl(
+          onRefresh: () => context.read<MapBloc>().add(GetAllMapsEvent()),
+          controller: _controller,
+        ),
+        SliverPadding(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.width > 35 ? context.width / 35 : 10,
+            vertical: 30,
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () => context.read<MapBloc>().add(GetAllMapsEvent()),
-            child: Text(
-              context.localizations.tryAgain,
+          sliver: SliverGrid.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: context.width > 300 ? context.width ~/ 300 : 1,
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 15,
+              mainAxisExtent: 200,
             ),
+            itemBuilder: (context, index) {
+              return MapsCard(map: widget.mapList[index]);
+            },
+            itemCount: widget.mapList.length,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

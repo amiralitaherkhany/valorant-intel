@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:valorant_intel/config/themes/app_colors.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
+import 'package:valorant_intel/core/widgets/custom_error_view.dart';
 import 'package:valorant_intel/core/widgets/custom_sliver_refresh_control.dart';
+import 'package:valorant_intel/core/widgets/simple_app_bar.dart';
 import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/widgets/agent_card.dart';
@@ -14,15 +16,8 @@ class AgentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: SimpleAppBar(
         title: Text(context.localizations.agents),
-        centerTitle: true,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-            ),
-        elevation: 0,
-        scrolledUnderElevation: 0,
       ),
       body: BlocConsumer<AgentBloc, AgentState>(
         listener: (context, state) {
@@ -39,8 +34,11 @@ class AgentsPage extends StatelessWidget {
             AgentLoadingState() => const AgentLoadingView(),
             AgentSuccessState(agentList: final agentList) =>
               AgentSuccessView(agentList: agentList),
-            AgentErrorState(message: final message) =>
-              AgentErrorView(message: message)
+            AgentErrorState(message: final message) => CustomErrorView(
+                message: message,
+                onTryAgain: () =>
+                    context.read<AgentBloc>().add(GetAllAgentsEvent()),
+              )
           };
         },
       ),
@@ -94,39 +92,6 @@ class AgentLoadingView extends StatelessWidget {
   }
 }
 
-class AgentErrorView extends StatelessWidget {
-  const AgentErrorView({
-    super.key,
-    required this.message,
-  });
-
-  final String message;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            context.translateError(message),
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () => context.read<AgentBloc>().add(GetAllAgentsEvent()),
-            child: Text(
-              context.localizations.tryAgain,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class AgentSuccessView extends StatefulWidget {
   const AgentSuccessView({
     super.key,
@@ -159,13 +124,13 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
         ),
         SliverPadding(
           padding: EdgeInsets.symmetric(
-            horizontal: context.width / 35,
+            horizontal: context.width > 35 ? context.width / 35 : 10,
             vertical: 30,
           ),
           sliver: SliverGrid.builder(
             itemCount: widget.agentList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: context.width ~/ 200,
+              crossAxisCount: context.width > 200 ? context.width ~/ 200 : 1,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               mainAxisExtent: 150,
