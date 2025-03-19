@@ -74,7 +74,7 @@ class AppTypography {
         displaySmall: headline3,
         bodyLarge: bodyText1,
         bodyMedium: bodyText2,
-        labelLarge: button,
         bodySmall: caption,
+        labelLarge: button,
       );
 }
