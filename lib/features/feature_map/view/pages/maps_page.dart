@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/core/widgets/custom_error_view.dart';
+import 'package:valorant_intel/core/widgets/custom_shimmer_grid_view.dart';
 import 'package:valorant_intel/core/widgets/custom_sliver_refresh_control.dart';
 import 'package:valorant_intel/core/widgets/simple_app_bar.dart';
 import 'package:valorant_intel/features/feature_map/bloc/map_bloc.dart';
@@ -20,7 +21,11 @@ class MapsPage extends StatelessWidget {
       body: BlocBuilder<MapBloc, MapState>(
         builder: (context, state) {
           return switch (state) {
-            MapLoadingState() => const MapLoadingView(),
+            MapLoadingState() => const CustomShimmerGridView(
+                width: 300,
+                height: 100,
+                radius: 12,
+              ),
             MapSuccessState(mapList: final mapList) =>
               MapSuccessView(mapList: mapList),
             MapErrorState(message: final message) => CustomErrorView(
