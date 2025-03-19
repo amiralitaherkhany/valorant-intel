@@ -24,24 +24,33 @@ class _CustomSliverRefreshControlState
   @override
   void initState() {
     super.initState();
-    widget.controller.position.isScrollingNotifier.addListener(() {
-      final isScrolling = widget.controller.position.isScrollingNotifier.value;
-      if (isScrolling) {
-        if (widget.controller.offset <= 0 && !_isAtTop.value) {
-          scheduleMicrotask(() {
-            if (mounted) {
-              _isAtTop.value = true;
-            }
-          });
-        } else if (widget.controller.offset > 0 && _isAtTop.value) {
-          scheduleMicrotask(() {
-            if (mounted) {
-              _isAtTop.value = false;
-            }
-          });
-        }
+    widget.controller.position.isScrollingNotifier.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.controller.position.isScrollingNotifier
+        .removeListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    final isScrolling = widget.controller.position.isScrollingNotifier.value;
+    if (isScrolling) {
+      if (widget.controller.offset <= 0 && !_isAtTop.value) {
+        scheduleMicrotask(() {
+          if (mounted) {
+            _isAtTop.value = true;
+          }
+        });
+      } else if (widget.controller.offset > 0 && _isAtTop.value) {
+        scheduleMicrotask(() {
+          if (mounted) {
+            _isAtTop.value = false;
+          }
+        });
       }
-    });
+    }
   }
 
   @override
