@@ -82,7 +82,7 @@ class _MapSuccessViewState extends State<MapSuccessView> {
               crossAxisCount: context.width > 300 ? context.width ~/ 300 : 1,
               mainAxisSpacing: 15,
               crossAxisSpacing: 15,
-              mainAxisExtent: 200,
+              mainAxisExtent: 100,
             ),
             itemBuilder: (context, index) {
               return MapsCard(map: widget.mapList[index]);
