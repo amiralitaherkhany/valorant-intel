@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:valorant_intel/config/themes/app_colors.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/core/widgets/custom_error_view.dart';
+import 'package:valorant_intel/core/widgets/custom_shimmer_grid_view.dart';
 import 'package:valorant_intel/core/widgets/custom_sliver_refresh_control.dart';
 import 'package:valorant_intel/core/widgets/simple_app_bar.dart';
 import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
@@ -29,7 +28,11 @@ class AgentsPage extends StatelessWidget {
         },
         builder: (context, state) {
           return switch (state) {
-            AgentLoadingState() => const AgentLoadingView(),
+            AgentLoadingState() => const CustomShimmerGridView(
+                width: 150,
+                height: 150,
+                radius: 12,
+              ),
             AgentSuccessState(agentList: final agentList) =>
               AgentSuccessView(agentList: agentList),
             AgentErrorState(message: final message) => CustomErrorView(
@@ -40,52 +43,6 @@ class AgentsPage extends StatelessWidget {
           };
         },
       ),
-    );
-  }
-}
-
-class AgentLoadingView extends StatelessWidget {
-  const AgentLoadingView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverPadding(
-          padding: EdgeInsets.symmetric(
-            horizontal: context.width / 35,
-            vertical: 30,
-          ),
-          sliver: SliverToBoxAdapter(
-            child: Shimmer.fromColors(
-              baseColor: AppColors.grey,
-              highlightColor: AppColors.white,
-              child: GridView.builder(
-                addRepaintBoundaries: true,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: context.width ~/ 200,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  mainAxisExtent: 150,
-                ),
-                itemBuilder: (context, index) => Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -128,7 +85,7 @@ class _AgentSuccessViewState extends State<AgentSuccessView> {
           sliver: SliverGrid.builder(
             itemCount: widget.agentList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: context.width > 200 ? context.width ~/ 200 : 1,
+              crossAxisCount: context.width > 150 ? context.width ~/ 150 : 1,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               mainAxisExtent: 150,
