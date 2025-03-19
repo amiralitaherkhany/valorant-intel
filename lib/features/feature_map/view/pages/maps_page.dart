@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/core/widgets/custom_error_view.dart';
 import 'package:valorant_intel/core/widgets/custom_shimmer_grid_view.dart';
-import 'package:valorant_intel/core/widgets/custom_sliver_refresh_control.dart';
+import 'package:valorant_intel/core/widgets/custom_sliver_refresh_wrapper.dart';
 import 'package:valorant_intel/core/widgets/simple_app_bar.dart';
 import 'package:valorant_intel/features/feature_map/bloc/map_bloc.dart';
 import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
@@ -51,32 +51,15 @@ class MapLoadingView extends StatelessWidget {
   }
 }
 
-class MapSuccessView extends StatefulWidget {
+class MapSuccessView extends StatelessWidget {
   final List<GameMap> mapList;
   const MapSuccessView({super.key, required this.mapList});
 
   @override
-  State<MapSuccessView> createState() => _MapSuccessViewState();
-}
-
-class _MapSuccessViewState extends State<MapSuccessView> {
-  final _controller = ScrollController();
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _controller,
-      physics: const BouncingScrollPhysics(),
+    return CustomSliverRefreshWrapper(
+      onRefresh: () => context.read<MapBloc>().add(GetAllMapsEvent()),
       slivers: [
-        CustomSliverRefreshControl(
-          onRefresh: () => context.read<MapBloc>().add(GetAllMapsEvent()),
-          controller: _controller,
-        ),
         SliverPadding(
           padding: EdgeInsets.symmetric(
             horizontal: context.width > 35 ? context.width / 35 : 10,
@@ -90,9 +73,9 @@ class _MapSuccessViewState extends State<MapSuccessView> {
               mainAxisExtent: 100,
             ),
             itemBuilder: (context, index) {
-              return MapsCard(map: widget.mapList[index]);
+              return MapsCard(map: mapList[index]);
             },
-            itemCount: widget.mapList.length,
+            itemCount: mapList.length,
           ),
         ),
       ],
