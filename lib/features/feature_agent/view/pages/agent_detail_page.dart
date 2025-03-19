@@ -396,26 +396,6 @@ class AnimatedDisplayIcon extends StatelessWidget {
     return Hero(
       transitionOnUserGestures: true,
       tag: agent.displayIcon,
-      // flightShuttleBuilder: (flightContext, animation,
-      //     flightDirection, fromHeroContext, toHeroContext) {
-      //   Animation<double> scaleAnimation =
-      //       TweenSequence<double>([
-      //     TweenSequenceItem(
-      //         tween: Tween(begin: 1, end: 1.5), weight: 0.5),
-      //     TweenSequenceItem(
-      //         tween: Tween(begin: 1.5, end: 1), weight: 0.5),
-      //   ]).animate(animation);
-
-      //   return RepaintBoundary(
-      //     child: ScaleTransition(
-      //       scale: scaleAnimation,
-      //       child: fromHeroContext.widget,
-      //     ),
-      //   );
-      // },
-      // createRectTween: (begin, end) {
-      //   return RectTween(begin: begin, end: end);
-      // },
       child: FittedBox(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
