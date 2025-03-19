@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:valorant_intel/config/themes/app_colors.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 
 class CustomSliverRefreshWrapper extends StatefulWidget {
@@ -67,10 +67,16 @@ class _CustomSliverRefreshWrapperState
                         Container(
                       width: double.infinity,
                       height: double.infinity,
-                      color: AppColors.mainRed,
+                      color: Theme.of(context).colorScheme.primary,
                       child: Center(
                         child: Text(
                           context.localizations.pullToRefresh,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                     ),
