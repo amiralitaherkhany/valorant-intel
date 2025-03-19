@@ -12,9 +12,9 @@ class Ability {
   });
 
   factory Ability.fromMap(Map<String, dynamic> json) => Ability(
-        slot: json['slot'] as String,
-        displayName: json['displayName'] as String,
-        description: json['description'] as String,
+        slot: json['slot'] ?? "",
+        displayName: json['displayName'] ?? "",
+        description: json['description'] ?? "",
         displayIcon: json['displayIcon'] ?? "",
       );
 
