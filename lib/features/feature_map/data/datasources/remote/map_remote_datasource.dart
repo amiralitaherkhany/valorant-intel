@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:valorant_intel/core/errors/api_exception.dart';
+import 'package:valorant_intel/core/exceptions/api_exception.dart';
 import 'package:valorant_intel/core/network/dio_client.dart';
 import 'package:valorant_intel/features/feature_map/data/datasources/map_datasource.dart';
 import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
@@ -20,8 +20,8 @@ class MapRemoteDatasource implements MapDatasource {
     } on DioException catch (exception) {
       if (exception.type == DioExceptionType.connectionError) {
         throw ApiException(
-          exception.response?.data['error'] ?? 'networkFailure',
-          exception.response?.data['status'] ?? exception.response?.statusCode,
+          'networkFailure',
+          exception.response?.statusCode,
         );
       } else {
         throw ApiException(
@@ -30,7 +30,7 @@ class MapRemoteDatasource implements MapDatasource {
         );
       }
     } catch (exception) {
-      throw ApiException(exception.toString(), null);
+      throw ApiException('unknownError', null);
     }
   }
 }

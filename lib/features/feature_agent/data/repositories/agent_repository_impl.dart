@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:valorant_intel/core/errors/api_exception.dart';
+import 'package:valorant_intel/core/exceptions/api_exception.dart';
 import 'package:valorant_intel/features/feature_agent/data/datasources/local/agent_local_datasource.dart';
 import 'package:valorant_intel/features/feature_agent/data/datasources/remote/agent_remote_datasource.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
