@@ -8,7 +8,6 @@ class Agent extends Equatable {
   final String displayName;
   final String description;
   final String developerName;
-  final dynamic characterTags;
   final String displayIcon;
   final String displayIconSmall;
   final String bustPortrait;
@@ -17,7 +16,6 @@ class Agent extends Equatable {
   final String killfeedPortrait;
   final String background;
   final List<dynamic> backgroundGradientColors;
-  final String assetPath;
   final bool isFullPortraitRightFacing;
   final bool isPlayableCharacter;
   final bool isAvailableForTest;
@@ -25,14 +23,12 @@ class Agent extends Equatable {
   final Role role;
   final dynamic recruitmentData;
   final List<Ability> abilities;
-  final dynamic voiceLine;
 
   const Agent({
     required this.uuid,
     required this.displayName,
     required this.description,
     required this.developerName,
-    required this.characterTags,
     required this.displayIcon,
     required this.displayIconSmall,
     required this.bustPortrait,
@@ -41,7 +37,6 @@ class Agent extends Equatable {
     required this.killfeedPortrait,
     required this.background,
     required this.backgroundGradientColors,
-    required this.assetPath,
     required this.isFullPortraitRightFacing,
     required this.isPlayableCharacter,
     required this.isAvailableForTest,
@@ -49,7 +44,6 @@ class Agent extends Equatable {
     required this.role,
     required this.recruitmentData,
     required this.abilities,
-    required this.voiceLine,
   });
 
   factory Agent.fromMap(Map<String, dynamic> json) => Agent(
@@ -57,7 +51,6 @@ class Agent extends Equatable {
         displayName: json['displayName'] ?? "",
         description: json['description'] ?? "",
         developerName: json['developerName'] ?? "",
-        characterTags: json['characterTags'] as dynamic,
         displayIcon: json['displayIcon'] ?? "",
         displayIconSmall: json['displayIconSmall'] ?? "",
         bustPortrait: json['bustPortrait'] ?? "",
@@ -67,7 +60,6 @@ class Agent extends Equatable {
         background: json['background'] ?? "",
         backgroundGradientColors:
             json['backgroundGradientColors'] as List<dynamic>,
-        assetPath: json['assetPath'] ?? "",
         isFullPortraitRightFacing: json['isFullPortraitRightFacing'] as bool,
         isPlayableCharacter: json['isPlayableCharacter'] as bool,
         isAvailableForTest: json['isAvailableForTest'] as bool,
@@ -77,7 +69,6 @@ class Agent extends Equatable {
         abilities: (json['abilities'] as List<dynamic>)
             .map((e) => Ability.fromMap(e as Map<String, dynamic>))
             .toList(),
-        voiceLine: json['voiceLine'] as dynamic,
       );
 
   @override
@@ -90,7 +81,6 @@ class Agent extends Equatable {
     result.addAll({'displayName': displayName});
     result.addAll({'description': description});
     result.addAll({'developerName': developerName});
-    result.addAll({'characterTags': characterTags});
     result.addAll({'displayIcon': displayIcon});
     result.addAll({'displayIconSmall': displayIconSmall});
     result.addAll({'bustPortrait': bustPortrait});
@@ -99,7 +89,6 @@ class Agent extends Equatable {
     result.addAll({'killfeedPortrait': killfeedPortrait});
     result.addAll({'background': background});
     result.addAll({'backgroundGradientColors': backgroundGradientColors});
-    result.addAll({'assetPath': assetPath});
     result.addAll({'isFullPortraitRightFacing': isFullPortraitRightFacing});
     result.addAll({'isPlayableCharacter': isPlayableCharacter});
     result.addAll({'isAvailableForTest': isAvailableForTest});
@@ -107,7 +96,6 @@ class Agent extends Equatable {
     result.addAll({'role': role.toMap()});
     result.addAll({'recruitmentData': recruitmentData});
     result.addAll({'abilities': abilities.map((x) => x.toMap()).toList()});
-    result.addAll({'voiceLine': voiceLine});
 
     return result;
   }

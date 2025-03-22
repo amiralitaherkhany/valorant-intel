@@ -1,22 +1,33 @@
 import 'package:dartz/dartz.dart';
 import 'package:valorant_intel/core/errors/api_exception.dart';
-import 'package:valorant_intel/features/feature_agent/data/datasources/agent_datasource.dart';
+import 'package:valorant_intel/features/feature_agent/data/datasources/local/agent_local_datasource.dart';
+import 'package:valorant_intel/features/feature_agent/data/datasources/remote/agent_remote_datasource.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 import 'package:valorant_intel/features/feature_agent/data/repositories/agent_repository.dart';
 
 class AgentRepositoryImpl implements AgentRepository {
-  final AgentDatasource _agentDatasource;
+  final AgentRemoteDatasource _agentRemoteDatasource;
+  final AgentLocalDatasource _agentLocalDatasource;
 
-  AgentRepositoryImpl({required AgentDatasource agentDatasource})
-      : _agentDatasource = agentDatasource;
+  AgentRepositoryImpl(
+      {required AgentRemoteDatasource agentRemoteDatasource,
+      required AgentLocalDatasource agentLocalDatasource})
+      : _agentRemoteDatasource = agentRemoteDatasource,
+        _agentLocalDatasource = agentLocalDatasource;
+
   @override
-  Future<Either<String, List<Agent>>> getAllAgents() async {
+  Future<Either<(String, List<Agent>?), List<Agent>>> getAllAgents() async {
     try {
-      return await _agentDatasource.getAllAgents().then(
-            (agentList) => right(agentList),
-          );
+      final agents = await _agentRemoteDatasource.getAllAgents();
+      await _agentLocalDatasource.saveAgents(agents);
+      return Right(agents);
     } on ApiException catch (exception) {
-      return left(exception.message);
+      final agents = await _agentLocalDatasource.getAllAgents();
+      if (agents.isNotEmpty) {
+        return Left((exception.message, agents));
+      } else {
+        return Left((exception.message, null));
+      }
     }
   }
 }

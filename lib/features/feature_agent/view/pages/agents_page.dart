@@ -20,7 +20,7 @@ class AgentsPage extends StatelessWidget {
       ),
       body: BlocConsumer<AgentBloc, AgentState>(
         listener: (context, state) {
-          if (state is AgentSuccessState && state.isFromCache) {
+          if (state is AgentErrorState && state.cachedAgentList != null) {
             context.showSnackBar(
               context.localizations.cachedContent,
             );
@@ -35,11 +35,17 @@ class AgentsPage extends StatelessWidget {
               ),
             AgentSuccessState(agentList: final agentList) =>
               AgentSuccessView(agentList: agentList),
-            AgentErrorState(message: final message) => CustomErrorView(
-                message: message,
-                onTryAgain: () =>
-                    context.read<AgentBloc>().add(GetAllAgentsEvent()),
-              )
+            AgentErrorState(
+              message: final message,
+              cachedAgentList: final cachedAgentList
+            ) =>
+              state.cachedAgentList == null
+                  ? CustomErrorView(
+                      message: message,
+                      onTryAgain: () =>
+                          context.read<AgentBloc>().add(GetAllAgentsEvent()),
+                    )
+                  : AgentSuccessView(agentList: cachedAgentList!),
           };
         },
       ),
