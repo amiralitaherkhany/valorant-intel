@@ -55,7 +55,8 @@ void main() {
         'emits [AgentLoadingState, AgentErrorState] when getAllAgents returns error',
         build: () {
           when(mockAgentRepositoryImpl.getAllAgents()).thenAnswer(
-            (_) async => Future.value(const Left('Unable to fetch agents')),
+            (_) async =>
+                Future.value(const Left(("Unable to fetch agents", null))),
           );
           return agentBloc;
         },

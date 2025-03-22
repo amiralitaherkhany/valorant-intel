@@ -19,8 +19,9 @@ final class MapSuccessState extends MapState {
 
 final class MapErrorState extends MapState {
   final String message;
-  const MapErrorState({required this.message});
+  final List<GameMap>? cachedMapList;
+  const MapErrorState({required this.message, required this.cachedMapList});
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, cachedMapList];
 }

@@ -28,7 +28,7 @@ import 'package:valorant_intel/features/feature_agent/data/repositories/agent_re
 
 class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
   _FakeEither_0(Object parent, Invocation parentInvocation)
-      : super(parent, parentInvocation);
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AgentRepositoryImpl].
@@ -41,14 +41,20 @@ class MockAgentRepositoryImpl extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<String, List<_i5.Agent>>> getAllAgents() =>
+  _i4.Future<_i2.Either<(String, List<_i5.Agent>?), List<_i5.Agent>>>
+  getAllAgents() =>
       (super.noSuchMethod(
-        Invocation.method(#getAllAgents, []),
-        returnValue: _i4.Future<_i2.Either<String, List<_i5.Agent>>>.value(
-          _FakeEither_0<String, List<_i5.Agent>>(
-            this,
             Invocation.method(#getAllAgents, []),
-          ),
-        ),
-      ) as _i4.Future<_i2.Either<String, List<_i5.Agent>>>);
+            returnValue: _i4.Future<
+              _i2.Either<(String, List<_i5.Agent>?), List<_i5.Agent>>
+            >.value(
+              _FakeEither_0<(String, List<_i5.Agent>?), List<_i5.Agent>>(
+                this,
+                Invocation.method(#getAllAgents, []),
+              ),
+            ),
+          )
+          as _i4.Future<
+            _i2.Either<(String, List<_i5.Agent>?), List<_i5.Agent>>
+          >);
 }

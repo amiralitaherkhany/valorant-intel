@@ -8,7 +8,6 @@ Agent createFakeAgent() {
     displayName: 'displayName',
     description: 'description',
     developerName: 'developerName',
-    characterTags: 'characterTags',
     displayIcon: 'displayIcon',
     displayIconSmall: 'displayIconSmall',
     bustPortrait: 'bustPortrait',
@@ -17,7 +16,6 @@ Agent createFakeAgent() {
     killfeedPortrait: 'killfeedPortrait',
     background: 'background',
     backgroundGradientColors: const ['', '', '', ''],
-    assetPath: 'assetPath',
     isFullPortraitRightFacing: true,
     isPlayableCharacter: true,
     isAvailableForTest: true,
@@ -36,6 +34,5 @@ Agent createFakeAgent() {
       Ability(description: '', displayIcon: '', displayName: '', slot: ''),
       Ability(description: '', displayIcon: '', displayName: '', slot: ''),
     ],
-    voiceLine: 'voiceLine',
   );
 }
