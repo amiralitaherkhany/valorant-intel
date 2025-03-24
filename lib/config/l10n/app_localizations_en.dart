@@ -54,5 +54,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unknownError => 'Unknown Error';
 
   @override
-  String get cachedContent => 'Unable to fetch latest data. Displaying cached content.';
+  String cachedContent(String error) {
+    return 'Unable to fetch latest data. Showing previously cached content - Error: $error';
+  }
 }

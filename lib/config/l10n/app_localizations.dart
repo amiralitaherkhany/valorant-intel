@@ -188,8 +188,8 @@ abstract class AppLocalizations {
   /// No description provided for @cachedContent.
   ///
   /// In en, this message translates to:
-  /// **'Unable to fetch latest data. Displaying cached content.'**
-  String get cachedContent;
+  /// **'Unable to fetch latest data. Showing previously cached content - Error: {error}'**
+  String cachedContent(String error);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

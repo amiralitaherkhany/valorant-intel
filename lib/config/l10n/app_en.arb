@@ -30,6 +30,12 @@
     "@language": {},
     "@darkMode": {},
     "@appTitle": {},
-    "cachedContent": "Unable to fetch latest data. Displaying cached content.",
-    "@cachedContent": {}
+    "cachedContent": "Unable to fetch latest data. Showing previously cached content - Error: {error}",
+    "@cachedContent": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    }
 }

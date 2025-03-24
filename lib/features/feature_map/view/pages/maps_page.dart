@@ -21,7 +21,8 @@ class MapsPage extends StatelessWidget {
       body: BlocConsumer<MapBloc, MapState>(
         listener: (context, state) {
           if (state is MapErrorState && state.cachedMapList != null) {
-            context.showSnackBar(context.localizations.cachedContent);
+            context.showSnackBar(context.localizations
+                .cachedContent(context.translateError(state.message)));
           }
         },
         builder: (context, state) {

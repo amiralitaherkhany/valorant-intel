@@ -22,7 +22,8 @@ class AgentsPage extends StatelessWidget {
         listener: (context, state) {
           if (state is AgentErrorState && state.cachedAgentList != null) {
             context.showSnackBar(
-              context.localizations.cachedContent,
+              context.localizations
+                  .cachedContent(context.translateError(state.message)),
             );
           }
         },
