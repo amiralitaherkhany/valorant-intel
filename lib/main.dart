@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
         return MaterialApp.router(
+          
           locale: Locale(state.languageStatus.languageCode),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,

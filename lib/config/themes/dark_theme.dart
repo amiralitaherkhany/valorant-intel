@@ -5,6 +5,14 @@ import 'package:valorant_intel/config/themes/typography.dart';
 final AppTypography _darkAppTypography = AppTypography(Brightness.dark);
 
 final ThemeData darkTheme = ThemeData(
+  pageTransitionsTheme: const PageTransitionsTheme(builders: {
+    TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
+    TargetPlatform.iOS: FadeForwardsPageTransitionsBuilder(),
+    TargetPlatform.macOS: FadeForwardsPageTransitionsBuilder(),
+    TargetPlatform.fuchsia: FadeForwardsPageTransitionsBuilder(),
+    TargetPlatform.linux: FadeForwardsPageTransitionsBuilder(),
+    TargetPlatform.windows: FadeForwardsPageTransitionsBuilder(),
+  }),
   brightness: Brightness.dark,
   colorScheme: AppColors.darkColorScheme,
   scaffoldBackgroundColor: AppColors.scaffoldBackground,

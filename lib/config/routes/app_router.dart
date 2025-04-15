@@ -10,6 +10,8 @@ import 'package:valorant_intel/features/feature_collections/view/pages/collectio
 import 'package:valorant_intel/features/feature_game/view/pages/game_page.dart';
 import 'package:valorant_intel/features/feature_home/view/pages/home_page.dart';
 import 'package:valorant_intel/features/feature_map/bloc/map_bloc.dart';
+import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
+import 'package:valorant_intel/features/feature_map/view/pages/map_detail_page.dart';
 import 'package:valorant_intel/features/feature_map/view/pages/maps_page.dart';
 import 'package:valorant_intel/features/feature_settings/view/pages/settings_page.dart';
 import 'package:valorant_intel/service_locator.dart';
@@ -95,6 +97,16 @@ class AppRouter {
                         child: const MapsPage(),
                       ),
                     ),
+                    routes: [
+                      GoRoute(
+                        path: "MapDetail",
+                        pageBuilder: (context, state) => MaterialPage(
+                          child: MapDetailPage(
+                            map: state.extra as GameMap,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
