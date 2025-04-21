@@ -1,7 +1,4 @@
 # Valorant Intel
-
-![Valorant Banner](https://static.wikia.nocookie.net/valorant/images/valorant_banner.jpg)
-
 A visually rich Flutter app that brings all Valorant in-game assets—agents, guns, maps, and more—right to your fingertips, powered by the Valorant API.
 
 ---
