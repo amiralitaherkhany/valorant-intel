@@ -15,21 +15,51 @@ class MapsCard extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-          color: Theme.of(context).cardColor,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          color: Colors.transparent,
         ),
         child: Stack(
           alignment: Alignment.center,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              child: CachedNetworkImage(
-                imageUrl: map.listViewIcon ?? "",
-                width: double.infinity,
-                filterQuality: FilterQuality.low,
-                height: 100,
-                fit: BoxFit.cover,
+            Hero(
+              tag: map.listViewIcon ?? "",
+              flightShuttleBuilder: (flightContext, animation, flightDirection,
+                  fromHeroContext, toHeroContext) {
+                Animation<double> borderAnimation =
+                    Tween<double>(begin: 12, end: 0).animate(animation);
+
+                return AnimatedBuilder(
+                  animation: borderAnimation,
+                  builder: (context, child) {
+                    return Material(
+                      color: Colors.transparent,
+                      surfaceTintColor: Colors.transparent,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(borderAnimation.value),
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: map.listViewIcon ?? "",
+                          width: double.infinity,
+                          filterQuality: FilterQuality.low,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                child: CachedNetworkImage(
+                  imageUrl: map.listViewIcon ?? "",
+                  width: double.infinity,
+                  filterQuality: FilterQuality.low,
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Positioned(
