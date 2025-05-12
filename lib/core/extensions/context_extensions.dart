@@ -10,12 +10,12 @@ extension MediaQueryExtension on BuildContext {
 extension LocalizationExtension on BuildContext {
   String translateError(String key) {
     final localizations = AppLocalizations.of(this)!;
-    final Map<String, String Function()> translations = {
-      'networkFailure': () => localizations.networkFailure,
-      'serverError': () => localizations.serverError,
-      'unknownError': () => localizations.unknownError,
+    final Map<String, String> translations = {
+      'networkFailure': localizations.networkFailure,
+      'serverError': localizations.serverError,
+      'unknownError': localizations.unknownError,
     };
-    return translations[key]?.call() ?? key;
+    return translations[key] ?? key;
   }
 
   AppLocalizations get localizations => AppLocalizations.of(this)!;
