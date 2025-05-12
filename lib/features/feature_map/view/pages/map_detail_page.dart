@@ -12,17 +12,29 @@ class MapDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             expandedHeight: 100 - MediaQuery.paddingOf(context).top,
+            centerTitle: true,
             elevation: 0,
-            scrolledUnderElevation: 4,
+            scrolledUnderElevation: 0,
             pinned: false,
             floating: true,
+            stretch: true,
             snap: false,
-            backgroundColor: Colors.transparent,
             flexibleSpace: FlexibleSpaceBar(
               background: AnimatedListViewIcon(map: map),
+              title: FittedBox(
+                child: Text(
+                  "${map.displayName} ",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(fontSize: 20.0),
+                ),
+              ),
+              centerTitle: true,
             ),
           ),
           SliverList(
