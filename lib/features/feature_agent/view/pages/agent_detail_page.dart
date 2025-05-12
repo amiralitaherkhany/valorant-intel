@@ -17,6 +17,7 @@ class AgentDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             flexibleSpace: FlexibleSpaceBar(
@@ -49,7 +50,6 @@ class AgentDetailPage extends StatelessWidget {
                   ),
                 ),
               ),
-              centerTitle: true,
               background: Container(
                 padding: EdgeInsets.only(
                     top: MediaQuery.viewPaddingOf(context).top, bottom: 50),
@@ -97,14 +97,15 @@ class AgentDetailPage extends StatelessWidget {
                   ],
                 ),
               ),
+              centerTitle: true,
             ),
             elevation: 0,
-            scrolledUnderElevation: 4,
+            scrolledUnderElevation: 0,
             pinned: true,
             floating: false,
-            expandedHeight: 450,
             snap: false,
             stretch: true,
+            expandedHeight: 450,
           ),
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
