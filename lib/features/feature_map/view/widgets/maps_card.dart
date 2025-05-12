@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valorant_intel/core/extensions/context_extensions.dart';
 import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
 
 class MapsCard extends StatelessWidget {
@@ -14,6 +13,7 @@ class MapsCard extends StatelessWidget {
         context.go("/Game/Maps/MapDetail", extra: map);
       },
       child: Container(
+        height: 100,
         width: double.infinity,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -43,7 +43,7 @@ class MapsCard extends StatelessWidget {
                           imageUrl: map.listViewIcon ?? "",
                           width: double.infinity,
                           filterQuality: FilterQuality.low,
-                          height: 100,
+                          height: double.infinity,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -57,7 +57,7 @@ class MapsCard extends StatelessWidget {
                   imageUrl: map.listViewIcon ?? "",
                   width: double.infinity,
                   filterQuality: FilterQuality.low,
-                  height: 100,
+                  height: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -80,15 +80,14 @@ class MapsCard extends StatelessWidget {
                     bottomRight: Radius.circular(12),
                   ),
                 ),
-                child: Text(
-                  map.displayName!,
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).orientation ==
-                                Orientation.portrait
-                            ? context.width * 0.045
-                            : context.width * 0.020,
-                      ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    map.displayName!,
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                          color: Colors.white,
+                        ),
+                  ),
                 ),
               ),
             ),
