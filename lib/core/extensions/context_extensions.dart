@@ -22,7 +22,7 @@ extension LocalizationExtension on BuildContext {
 }
 
 extension SnackBarExtension on BuildContext {
-  void showSnackBar(String message) {
+  void showSimpleSnackBar(String message) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Text(message),

@@ -21,7 +21,7 @@ class AgentsPage extends StatelessWidget {
       body: BlocConsumer<AgentBloc, AgentState>(
         listener: (context, state) {
           if (state is AgentErrorState && state.cachedAgentList != null) {
-            context.showSnackBar(
+            context.showSimpleSnackBar(
               context.localizations
                   .cachedContent(context.translateError(state.message)),
             );
