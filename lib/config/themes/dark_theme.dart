@@ -17,7 +17,7 @@ final ThemeData darkTheme = ThemeData(
   colorScheme: AppColors.darkColorScheme,
   scaffoldBackgroundColor: AppColors.scaffoldBackground,
   textTheme: _darkAppTypography.textTheme,
-  cardTheme: CardTheme(
+  cardTheme: CardThemeData(
     color: AppColors.darkColorScheme.surface,
     shadowColor: AppColors.darkColorScheme.primary,
     elevation: 4,
@@ -54,7 +54,7 @@ final ThemeData darkTheme = ThemeData(
       borderRadius: BorderRadius.circular(8),
     ),
   ),
-  dialogTheme: DialogTheme(
+  dialogTheme: DialogThemeData(
     backgroundColor: AppColors.darkColorScheme.surface,
     titleTextStyle: _darkAppTypography.headline2.copyWith(
       color: AppColors.darkColorScheme.onSurface,
@@ -87,7 +87,6 @@ final ThemeData darkTheme = ThemeData(
     thumbColor: WidgetStateProperty.all(AppColors.darkColorScheme.primary),
     trackColor: WidgetStateProperty.all(AppColors.darkColorScheme.onSurface),
   ),
-  indicatorColor: AppColors.darkColorScheme.primary,
   bottomSheetTheme: BottomSheetThemeData(
     modalBackgroundColor: AppColors.darkColorScheme.surface,
     shape: const RoundedRectangleBorder(
@@ -99,4 +98,6 @@ final ThemeData darkTheme = ThemeData(
     dragHandleColor: AppColors.darkColorScheme.onPrimary,
     showDragHandle: true,
   ),
+  tabBarTheme:
+      TabBarThemeData(indicatorColor: AppColors.darkColorScheme.primary),
 );

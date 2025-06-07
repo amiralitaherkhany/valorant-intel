@@ -8,17 +8,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: Text(context.localizations.home),
-      ),
+      appBar: SimpleAppBar(title: Text(context.localizations.home)),
       body: const CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate.fixed(
-              [],
-            ),
-          )
-        ],
+        slivers: [SliverList(delegate: SliverChildListDelegate.fixed([]))],
       ),
     );
   }

@@ -12,8 +12,9 @@ import 'config/l10n/app_localizations.dart' show AppLocalizations;
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  final dir = await getApplicationDocumentsDirectory();
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
+    storageDirectory: HydratedStorageDirectory(dir.path),
   );
   await initializeServiceLocator();
   runApp(
@@ -32,7 +33,6 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
         return MaterialApp.router(
-          
           locale: Locale(state.languageStatus.languageCode),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
