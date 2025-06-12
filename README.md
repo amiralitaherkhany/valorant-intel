@@ -2,7 +2,7 @@
 A visually rich Flutter app that brings all Valorant in-game assets—agents, guns, maps, and more—right to your fingertips, powered by the Valorant API.
 
 
-## 🧑🏻‍💻Techs Used
+## 🧑🏻‍💻 Techs Used
 - **Dart** and **Flutter**
 - State Management with **Bloc**
 - Persistent State with **Hydrated_Bloc**
