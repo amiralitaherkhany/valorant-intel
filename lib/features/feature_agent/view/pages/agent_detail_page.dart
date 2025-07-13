@@ -1,16 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:valorant_intel/config/themes/app_colors.dart';
+import 'package:valorant_intel/config/theme/app_color_scheme.dart';
 import 'package:valorant_intel/core/extensions/string_extensions.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/ability.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 
 class AgentDetailPage extends StatelessWidget {
-  const AgentDetailPage({
-    super.key,
-    required this.agent,
-  });
+  const AgentDetailPage({super.key, required this.agent});
   final Agent agent;
 
   @override
@@ -24,35 +21,42 @@ class AgentDetailPage extends StatelessWidget {
               title: Hero(
                 transitionOnUserGestures: true,
                 tag: agent.displayName,
-                flightShuttleBuilder: (flightContext, animation,
-                    flightDirection, fromHeroContext, toHeroContext) {
-                  Animation<double> textAnimation =
-                      Tween<double>(begin: 14.0, end: 30.0).animate(animation);
-                  return RepaintBoundary(
-                    child: FittedBox(
-                      child: Text(
-                        "${agent.displayName} ",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(fontSize: textAnimation.value),
-                      ),
-                    ),
-                  );
-                },
+                flightShuttleBuilder:
+                    (
+                      flightContext,
+                      animation,
+                      flightDirection,
+                      fromHeroContext,
+                      toHeroContext,
+                    ) {
+                      Animation<double> textAnimation = Tween<double>(
+                        begin: 14.0,
+                        end: 30.0,
+                      ).animate(animation);
+                      return RepaintBoundary(
+                        child: FittedBox(
+                          child: Text(
+                            "${agent.displayName} ",
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(fontSize: textAnimation.value),
+                          ),
+                        ),
+                      );
+                    },
                 child: FittedBox(
                   child: Text(
                     "${agent.displayName} ",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(fontSize: 20.0),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(fontSize: 20.0),
                   ),
                 ),
               ),
               background: Container(
                 padding: EdgeInsets.only(
-                    top: MediaQuery.viewPaddingOf(context).top, bottom: 50),
+                  top: MediaQuery.viewPaddingOf(context).top,
+                  bottom: 50,
+                ),
                 width: double.infinity,
                 height: double.infinity,
                 decoration: BoxDecoration(
@@ -60,8 +64,8 @@ class AgentDetailPage extends StatelessWidget {
                     colors: [
                       for (var colorString
                           in agent.backgroundGradientColors) ...{
-                        (colorString as String).parseToColor
-                      }
+                        (colorString as String).parseToColor,
+                      },
                     ],
                     begin: AlignmentDirectional.topStart,
                     end: AlignmentDirectional.bottomEnd,
@@ -116,10 +120,7 @@ class AgentDetailPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: AnimatedDisplayIcon(agent: agent),
-                    ),
+                    Expanded(flex: 1, child: AnimatedDisplayIcon(agent: agent)),
                     Expanded(
                       flex: 1,
                       child: Column(
@@ -135,8 +136,8 @@ class AgentDetailPage extends StatelessWidget {
                                 imageUrl: agent.role.displayIcon,
                                 placeholder: (context, url) {
                                   return Shimmer.fromColors(
-                                    baseColor: AppColors.grey,
-                                    highlightColor: AppColors.white,
+                                    baseColor: AppColorScheme.grey,
+                                    highlightColor: AppColorScheme.white,
                                     child: Container(
                                       width: 100,
                                       height: 100,
@@ -152,18 +153,15 @@ class AgentDetailPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Spacer(
-                            flex: 1,
-                          ),
+                          const Spacer(flex: 1),
                           Expanded(
                             flex: 1,
                             child: FittedBox(
                               child: Text(
                                 agent.role.displayName,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(fontSize: 20),
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyMedium?.copyWith(fontSize: 20),
                               ),
                             ),
                           ),
@@ -175,12 +173,7 @@ class AgentDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: Divider(
-              indent: 20,
-              endIndent: 20,
-            ),
-          ),
+          const SliverToBoxAdapter(child: Divider(indent: 20, endIndent: 20)),
           SliverPadding(
             padding: const EdgeInsets.all(10),
             sliver: SliverToBoxAdapter(
@@ -193,9 +186,7 @@ class AgentDetailPage extends StatelessWidget {
               child: AbilityList(abilities: agent.abilities),
             ),
           ),
-          const SliverPadding(
-            padding: EdgeInsets.only(top: 50),
-          ),
+          const SliverPadding(padding: EdgeInsets.only(top: 50)),
         ],
       ),
     );
@@ -203,10 +194,7 @@ class AgentDetailPage extends StatelessWidget {
 }
 
 class AbilityList extends StatelessWidget {
-  const AbilityList({
-    super.key,
-    required this.abilities,
-  });
+  const AbilityList({super.key, required this.abilities});
   final List<Ability> abilities;
   @override
   Widget build(BuildContext context) {
@@ -226,10 +214,7 @@ class AbilityList extends StatelessWidget {
 }
 
 class AbilityItem extends StatelessWidget {
-  const AbilityItem({
-    super.key,
-    required this.ability,
-  });
+  const AbilityItem({super.key, required this.ability});
 
   final Ability ability;
 
@@ -257,8 +242,8 @@ class AbilityItem extends StatelessWidget {
                     height: 50,
                     placeholder: (context, url) {
                       return Shimmer.fromColors(
-                        baseColor: AppColors.grey,
-                        highlightColor: AppColors.white,
+                        baseColor: AppColorScheme.grey,
+                        highlightColor: AppColorScheme.white,
                         child: Container(
                           width: 50,
                           height: 50,
@@ -287,9 +272,9 @@ class AbilityItem extends StatelessWidget {
                 Text(
                   ability.displayName,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontSize: 11,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontSize: 11),
                 ),
               ],
             ),
@@ -301,10 +286,7 @@ class AbilityItem extends StatelessWidget {
 }
 
 class AbilityBottomSheetContent extends StatelessWidget {
-  const AbilityBottomSheetContent({
-    super.key,
-    required this.ability,
-  });
+  const AbilityBottomSheetContent({super.key, required this.ability});
 
   final Ability ability;
 
@@ -326,27 +308,23 @@ class AbilityBottomSheetContent extends StatelessWidget {
               Icons.image_not_supported,
               color: Colors.white,
               size: 75,
-            )
+            ),
           },
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
               ability.displayName,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontSize: 20,
-                    color: AppColors.mainRed,
-                  ),
+                fontSize: 20,
+                color: AppColorScheme.mainRed,
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Text(
-              ability.description,
-            ),
+            child: Text(ability.description),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
         ],
       ),
     );
@@ -354,10 +332,7 @@ class AbilityBottomSheetContent extends StatelessWidget {
 }
 
 class AgentDescribtion extends StatelessWidget {
-  const AgentDescribtion({
-    super.key,
-    required this.description,
-  });
+  const AgentDescribtion({super.key, required this.description});
 
   final String description;
 
@@ -368,14 +343,14 @@ class AgentDescribtion extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: 'Description: ',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.mainRed,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: AppColorScheme.mainRed),
           children: [
             TextSpan(
               text: description,
               style: Theme.of(context).textTheme.bodyMedium,
-            )
+            ),
           ],
         ),
         textAlign: TextAlign.left,
@@ -385,10 +360,7 @@ class AgentDescribtion extends StatelessWidget {
 }
 
 class AnimatedDisplayIcon extends StatelessWidget {
-  const AnimatedDisplayIcon({
-    super.key,
-    required this.agent,
-  });
+  const AnimatedDisplayIcon({super.key, required this.agent});
 
   final Agent agent;
 
@@ -405,17 +377,11 @@ class AnimatedDisplayIcon extends StatelessWidget {
             height: 100,
             imageUrl: agent.displayIcon,
             placeholder: (context, url) => Shimmer.fromColors(
-              baseColor: AppColors.white,
-              highlightColor: AppColors.grey,
-              child: Container(
-                color: Colors.grey,
-                width: 100,
-                height: 100,
-              ),
+              baseColor: AppColorScheme.white,
+              highlightColor: AppColorScheme.grey,
+              child: Container(color: Colors.grey, width: 100, height: 100),
             ),
-            errorWidget: (context, url, error) => const Icon(
-              Icons.error,
-            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
       ),

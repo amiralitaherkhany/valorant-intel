@@ -2,14 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:valorant_intel/config/themes/app_colors.dart';
+import 'package:valorant_intel/config/theme/app_color_scheme.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 
 class AgentCard extends StatelessWidget {
-  const AgentCard({
-    super.key,
-    required this.agent,
-  });
+  const AgentCard({super.key, required this.agent});
 
   final Agent agent;
 
@@ -17,10 +14,7 @@ class AgentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.go(
-          '/Collections/Agents/AgentDetail',
-          extra: agent,
-        );
+        context.go('/Collections/Agents/AgentDetail', extra: agent);
       },
       child: Card(
         child: Center(
@@ -40,17 +34,16 @@ class AgentCard extends StatelessWidget {
                         height: 100,
                         imageUrl: agent.displayIcon,
                         placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: AppColors.white,
-                          highlightColor: AppColors.grey,
+                          baseColor: AppColorScheme.white,
+                          highlightColor: AppColorScheme.grey,
                           child: Container(
                             color: Colors.grey,
                             width: 100,
                             height: 100,
                           ),
                         ),
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.error,
-                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     ),
                   ),
@@ -59,30 +52,35 @@ class AgentCard extends StatelessWidget {
                 Hero(
                   transitionOnUserGestures: true,
                   tag: agent.displayName,
-                  flightShuttleBuilder: (flightContext, animation,
-                      flightDirection, fromHeroContext, toHeroContext) {
-                    Animation<double> textAnimation =
-                        Tween<double>(begin: 14.0, end: 30.0)
-                            .animate(animation);
-                    return RepaintBoundary(
-                      child: FittedBox(
-                        child: Text(
-                          "${agent.displayName} ",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(fontSize: textAnimation.value),
-                        ),
-                      ),
-                    );
-                  },
+                  flightShuttleBuilder:
+                      (
+                        flightContext,
+                        animation,
+                        flightDirection,
+                        fromHeroContext,
+                        toHeroContext,
+                      ) {
+                        Animation<double> textAnimation = Tween<double>(
+                          begin: 14.0,
+                          end: 30.0,
+                        ).animate(animation);
+                        return RepaintBoundary(
+                          child: FittedBox(
+                            child: Text(
+                              "${agent.displayName} ",
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(fontSize: textAnimation.value),
+                            ),
+                          ),
+                        );
+                      },
                   child: FittedBox(
                     child: Text(
                       "${agent.displayName} ",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

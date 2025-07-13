@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:valorant_intel/config/themes/app_colors.dart';
+import 'package:valorant_intel/config/theme/app_color_scheme.dart';
 import 'package:valorant_intel/core/extensions/context_extensions.dart';
 
 class CustomShimmerGridView extends StatelessWidget {
@@ -24,16 +24,17 @@ class CustomShimmerGridView extends StatelessWidget {
           ),
           sliver: SliverToBoxAdapter(
             child: Shimmer.fromColors(
-              baseColor: AppColors.grey,
-              highlightColor: AppColors.white,
+              baseColor: AppColorScheme.grey,
+              highlightColor: AppColorScheme.white,
               child: GridView.builder(
                 addRepaintBoundaries: true,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 10,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount:
-                      context.width > width ? context.width ~/ width : 1,
+                  crossAxisCount: context.width > width
+                      ? context.width ~/ width
+                      : 1,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   mainAxisExtent: height.toDouble(),
