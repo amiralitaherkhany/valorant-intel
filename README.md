@@ -1,8 +1,9 @@
 # <a href="https://emoji.gg/emoji/54052-valorant"><img src="https://cdn3.emoji.gg/emojis/54052-valorant.png" width="25px" height="25px" alt="valorant"></a> Valorant Intel
+
 A visually rich Flutter app that brings all Valorant in-game assets—agents, guns, maps, and more—right to your fingertips, powered by the Valorant API.
 
-
 ## 🧑🏻‍💻 Techs Used
+
 - **Dart** and **Flutter**
 - State Management with **Bloc**
 - Persistent State with **Hydrated_Bloc**
@@ -13,6 +14,7 @@ A visually rich Flutter app that brings all Valorant in-game assets—agents, gu
 - **MVB** (Model-View-Bloc) Architecture
 
 ## 🚀 Features
+
 - Browse all Valorant agents with detailed stats and abilities
 - Fast, beautiful, and responsive **UI**
 - Beautiful **Animations** and **Transitions**
@@ -49,13 +51,13 @@ A visually rich Flutter app that brings all Valorant in-game assets—agents, gu
   </tr>
 </table>
 
-
-
 ## 🛠️ Usage
+
 - Launch the app and navigate through Agents, Weapons, and Maps tabs.
 - Tap on any asset for detailed information and visuals.
 
 ## 📚 Credits
+
 - [Valorant API](https://valorant-api.com/)
 - [Flutter](https://flutter.dev/)
 - Inspired by the Valorant community
