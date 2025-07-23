@@ -4,7 +4,8 @@ A visually rich Flutter app that brings all Valorant in-game assets—agents, gu
 
 ## 🧑🏻‍💻 Techs Used
 
-- **Dart** and **Flutter**
+- **Dart** Programming Language
+- **Flutter** Framework
 - State Management with **Bloc**
 - Persistent State with **Hydrated_Bloc**
 - Navigation with **Go_Router**
