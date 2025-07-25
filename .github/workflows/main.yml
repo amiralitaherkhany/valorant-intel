@@ -39,6 +39,13 @@ jobs:
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
 
+          
+      - name: Install sdkmanager
+        run: yes | sudo apt-get install -y android-sdk
+
+      - name: Accept Android SDK Licenses
+        run: yes | sdkmanager --licenses
+
       - name: Build Signed APK
         run: flutter build apk --release
 
