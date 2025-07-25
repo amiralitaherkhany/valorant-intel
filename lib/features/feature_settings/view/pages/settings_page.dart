@@ -52,13 +52,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                   onChanged: (String? newValue) {
                     if (newValue != null) {
-                      context
-                          .read<SettingsBloc>()
-                          .add(SetLanguageEvent(languageCode: newValue));
+                      context.read<SettingsBloc>().add(
+                        SetLanguageEvent(languageCode: newValue),
+                      );
                     }
                   },
                 ),
-              )
+              ),
             ],
           );
         },
@@ -79,9 +79,9 @@ class ThemeSwitcherListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SwitchListTile(
       value: isDarkMode,
-      onChanged: (value) => context
-          .read<SettingsBloc>()
-          .add(SetThemeModeEvent(isDarkMode: value)),
+      onChanged: (value) => context.read<SettingsBloc>().add(
+        SetThemeModeEvent(isDarkMode: value),
+      ),
       title: Text(
         context.localizations.darkMode,
       ),
