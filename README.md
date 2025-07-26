@@ -62,6 +62,3 @@ A visually rich Flutter app that brings all Valorant in-game assets—agents, gu
 - [Valorant API](https://valorant-api.com/)
 - [Flutter](https://flutter.dev/)
 - Inspired by the Valorant community
-<!-- 
-## 📄 License
-This project is licensed under the MIT License. -->
