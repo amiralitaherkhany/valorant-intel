@@ -21,109 +21,135 @@ class AppRouter {
     initialLocation: '/Home',
     routes: [
       StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) => MainWrapper(
-          navigationShell: navigationShell,
-        ),
+        builder: (context, state, navigationShell) {
+          return MainWrapper(
+            navigationShell: navigationShell,
+          );
+        },
+
         branches: [
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: '/Home',
-                pageBuilder: (context, state) => const MaterialPage(
-                  child: HomePage(),
-                ),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: '/Collections',
-                pageBuilder: (context, state) => const MaterialPage(
-                  child: CollectionsPage(),
-                ),
-                routes: [
-                  GoRoute(
-                    path: 'Agents',
-                    pageBuilder: (context, state) => MaterialPage(
-                      child: BlocProvider<AgentBloc>(
-                        create: (context) =>
-                            locator()..add(GetAllAgentsEvent()),
-                        child: const AgentsPage(),
-                      ),
-                    ),
-                    routes: [
-                      GoRoute(
-                        path: 'AgentDetail',
-                        pageBuilder: (context, state) {
-                          return CustomTransitionPage(
-                            transitionDuration:
-                                const Duration(milliseconds: 800),
-                            reverseTransitionDuration:
-                                const Duration(milliseconds: 800),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                            child: AgentDetailPage(
-                              agent: state.extra as Agent,
-                            ),
-                            maintainState: true,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: '/Game',
-                pageBuilder: (context, state) => const MaterialPage(
-                  child: GamePage(),
-                ),
-                routes: [
-                  GoRoute(
-                    path: 'Maps',
-                    pageBuilder: (context, state) => MaterialPage(
-                      child: BlocProvider<MapBloc>(
-                        create: (context) => locator()..add(GetAllMapsEvent()),
-                        child: const MapsPage(),
-                      ),
-                    ),
-                    routes: [
-                      GoRoute(
-                        path: "MapDetail",
-                        pageBuilder: (context, state) => MaterialPage(
-                          child: MapDetailPage(
-                            map: state.extra as GameMap,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: '/Settings',
-                pageBuilder: (context, state) => const MaterialPage(
-                  child: SettingsPage(),
-                ),
-              ),
-            ],
-          )
+          _getHomeBranch(),
+          _getCollectionsBranch(),
+          _getGameBranch(),
+          _getSettingsBranch(),
         ],
       ),
     ],
   );
+
+  static StatefulShellBranch _getHomeBranch() {
+    return StatefulShellBranch(
+      routes: [
+        GoRoute(
+          path: '/Home',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: HomePage(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  static StatefulShellBranch _getCollectionsBranch() {
+    return StatefulShellBranch(
+      routes: [
+        GoRoute(
+          path: '/Collections',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: CollectionsPage(),
+            );
+          },
+          routes: [
+            GoRoute(
+              path: 'Agents',
+              pageBuilder: (context, state) => MaterialPage(
+                key: state.pageKey,
+                child: BlocProvider<AgentBloc>(
+                  create: (context) => locator()..add(GetAllAgentsEvent()),
+                  child: const AgentsPage(),
+                ),
+              ),
+              routes: [
+                GoRoute(
+                  path: 'AgentDetail',
+                  pageBuilder: (context, state) {
+                    return MaterialPage(
+                      key: state.pageKey,
+                      child: AgentDetailPage(
+                        agent: state.extra as Agent,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  static StatefulShellBranch _getGameBranch() {
+    return StatefulShellBranch(
+      routes: [
+        GoRoute(
+          path: '/Game',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: GamePage(),
+            );
+          },
+          routes: [
+            GoRoute(
+              path: 'Maps',
+              pageBuilder: (context, state) {
+                return MaterialPage(
+                  key: state.pageKey,
+                  child: BlocProvider<MapBloc>(
+                    create: (context) => locator()..add(GetAllMapsEvent()),
+                    child: const MapsPage(),
+                  ),
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: "MapDetail",
+                  pageBuilder: (context, state) {
+                    return MaterialPage(
+                      key: state.pageKey,
+                      child: MapDetailPage(
+                        map: state.extra as GameMap,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  static StatefulShellBranch _getSettingsBranch() {
+    return StatefulShellBranch(
+      routes: [
+        GoRoute(
+          path: '/Settings',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: SettingsPage(),
+            );
+          },
+        ),
+      ],
+    );
+  }
 }
