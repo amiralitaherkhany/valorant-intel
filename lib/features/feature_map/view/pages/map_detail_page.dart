@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
-import 'package:valorant_intel/features/feature_map/view/widgets/map_appbar.dart';
+import 'package:valorant_intel/features/feature_map/view/widgets/map_app_bar.dart';
 import 'package:valorant_intel/features/feature_map/view/widgets/map_cordinates.dart';
 import 'package:valorant_intel/features/feature_map/view/widgets/map_with_callouts.dart';
 
