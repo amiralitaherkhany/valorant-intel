@@ -13,20 +13,24 @@ class MapCordinates extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          spacing: 20,
-          children: [
-            Text(
-              "Map coridinates:",
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColorScheme.mainRed,
+        padding: const EdgeInsets.all(20.0),
+        child: RichText(
+          text: TextSpan(
+            text: "Map coridinates:",
+            style:
+                Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(
+                  color: AppColorScheme.mainRed,
+                ),
+            children: [
+              TextSpan(
+                text: mapCordinates ?? "no coridinates",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-            ),
-            Text(
-              mapCordinates ?? "no coridinates",
-            ),
-          ],
+            ],
+          ),
+          textAlign: TextAlign.left,
         ),
       ),
     );
