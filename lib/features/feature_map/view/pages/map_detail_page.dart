@@ -26,16 +26,6 @@ class MapDetailPage extends StatelessWidget {
           MapDisplayIcon(
             mapDisplayIconUrl: map.displayIcon,
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: 20,
-              (context, index) => ListTile(
-                title: Text(
-                  index.toString(),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
