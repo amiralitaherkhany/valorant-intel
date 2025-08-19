@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
 import 'package:valorant_intel/features/feature_map/view/widgets/map_app_bar.dart';
 import 'package:valorant_intel/features/feature_map/view/widgets/map_cordinates.dart';
-import 'package:valorant_intel/features/feature_map/view/widgets/map_with_callouts.dart';
+import 'package:valorant_intel/features/feature_map/view/widgets/map_display_icon.dart';
 
 class MapDetailPage extends StatelessWidget {
   const MapDetailPage({
@@ -23,13 +23,8 @@ class MapDetailPage extends StatelessWidget {
           MapCordinates(
             mapCordinates: map.coordinates,
           ),
-          MapWithCallouts(
-            mapCallouts: map.callouts,
+          MapDisplayIcon(
             mapDisplayIconUrl: map.displayIcon,
-            xMultiplier: map.xMultiplier ?? 0.0,
-            yMultiplier: map.yMultiplier ?? 0.0,
-            xScalarToAdd: map.xScalarToAdd ?? 0.0,
-            yScalarToAdd: map.yScalarToAdd ?? 0.0,
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
