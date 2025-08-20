@@ -20,11 +20,23 @@ class MapDetailPage extends StatelessWidget {
             mapDisplayName: map.displayName,
             mapImageUrl: map.listViewIcon,
           ),
-          MapCordinates(
-            mapCordinates: map.coordinates,
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15.0,
+              vertical: 10.0,
+            ),
+            sliver: MapCordinates(
+              mapCordinates: map.coordinates,
+            ),
           ),
-          MapDisplayIcon(
-            mapDisplayIconUrl: map.displayIcon,
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15.0,
+              vertical: 10.0,
+            ),
+            sliver: MapDisplayIcon(
+              mapDisplayIconUrl: map.displayIcon,
+            ),
           ),
         ],
       ),
