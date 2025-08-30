@@ -36,7 +36,7 @@ class GamePage extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

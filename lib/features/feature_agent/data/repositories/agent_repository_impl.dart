@@ -9,11 +9,11 @@ class AgentRepositoryImpl implements AgentRepository {
   final AgentRemoteDatasource _agentRemoteDatasource;
   final AgentLocalDatasource _agentLocalDatasource;
 
-  AgentRepositoryImpl(
-      {required AgentRemoteDatasource agentRemoteDatasource,
-      required AgentLocalDatasource agentLocalDatasource})
-      : _agentRemoteDatasource = agentRemoteDatasource,
-        _agentLocalDatasource = agentLocalDatasource;
+  AgentRepositoryImpl({
+    required AgentRemoteDatasource agentRemoteDatasource,
+    required AgentLocalDatasource agentLocalDatasource,
+  }) : _agentRemoteDatasource = agentRemoteDatasource,
+       _agentLocalDatasource = agentLocalDatasource;
 
   @override
   Future<Either<(String, List<Agent>?), List<Agent>>> getAllAgents() async {

@@ -21,19 +21,23 @@ class MapsPage extends StatelessWidget {
       body: BlocConsumer<MapBloc, MapState>(
         listener: (context, state) {
           if (state is MapErrorState && state.cachedMapList != null) {
-            context.showSimpleSnackBar(context.localizations
-                .cachedContent(context.translateError(state.message)));
+            context.showSimpleSnackBar(
+              context.localizations.cachedContent(
+                context.translateError(state.message),
+              ),
+            );
           }
         },
         builder: (context, state) {
           return switch (state) {
             MapLoadingState() => const CustomShimmerGridView(
-                width: 300,
-                height: 100,
-                radius: 12,
-              ),
-            MapSuccessState(mapList: final mapList) =>
-              MapSuccessView(mapList: mapList),
+              width: 300,
+              height: 100,
+              radius: 12,
+            ),
+            MapSuccessState(mapList: final mapList) => MapSuccessView(
+              mapList: mapList,
+            ),
             MapErrorState(
               message: final message,
               cachedMapList: final cachedMapList,
@@ -44,7 +48,7 @@ class MapsPage extends StatelessWidget {
                       onTryAgain: () =>
                           context.read<MapBloc>().add(GetAllMapsEvent()),
                     )
-                  : MapSuccessView(mapList: cachedMapList)
+                  : MapSuccessView(mapList: cachedMapList),
           };
         },
       ),

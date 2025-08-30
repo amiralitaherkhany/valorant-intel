@@ -48,41 +48,44 @@ class _CustomSliverRefreshWrapperState
         physics: const BouncingScrollPhysics(),
         slivers: [
           ListenableBuilder(
-              listenable: _isAtTop,
-              builder: (context, child) {
-                return SliverVisibility(
-                  visible: _isAtTop.value,
-                  sliver: CupertinoSliverRefreshControl(
-                    refreshIndicatorExtent: 50,
-                    refreshTriggerPullDistance: 50,
-                    onRefresh: () async {
-                      HapticFeedback.vibrate();
-                      widget.onRefresh();
-                    },
-                    builder: (context,
-                            refreshState,
-                            pulledExtent,
-                            refreshTriggerPullDistance,
-                            refreshIndicatorExtent) =>
-                        Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      color: Theme.of(context).colorScheme.primary,
-                      child: Center(
-                        child: Text(
-                          context.localizations.pullToRefresh,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary),
+            listenable: _isAtTop,
+            builder: (context, child) {
+              return SliverVisibility(
+                visible: _isAtTop.value,
+                sliver: CupertinoSliverRefreshControl(
+                  refreshIndicatorExtent: 50,
+                  refreshTriggerPullDistance: 50,
+                  onRefresh: () async {
+                    HapticFeedback.vibrate();
+                    widget.onRefresh();
+                  },
+                  builder:
+                      (
+                        context,
+                        refreshState,
+                        pulledExtent,
+                        refreshTriggerPullDistance,
+                        refreshIndicatorExtent,
+                      ) => Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        color: Theme.of(context).colorScheme.primary,
+                        child: Center(
+                          child: Text(
+                            context.localizations.pullToRefresh,
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimary,
+                                ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                );
-              }),
+                ),
+              );
+            },
+          ),
           ...widget.slivers,
         ],
       ),

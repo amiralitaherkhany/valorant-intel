@@ -12,9 +12,9 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       centerTitle: true,
       titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
-          ),
+        fontWeight: FontWeight.bold,
+        fontSize: 30,
+      ),
       elevation: 0,
       scrolledUnderElevation: 0,
     );

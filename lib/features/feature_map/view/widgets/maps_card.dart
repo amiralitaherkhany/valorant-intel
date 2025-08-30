@@ -24,33 +24,41 @@ class MapsCard extends StatelessWidget {
           children: [
             Hero(
               tag: map.listViewIcon ?? "",
-              flightShuttleBuilder: (flightContext, animation, flightDirection,
-                  fromHeroContext, toHeroContext) {
-                Animation<double> borderAnimation =
-                    Tween<double>(begin: 12, end: 0).animate(animation);
+              flightShuttleBuilder:
+                  (
+                    flightContext,
+                    animation,
+                    flightDirection,
+                    fromHeroContext,
+                    toHeroContext,
+                  ) {
+                    Animation<double> borderAnimation = Tween<double>(
+                      begin: 12,
+                      end: 0,
+                    ).animate(animation);
 
-                return AnimatedBuilder(
-                  animation: borderAnimation,
-                  builder: (context, child) {
-                    return Material(
-                      color: Colors.transparent,
-                      surfaceTintColor: Colors.transparent,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(borderAnimation.value),
-                        ),
-                        child: CachedNetworkImage(
-                          imageUrl: map.listViewIcon ?? "",
-                          width: double.infinity,
-                          filterQuality: FilterQuality.low,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                    return AnimatedBuilder(
+                      animation: borderAnimation,
+                      builder: (context, child) {
+                        return Material(
+                          color: Colors.transparent,
+                          surfaceTintColor: Colors.transparent,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(borderAnimation.value),
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl: map.listViewIcon ?? "",
+                              width: double.infinity,
+                              filterQuality: FilterQuality.low,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
-                );
-              },
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
                 child: CachedNetworkImage(
@@ -85,8 +93,8 @@ class MapsCard extends StatelessWidget {
                   child: Text(
                     map.displayName!,
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          color: Colors.white,
-                        ),
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

@@ -47,29 +47,28 @@ class Agent extends Equatable {
   });
 
   factory Agent.fromMap(Map<String, dynamic> json) => Agent(
-        uuid: json['uuid'] ?? "",
-        displayName: json['displayName'] ?? "",
-        description: json['description'] ?? "",
-        developerName: json['developerName'] ?? "",
-        displayIcon: json['displayIcon'] ?? "",
-        displayIconSmall: json['displayIconSmall'] ?? "",
-        bustPortrait: json['bustPortrait'] ?? "",
-        fullPortrait: json['fullPortrait'] ?? "",
-        fullPortraitV2: json['fullPortraitV2'] ?? "",
-        killfeedPortrait: json['killfeedPortrait'] ?? "",
-        background: json['background'] ?? "",
-        backgroundGradientColors:
-            json['backgroundGradientColors'] as List<dynamic>,
-        isFullPortraitRightFacing: json['isFullPortraitRightFacing'] as bool,
-        isPlayableCharacter: json['isPlayableCharacter'] as bool,
-        isAvailableForTest: json['isAvailableForTest'] as bool,
-        isBaseContent: json['isBaseContent'] as bool,
-        role: Role.fromMap(json['role'] as Map<String, dynamic>),
-        recruitmentData: json['recruitmentData'] as dynamic,
-        abilities: (json['abilities'] as List<dynamic>)
-            .map((e) => Ability.fromMap(e as Map<String, dynamic>))
-            .toList(),
-      );
+    uuid: json['uuid'] ?? "",
+    displayName: json['displayName'] ?? "",
+    description: json['description'] ?? "",
+    developerName: json['developerName'] ?? "",
+    displayIcon: json['displayIcon'] ?? "",
+    displayIconSmall: json['displayIconSmall'] ?? "",
+    bustPortrait: json['bustPortrait'] ?? "",
+    fullPortrait: json['fullPortrait'] ?? "",
+    fullPortraitV2: json['fullPortraitV2'] ?? "",
+    killfeedPortrait: json['killfeedPortrait'] ?? "",
+    background: json['background'] ?? "",
+    backgroundGradientColors: json['backgroundGradientColors'] as List<dynamic>,
+    isFullPortraitRightFacing: json['isFullPortraitRightFacing'] as bool,
+    isPlayableCharacter: json['isPlayableCharacter'] as bool,
+    isAvailableForTest: json['isAvailableForTest'] as bool,
+    isBaseContent: json['isBaseContent'] as bool,
+    role: Role.fromMap(json['role'] as Map<String, dynamic>),
+    recruitmentData: json['recruitmentData'] as dynamic,
+    abilities: (json['abilities'] as List<dynamic>)
+        .map((e) => Ability.fromMap(e as Map<String, dynamic>))
+        .toList(),
+  );
 
   @override
   List<Object?> get props => [uuid];

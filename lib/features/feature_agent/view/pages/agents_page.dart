@@ -22,23 +22,25 @@ class AgentsPage extends StatelessWidget {
         listener: (context, state) {
           if (state is AgentErrorState && state.cachedAgentList != null) {
             context.showSimpleSnackBar(
-              context.localizations
-                  .cachedContent(context.translateError(state.message)),
+              context.localizations.cachedContent(
+                context.translateError(state.message),
+              ),
             );
           }
         },
         builder: (context, state) {
           return switch (state) {
             AgentLoadingState() => const CustomShimmerGridView(
-                width: 150,
-                height: 150,
-                radius: 12,
-              ),
-            AgentSuccessState(agentList: final agentList) =>
-              AgentSuccessView(agentList: agentList),
+              width: 150,
+              height: 150,
+              radius: 12,
+            ),
+            AgentSuccessState(agentList: final agentList) => AgentSuccessView(
+              agentList: agentList,
+            ),
             AgentErrorState(
               message: final message,
-              cachedAgentList: final cachedAgentList
+              cachedAgentList: final cachedAgentList,
             ) =>
               state.cachedAgentList == null
                   ? CustomErrorView(

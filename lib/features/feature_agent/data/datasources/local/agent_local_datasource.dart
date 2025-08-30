@@ -12,13 +12,16 @@ class AgentLocalDatasource implements AgentDatasource {
 
     return snapshots
         .map(
-            (snapshot) => Agent.fromMap(snapshot.value as Map<String, dynamic>))
+          (snapshot) => Agent.fromMap(snapshot.value as Map<String, dynamic>),
+        )
         .toList();
   }
 
   Future<void> saveAgents(List<Agent> agents) async {
     await _store.delete(_database);
     await _store.addAll(
-        _database, agents.map((agent) => agent.toMap()).toList());
+      _database,
+      agents.map((agent) => agent.toMap()).toList(),
+    );
   }
 }

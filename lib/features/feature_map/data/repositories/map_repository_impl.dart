@@ -9,25 +9,25 @@ class MapRepositoryImpl implements MapRepository {
   final MapRemoteDatasource _mapRemoteDatasource;
   final MapLocalDatasource _mapLocalDatasource;
 
-  MapRepositoryImpl(
-      {required MapRemoteDatasource mapRemoteDatasource,
-      required MapLocalDatasource mapLocalDatasource})
-      : _mapRemoteDatasource = mapRemoteDatasource,
-        _mapLocalDatasource = mapLocalDatasource;
+  MapRepositoryImpl({
+    required MapRemoteDatasource mapRemoteDatasource,
+    required MapLocalDatasource mapLocalDatasource,
+  }) : _mapRemoteDatasource = mapRemoteDatasource,
+       _mapLocalDatasource = mapLocalDatasource;
 
   @override
   Future<Either<(String, List<GameMap>?), List<GameMap>>> getAllMaps() async {
     try {
       final maps = await _mapRemoteDatasource.getAllMaps().then(
-            (mapList) => mapList
-                .where(
-                  (element) => ![
-                    "5914d1e0-40c4-cfdd-6b88-eba06347686c",
-                    "1f10dab3-4294-3827-fa35-c2aa00213cf3"
-                  ].contains(element.uuid),
-                )
-                .toList(),
-          );
+        (mapList) => mapList
+            .where(
+              (element) => ![
+                "5914d1e0-40c4-cfdd-6b88-eba06347686c",
+                "1f10dab3-4294-3827-fa35-c2aa00213cf3",
+              ].contains(element.uuid),
+            )
+            .toList(),
+      );
       await _mapLocalDatasource.saveMaps(maps);
       return right(maps);
     } on ApiException catch (exception) {

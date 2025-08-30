@@ -9,12 +9,12 @@ part 'settings_state.dart';
 
 class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   SettingsBloc()
-      : super(
-          SettingsState(
-            themeStatus: ThemeInitialState(),
-            languageStatus: LanguageInitialState(),
-          ),
-        ) {
+    : super(
+        SettingsState(
+          themeStatus: ThemeInitialState(),
+          languageStatus: LanguageInitialState(),
+        ),
+      ) {
     on<SetThemeModeEvent>((event, emit) async {
       emit(
         state.copyWith(
@@ -28,8 +28,9 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     on<SetLanguageEvent>((event, emit) async {
       emit(
         state.copyWith(
-          newLanguageStatus:
-              LanguageChangedState(languageCode: event.languageCode),
+          newLanguageStatus: LanguageChangedState(
+            languageCode: event.languageCode,
+          ),
         ),
       );
     });

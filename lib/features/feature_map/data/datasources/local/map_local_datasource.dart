@@ -12,8 +12,9 @@ class MapLocalDatasource implements MapDatasource {
     final snapshots = await _store.find(_database);
 
     return snapshots
-        .map((snapshot) =>
-            GameMap.fromMap(snapshot.value as Map<String, dynamic>))
+        .map(
+          (snapshot) => GameMap.fromMap(snapshot.value as Map<String, dynamic>),
+        )
         .toList();
   }
 

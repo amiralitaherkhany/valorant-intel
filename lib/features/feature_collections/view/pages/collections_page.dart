@@ -32,10 +32,10 @@ class CollectionsPage extends StatelessWidget {
                     filterQuality: FilterQuality.low,
                   ),
                   title: context.localizations.agents,
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

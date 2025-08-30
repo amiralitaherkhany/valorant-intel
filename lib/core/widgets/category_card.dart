@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard(
-      {super.key,
-      required this.onTap,
-      required this.image,
-      required this.title});
+  const CategoryCard({
+    super.key,
+    required this.onTap,
+    required this.image,
+    required this.title,
+  });
   final void Function() onTap;
   final Image image;
   final String title;
@@ -48,8 +49,8 @@ class CategoryCard extends StatelessWidget {
               child: Text(
                 title,
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
             ),
           ],

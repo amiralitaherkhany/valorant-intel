@@ -14,18 +14,18 @@ class Role {
   });
 
   factory Role.fromMap(Map<String, dynamic> json) => Role(
-        uuid: json['uuid'] ?? "",
-        displayName: json['displayName'] ?? "",
-        description: json['description'] ?? "",
-        displayIcon: json['displayIcon'] ?? "",
-        assetPath: json['assetPath'] ?? "",
-      );
+    uuid: json['uuid'] ?? "",
+    displayName: json['displayName'] ?? "",
+    description: json['description'] ?? "",
+    displayIcon: json['displayIcon'] ?? "",
+    assetPath: json['assetPath'] ?? "",
+  );
 
   Map<String, dynamic> toMap() => {
-        'uuid': uuid,
-        'displayName': displayName,
-        'description': description,
-        'displayIcon': displayIcon,
-        'assetPath': assetPath,
-      };
+    'uuid': uuid,
+    'displayName': displayName,
+    'description': description,
+    'displayIcon': displayIcon,
+    'assetPath': assetPath,
+  };
 }

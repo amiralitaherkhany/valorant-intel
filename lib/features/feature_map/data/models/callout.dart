@@ -10,18 +10,18 @@ class Callout extends Equatable {
   const Callout({this.regionName, this.superRegionName, this.location});
 
   factory Callout.fromMap(Map<String, dynamic> data) => Callout(
-        regionName: data['regionName'] as String?,
-        superRegionName: data['superRegionName'] as String?,
-        location: data['location'] == null
-            ? null
-            : Location.fromMap(data['location'] as Map<String, dynamic>),
-      );
+    regionName: data['regionName'] as String?,
+    superRegionName: data['superRegionName'] as String?,
+    location: data['location'] == null
+        ? null
+        : Location.fromMap(data['location'] as Map<String, dynamic>),
+  );
 
   Map<String, dynamic> toMap() => {
-        'regionName': regionName,
-        'superRegionName': superRegionName,
-        'location': location?.toMap(),
-      };
+    'regionName': regionName,
+    'superRegionName': superRegionName,
+    'location': location?.toMap(),
+  };
 
   Callout copyWith({
     String? regionName,

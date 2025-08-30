@@ -6,12 +6,12 @@ class DioClient {
   final Dio dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
   final NetworkUtils _networkUtils;
   DioClient({required NetworkUtils networkUtils})
-      : _networkUtils = networkUtils {
+    : _networkUtils = networkUtils {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          options.queryParameters['language'] =
-              await _networkUtils.getLanguageCode();
+          options.queryParameters['language'] = await _networkUtils
+              .getLanguageCode();
           return handler.next(options);
         },
       ),

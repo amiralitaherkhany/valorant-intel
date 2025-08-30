@@ -8,7 +8,7 @@ class AgentRemoteDatasource implements AgentDatasource {
   final DioClient _dioClient;
 
   AgentRemoteDatasource({required DioClient dioClient})
-      : _dioClient = dioClient;
+    : _dioClient = dioClient;
 
   @override
   Future<List<Agent>> getAllAgents() async {

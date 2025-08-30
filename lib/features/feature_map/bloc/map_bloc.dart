@@ -9,20 +9,22 @@ part 'map_state.dart';
 class MapBloc extends Bloc<MapEvent, MapState> {
   final MapRepository _mapRepository;
   MapBloc({required MapRepository mapRepository})
-      : _mapRepository = mapRepository,
-        super(MapLoadingState()) {
+    : _mapRepository = mapRepository,
+      super(MapLoadingState()) {
     on<GetAllMapsEvent>(
       (event, emit) async {
         emit(MapLoadingState());
         await _mapRepository.getAllMaps().then(
-              (response) => response.fold(
-                (errorDetails) => emit(MapErrorState(
-                  message: errorDetails.$1,
-                  cachedMapList: errorDetails.$2,
-                )),
-                (mapList) => emit(MapSuccessState(mapList: mapList)),
+          (response) => response.fold(
+            (errorDetails) => emit(
+              MapErrorState(
+                message: errorDetails.$1,
+                cachedMapList: errorDetails.$2,
               ),
-            );
+            ),
+            (mapList) => emit(MapSuccessState(mapList: mapList)),
+          ),
+        );
       },
     );
   }
