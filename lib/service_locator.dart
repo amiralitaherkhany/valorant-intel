@@ -15,26 +15,69 @@ import 'package:valorant_intel/features/feature_map/data/datasources/remote/map_
 import 'package:valorant_intel/features/feature_map/data/repositories/map_repository.dart';
 import 'package:valorant_intel/features/feature_map/data/repositories/map_repository_impl.dart';
 import 'package:valorant_intel/features/feature_settings/bloc/settings_bloc.dart';
+import 'package:valorant_intel/features/feature_weapon/bloc/weapon_bloc.dart';
+import 'package:valorant_intel/features/feature_weapon/data/datasources/remote/weapon_remote_datasource.dart';
+import 'package:valorant_intel/features/feature_weapon/data/repositories/weapon_repository.dart';
+import 'package:valorant_intel/features/feature_weapon/data/repositories/weapon_repository_impl.dart';
 
 final GetIt locator = GetIt.instance;
 
 Future<void> initializeServiceLocator() async {
   // Register components as a singleton
-  locator.registerSingleton<SettingsBloc>(
-    SettingsBloc(),
-  );
-  locator.registerSingleton<NetworkUtils>(
-    NetworkUtils(
-      settingsBloc: locator(),
-    ),
-  );
-  locator.registerLazySingleton<DioClient>(
-    () => DioClient(
-      networkUtils: locator(),
-    ),
-  );
+  registerSingletons();
+
+  //register local database
   await _initSembast();
+
   //register dataSources
+  registerDatasources();
+
+  //register repositories
+  registerRepositories();
+
+  //register blocs
+  registerBlocs();
+}
+
+void registerBlocs() {
+  locator.registerFactory<AgentBloc>(
+    () => AgentBloc(
+      agentRepository: locator(),
+    ),
+  );
+  locator.registerFactory<MapBloc>(
+    () => MapBloc(
+      mapRepository: locator(),
+    ),
+  );
+  locator.registerFactory<WeaponBloc>(
+    () => WeaponBloc(
+      weaponRepository: locator(),
+    ),
+  );
+}
+
+void registerRepositories() {
+  locator.registerFactory<AgentRepository>(
+    () => AgentRepositoryImpl(
+      agentRemoteDatasource: locator(),
+      agentLocalDatasource: locator(),
+    ),
+  );
+  locator.registerFactory<MapRepository>(
+    () => MapRepositoryImpl(
+      mapRemoteDatasource: locator(),
+      mapLocalDatasource: locator(),
+    ),
+  );
+  locator.registerFactory<WeaponRepository>(
+    () => WeaponRepositoryImpl(
+      weaponRemoteDatasource: locator(),
+    ),
+  );
+}
+
+void registerDatasources() {
   locator.registerFactory<AgentRemoteDatasource>(
     () => AgentRemoteDatasource(
       dioClient: locator(),
@@ -55,30 +98,25 @@ Future<void> initializeServiceLocator() async {
       database: locator(),
     ),
   );
+  locator.registerFactory<WeaponRemoteDatasource>(
+    () => WeaponRemoteDatasource(
+      dioClient: locator(),
+    ),
+  );
+}
 
-  //register repositories
-  locator.registerFactory<AgentRepository>(
-    () => AgentRepositoryImpl(
-      agentRemoteDatasource: locator(),
-      agentLocalDatasource: locator(),
+void registerSingletons() {
+  locator.registerSingleton<SettingsBloc>(
+    SettingsBloc(),
+  );
+  locator.registerSingleton<NetworkUtils>(
+    NetworkUtils(
+      settingsBloc: locator(),
     ),
   );
-  locator.registerFactory<MapRepository>(
-    () => MapRepositoryImpl(
-      mapRemoteDatasource: locator(),
-      mapLocalDatasource: locator(),
-    ),
-  );
-
-  //register blocs
-  locator.registerFactory<AgentBloc>(
-    () => AgentBloc(
-      agentRepository: locator(),
-    ),
-  );
-  locator.registerFactory<MapBloc>(
-    () => MapBloc(
-      mapRepository: locator(),
+  locator.registerLazySingleton<DioClient>(
+    () => DioClient(
+      networkUtils: locator(),
     ),
   );
 }
