@@ -13,8 +13,8 @@ class WeaponRepositoryImpl implements WeaponRepository {
   @override
   Future<Either<(String, List<Weapon>?), List<Weapon>>> getAllWeapons() async {
     try {
-      final weapons = await _weaponRemoteDatasource.getAllWeapons();
-      return Right(weapons);
+      final weaponList = await _weaponRemoteDatasource.getAllWeapons();
+      return Right(weaponList);
     } on ApiException catch (exception) {
       return Left((exception.message, null));
     }

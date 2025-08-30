@@ -11,13 +11,12 @@ class WeaponRemoteDatasource implements WeaponDatasource {
   @override
   Future<List<Weapon>> getAllWeapons() async {
     try {
-      return await _dioClient.dio
-          .get('/weapons')
-          .then(
-            (response) => (response.data['data'] as List<dynamic>)
-                .map<Weapon>((element) => Weapon.fromMap(element))
-                .toList(),
-          );
+      final response = await _dioClient.dio.get('/weapons');
+      final weaponList = (response.data['data'] as List<dynamic>)
+          .map<Weapon>((element) => Weapon.fromMap(element))
+          .toList();
+
+      return weaponList;
     } on DioException catch (exception) {
       if (exception.type == DioExceptionType.connectionError) {
         throw ApiException(

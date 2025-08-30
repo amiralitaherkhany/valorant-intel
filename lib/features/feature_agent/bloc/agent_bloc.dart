@@ -14,17 +14,16 @@ class AgentBloc extends Bloc<AgentEvent, AgentState> {
     on<GetAllAgentsEvent>(
       (event, emit) async {
         emit(AgentLoadingState());
-        await _agentRepository.getAllAgents().then(
-          (response) => response.fold(
-            (errorDetails) {
-              emit(
-                AgentErrorState(
-                  message: errorDetails.$1,
-                  cachedAgentList: errorDetails.$2,
-                ),
-              );
-            },
-            (agentList) => emit(AgentSuccessState(agentList: agentList)),
+        final response = await _agentRepository.getAllAgents();
+        response.fold(
+          (errorDetails) => emit(
+            AgentErrorState(
+              message: errorDetails.$1,
+              cachedAgentList: errorDetails.$2,
+            ),
+          ),
+          (agentList) => emit(
+            AgentSuccessState(agentList: agentList),
           ),
         );
       },

@@ -18,22 +18,21 @@ class MapRepositoryImpl implements MapRepository {
   @override
   Future<Either<(String, List<GameMap>?), List<GameMap>>> getAllMaps() async {
     try {
-      final maps = await _mapRemoteDatasource.getAllMaps().then(
-        (mapList) => mapList
-            .where(
-              (element) => ![
-                "5914d1e0-40c4-cfdd-6b88-eba06347686c",
-                "1f10dab3-4294-3827-fa35-c2aa00213cf3",
-              ].contains(element.uuid),
-            )
-            .toList(),
-      );
-      await _mapLocalDatasource.saveMaps(maps);
-      return right(maps);
+      final mapList = await _mapRemoteDatasource.getAllMaps();
+      final filteredMaps = mapList
+          .where(
+            (element) => ![
+              "5914d1e0-40c4-cfdd-6b88-eba06347686c",
+              "1f10dab3-4294-3827-fa35-c2aa00213cf3",
+            ].contains(element.uuid),
+          )
+          .toList();
+      await _mapLocalDatasource.saveMaps(filteredMaps);
+      return right(filteredMaps);
     } on ApiException catch (exception) {
-      final maps = await _mapLocalDatasource.getAllMaps();
-      if (maps.isNotEmpty) {
-        return Left((exception.message, maps));
+      final mapList = await _mapLocalDatasource.getAllMaps();
+      if (mapList.isNotEmpty) {
+        return Left((exception.message, mapList));
       } else {
         return Left((exception.message, null));
       }

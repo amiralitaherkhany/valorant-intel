@@ -14,13 +14,15 @@ class AgentRemoteDatasource implements AgentDatasource {
   Future<List<Agent>> getAllAgents() async {
     Map<String, dynamic> queryParameters = {'isPlayableCharacter': true};
     try {
-      return await _dioClient.dio
-          .get('/agents', queryParameters: queryParameters)
-          .then(
-            (response) => (response.data['data'] as List<dynamic>)
-                .map<Agent>((element) => Agent.fromMap(element))
-                .toList(),
-          );
+      final response = await _dioClient.dio.get(
+        '/agents',
+        queryParameters: queryParameters,
+      );
+      final agentList = (response.data['data'] as List<dynamic>)
+          .map<Agent>((element) => Agent.fromMap(element))
+          .toList();
+
+      return agentList;
     } on DioException catch (exception) {
       if (exception.type == DioExceptionType.connectionError) {
         throw ApiException(

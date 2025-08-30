@@ -18,13 +18,13 @@ class AgentRepositoryImpl implements AgentRepository {
   @override
   Future<Either<(String, List<Agent>?), List<Agent>>> getAllAgents() async {
     try {
-      final agents = await _agentRemoteDatasource.getAllAgents();
-      await _agentLocalDatasource.saveAgents(agents);
-      return Right(agents);
+      final agentList = await _agentRemoteDatasource.getAllAgents();
+      await _agentLocalDatasource.saveAgents(agentList);
+      return Right(agentList);
     } on ApiException catch (exception) {
-      final agents = await _agentLocalDatasource.getAllAgents();
-      if (agents.isNotEmpty) {
-        return Left((exception.message, agents));
+      final agentList = await _agentLocalDatasource.getAllAgents();
+      if (agentList.isNotEmpty) {
+        return Left((exception.message, agentList));
       } else {
         return Left((exception.message, null));
       }

@@ -12,13 +12,11 @@ class MapRemoteDatasource implements MapDatasource {
   @override
   Future<List<GameMap>> getAllMaps() async {
     try {
-      return await _dioClient.dio
-          .get('/maps')
-          .then(
-            (response) => (response.data['data'] as List<dynamic>)
-                .map<GameMap>((element) => GameMap.fromMap(element))
-                .toList(),
-          );
+      final response = await _dioClient.dio.get('/maps');
+      final mapList = (response.data['data'] as List<dynamic>)
+          .map<GameMap>((element) => GameMap.fromMap(element))
+          .toList();
+      return mapList;
     } on DioException catch (exception) {
       if (exception.type == DioExceptionType.connectionError) {
         throw ApiException(

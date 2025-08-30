@@ -14,15 +14,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<GetAllMapsEvent>(
       (event, emit) async {
         emit(MapLoadingState());
-        await _mapRepository.getAllMaps().then(
-          (response) => response.fold(
-            (errorDetails) => emit(
-              MapErrorState(
-                message: errorDetails.$1,
-                cachedMapList: errorDetails.$2,
-              ),
+        final response = await _mapRepository.getAllMaps();
+        response.fold(
+          (errorDetails) => emit(
+            MapErrorState(
+              message: errorDetails.$1,
+              cachedMapList: errorDetails.$2,
             ),
-            (mapList) => emit(MapSuccessState(mapList: mapList)),
+          ),
+          (mapList) => emit(
+            MapSuccessState(mapList: mapList),
           ),
         );
       },
