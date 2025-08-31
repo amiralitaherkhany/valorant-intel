@@ -14,6 +14,8 @@ import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
 import 'package:valorant_intel/features/feature_map/view/pages/map_detail_page.dart';
 import 'package:valorant_intel/features/feature_map/view/pages/maps_page.dart';
 import 'package:valorant_intel/features/feature_settings/view/pages/settings_page.dart';
+import 'package:valorant_intel/features/feature_weapon/bloc/weapon_bloc.dart';
+import 'package:valorant_intel/features/feature_weapon/view/pages/weapons_page.dart';
 import 'package:valorant_intel/service_locator.dart';
 
 class AppRouter {
@@ -61,7 +63,7 @@ class AppRouter {
           pageBuilder: (context, state) {
             return MaterialPage(
               key: state.pageKey,
-              child: CollectionsPage(),
+              child: const CollectionsPage(),
             );
           },
           routes: [
@@ -87,6 +89,16 @@ class AppRouter {
                   },
                 ),
               ],
+            ),
+            GoRoute(
+              path: "Weapons",
+              pageBuilder: (context, state) => MaterialPage(
+                key: state.pageKey,
+                child: BlocProvider<WeaponBloc>(
+                  create: (context) => locator()..add(GetAllWeaponsEvent()),
+                  child: const WeaponsPage(),
+                ),
+              ),
             ),
           ],
         ),
