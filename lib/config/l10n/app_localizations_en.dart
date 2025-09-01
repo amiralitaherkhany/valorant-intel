@@ -15,6 +15,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get agents => 'Agents';
 
   @override
+  String get weapons => 'Weapons';
+
+  @override
   String get maps => 'Maps';
 
   @override

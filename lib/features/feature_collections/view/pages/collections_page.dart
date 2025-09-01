@@ -33,6 +33,15 @@ class CollectionsPage extends StatelessWidget {
                   ),
                   title: context.localizations.agents,
                 ),
+                CategoryCard(
+                  onTap: () => context.go('/Collections/Weapons'),
+                  image: Image.asset(
+                    'assets/images/weapons.jpg',
+                    fit: BoxFit.cover,
+                    filterQuality: FilterQuality.low,
+                  ),
+                  title: context.localizations.weapons,
+                ),
               ],
             ),
           ),

@@ -24,7 +24,7 @@ class CategoryCard extends StatelessWidget {
           color: Theme.of(context).colorScheme.surface,
           border: Border.all(
             color: Theme.of(context).colorScheme.primary,
-            width: 3.5,
+            width: 2.5,
           ),
           borderRadius: BorderRadius.circular(
             20,

@@ -110,6 +110,12 @@ abstract class AppLocalizations {
   /// **'Agents'**
   String get agents;
 
+  /// No description provided for @weapons.
+  ///
+  /// In en, this message translates to:
+  /// **'Weapons'**
+  String get weapons;
+
   /// No description provided for @maps.
   ///
   /// In en, this message translates to:

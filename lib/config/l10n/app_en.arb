@@ -2,6 +2,8 @@
     "@@locale": "en",
     "appTitle": "Valorant Intel",
     "agents": "Agents",
+    "weapons": "Weapons",
+    "@weapons": {},
     "maps": "Maps",
     "@maps": {},
     "@agents": {},
