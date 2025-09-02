@@ -1,6 +1,7 @@
 {
     "@@locale": "es",
     "maps": "mapas",
+    "none": "ninguno",
     "appTitle": "Información de Valorant",
     "agents": "Agentes",
     "weapons": "Armes",

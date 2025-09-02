@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:valorant_intel/config/theme/app_color_scheme.dart';
+import 'package:valorant_intel/core/extensions/context_extensions.dart';
 
 class MapCordinates extends StatelessWidget {
   const MapCordinates({
@@ -23,7 +24,7 @@ class MapCordinates extends StatelessWidget {
               ),
           children: [
             TextSpan(
-              text: mapCordinates ?? "none",
+              text: mapCordinates ?? context.localizations.none,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
