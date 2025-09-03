@@ -90,10 +90,41 @@ class MapCard extends StatelessWidget {
                 ),
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
-                  child: Text(
-                    map.displayName!,
-                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      color: Colors.white,
+                  child: Hero(
+                    transitionOnUserGestures: true,
+                    tag: map.displayName ?? "",
+                    flightShuttleBuilder:
+                        (
+                          flightContext,
+                          animation,
+                          flightDirection,
+                          fromHeroContext,
+                          toHeroContext,
+                        ) {
+                          Animation<double> textAnimation = Tween<double>(
+                            begin: 35.0,
+                            end: 40.0,
+                          ).animate(animation);
+                          return RepaintBoundary(
+                            child: FittedBox(
+                              child: Text(
+                                "${map.displayName} ",
+                                style: Theme.of(context).textTheme.displayLarge
+                                    ?.copyWith(
+                                      fontSize: textAnimation.value,
+                                      color: Colors.white,
+                                    ),
+                              ),
+                            ),
+                          );
+                        },
+                    child: FittedBox(
+                      child: Text(
+                        "${map.displayName} ",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.displayLarge?.copyWith(fontSize: 35.0),
+                      ),
                     ),
                   ),
                 ),

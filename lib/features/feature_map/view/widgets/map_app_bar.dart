@@ -23,12 +23,39 @@ class MapAppBar extends StatelessWidget {
       snap: false,
       flexibleSpace: FlexibleSpaceBar(
         background: AnimatedMapImage(mapImageUrl: mapImageUrl),
-        title: FittedBox(
-          child: Text(
-            "$mapDisplayName ",
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium?.copyWith(fontSize: 20.0),
+        title: Hero(
+          transitionOnUserGestures: true,
+          tag: mapDisplayName ?? "",
+          flightShuttleBuilder:
+              (
+                flightContext,
+                animation,
+                flightDirection,
+                fromHeroContext,
+                toHeroContext,
+              ) {
+                Animation<double> textAnimation = Tween<double>(
+                  begin: 40.0,
+                  end: 35.0,
+                ).animate(animation);
+                return RepaintBoundary(
+                  child: FittedBox(
+                    child: Text(
+                      "$mapDisplayName ",
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        fontSize: textAnimation.value,
+                      ),
+                    ),
+                  ),
+                );
+              },
+          child: FittedBox(
+            child: Text(
+              "$mapDisplayName ",
+              style: Theme.of(
+                context,
+              ).textTheme.displayLarge?.copyWith(fontSize: 40.0),
+            ),
           ),
         ),
         centerTitle: true,

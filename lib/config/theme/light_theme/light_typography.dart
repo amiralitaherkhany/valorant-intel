@@ -40,8 +40,8 @@ class LightTypography implements AppTypography {
   TextStyle get headline1 => TextStyle(
     fontFamily: 'Tungsten',
     fontSize: 32,
-    fontWeight: FontWeight.bold,
-    color: AppColorScheme.darkBlue,
+    fontWeight: FontWeight.normal,
+    color: AppColorScheme.white,
   );
 
   @override

@@ -40,7 +40,7 @@ class DarkTypography implements AppTypography {
   TextStyle get headline1 => TextStyle(
     fontFamily: 'Tungsten',
     fontSize: 32,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.normal,
     color: AppColorScheme.white,
   );
 
