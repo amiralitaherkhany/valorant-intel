@@ -12,7 +12,7 @@ class AgentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         context.go('/Collections/Agents/AgentDetail', extra: agent);
       },
