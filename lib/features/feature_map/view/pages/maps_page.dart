@@ -7,7 +7,7 @@ import 'package:valorant_intel/core/widgets/custom_sliver_refresh_wrapper.dart';
 import 'package:valorant_intel/core/widgets/simple_app_bar.dart';
 import 'package:valorant_intel/features/feature_map/bloc/map_bloc.dart';
 import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
-import 'package:valorant_intel/features/feature_map/view/widgets/maps_card.dart';
+import 'package:valorant_intel/features/feature_map/view/widgets/map_card.dart';
 
 class MapsPage extends StatelessWidget {
   const MapsPage({super.key});
@@ -89,7 +89,7 @@ class MapSuccessView extends StatelessWidget {
               mainAxisExtent: 100,
             ),
             itemBuilder: (context, index) {
-              return MapsCard(map: mapList[index]);
+              return MapCard(map: mapList[index]);
             },
             itemCount: mapList.length,
           ),

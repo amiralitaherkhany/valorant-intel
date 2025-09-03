@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
 
-class MapsCard extends StatelessWidget {
-  const MapsCard({super.key, required this.map});
+class MapCard extends StatelessWidget {
+  const MapCard({super.key, required this.map});
   final GameMap map;
   @override
   Widget build(BuildContext context) {
