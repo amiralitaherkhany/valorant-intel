@@ -21,7 +21,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get weapons => 'Armes';
 
   @override
-  String get maps => 'mapas';
+  String get maps => 'Mapas';
 
   @override
   String get darkMode => 'Modo oscuro';
