@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:valorant_intel/core/presentation/main_wrapper.dart';
+import 'package:valorant_intel/core/widgets/main_wrapper.dart';
 import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/pages/agent_detail_page.dart';
