@@ -6,7 +6,6 @@ import 'package:valorant_intel/features/feature_agent/data/models/agent.dart';
 import 'package:valorant_intel/features/feature_agent/view/widgets/agent_ability_list.dart';
 import 'package:valorant_intel/features/feature_agent/view/widgets/agent_app_bar.dart';
 import 'package:valorant_intel/features/feature_agent/view/widgets/agent_describtion.dart';
-import 'package:valorant_intel/features/feature_agent/view/widgets/animated_agent_image.dart';
 
 class AgentDetailPage extends StatelessWidget {
   const AgentDetailPage({super.key, required this.agent});
@@ -103,6 +102,39 @@ class AgentDetailPage extends StatelessWidget {
           ),
           const SliverPadding(padding: EdgeInsets.only(top: 50)),
         ],
+      ),
+    );
+  }
+}
+
+class AnimatedAgentImage extends StatelessWidget {
+  const AnimatedAgentImage({super.key, required this.agentImageUrl});
+
+  final String agentImageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: agentImageUrl,
+      child: FittedBox(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: CachedNetworkImage(
+            width: 100,
+            height: 100,
+            imageUrl: agentImageUrl,
+            placeholder: (context, url) => Shimmer.fromColors(
+              baseColor: AppColorScheme.white,
+              highlightColor: AppColorScheme.grey,
+              child: Container(
+                color: Colors.grey,
+                width: 100,
+                height: 100,
+              ),
+            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          ),
+        ),
       ),
     );
   }

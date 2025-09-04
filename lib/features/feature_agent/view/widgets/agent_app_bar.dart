@@ -15,41 +15,7 @@ class AgentAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       flexibleSpace: FlexibleSpaceBar(
-        title: Hero(
-          transitionOnUserGestures: true,
-          tag: agent.displayName,
-          flightShuttleBuilder:
-              (
-                flightContext,
-                animation,
-                flightDirection,
-                fromHeroContext,
-                toHeroContext,
-              ) {
-                Animation<double> textAnimation = Tween<double>(
-                  begin: 14.0,
-                  end: 30.0,
-                ).animate(animation);
-                return RepaintBoundary(
-                  child: FittedBox(
-                    child: Text(
-                      "${agent.displayName} ",
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontSize: textAnimation.value,
-                      ),
-                    ),
-                  ),
-                );
-              },
-          child: FittedBox(
-            child: Text(
-              "${agent.displayName} ",
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(fontSize: 20.0),
-            ),
-          ),
-        ),
+        title: AnimatedAgentName(agent: agent),
         background: Container(
           padding: EdgeInsets.only(
             top: MediaQuery.viewPaddingOf(context).top,
@@ -106,6 +72,30 @@ class AgentAppBar extends StatelessWidget {
       snap: false,
       stretch: true,
       expandedHeight: 450,
+    );
+  }
+}
+
+class AnimatedAgentName extends StatelessWidget {
+  const AnimatedAgentName({
+    super.key,
+    required this.agent,
+  });
+
+  final Agent agent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: agent.displayName,
+      child: FittedBox(
+        child: Text(
+          "${agent.displayName} ",
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(fontSize: 20.0),
+        ),
+      ),
     );
   }
 }
