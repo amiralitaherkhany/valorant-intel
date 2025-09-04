@@ -6,6 +6,7 @@ import 'package:valorant_intel/features/feature_map/data/models/game_map.dart';
 class MapCard extends StatelessWidget {
   const MapCard({super.key, required this.map});
   final GameMap map;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,7 +33,7 @@ class MapCard extends StatelessWidget {
                     fromHeroContext,
                     toHeroContext,
                   ) {
-                    Animation<double> borderAnimation = Tween<double>(
+                    final borderAnimation = Tween<double>(
                       begin: 12,
                       end: 0,
                     ).animate(animation);
@@ -89,20 +90,18 @@ class MapCard extends StatelessWidget {
                           fromHeroContext,
                           toHeroContext,
                         ) {
-                          Animation<double> textAnimation = Tween<double>(
+                          final textAnimation = Tween<double>(
                             begin: 35.0,
                             end: 40.0,
                           ).animate(animation);
-                          return RepaintBoundary(
-                            child: FittedBox(
-                              child: Text(
-                                "${map.displayName} ",
-                                style: Theme.of(context).textTheme.displayLarge
-                                    ?.copyWith(
-                                      fontSize: textAnimation.value,
-                                      color: Colors.white,
-                                    ),
-                              ),
+
+                          return FittedBox(
+                            child: Text(
+                              "${map.displayName} ",
+                              style: Theme.of(context).textTheme.displayLarge
+                                  ?.copyWith(
+                                    fontSize: textAnimation.value,
+                                  ),
                             ),
                           );
                         },

@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:valorant_intel/features/feature_map/view/widgets/animated_map_image.dart';
 
 class MapAppBar extends StatelessWidget {
   const MapAppBar({
@@ -23,42 +23,65 @@ class MapAppBar extends StatelessWidget {
       snap: false,
       flexibleSpace: FlexibleSpaceBar(
         background: AnimatedMapImage(mapImageUrl: mapImageUrl),
-        title: Hero(
-          transitionOnUserGestures: true,
-          tag: mapDisplayName ?? "",
-          flightShuttleBuilder:
-              (
-                flightContext,
-                animation,
-                flightDirection,
-                fromHeroContext,
-                toHeroContext,
-              ) {
-                Animation<double> textAnimation = Tween<double>(
-                  begin: 40.0,
-                  end: 35.0,
-                ).animate(animation);
-                return RepaintBoundary(
-                  child: FittedBox(
-                    child: Text(
-                      "$mapDisplayName ",
-                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                        fontSize: textAnimation.value,
-                      ),
-                    ),
-                  ),
-                );
-              },
-          child: FittedBox(
-            child: Text(
-              "$mapDisplayName ",
-              style: Theme.of(
-                context,
-              ).textTheme.displayLarge?.copyWith(fontSize: 40.0),
-            ),
-          ),
-        ),
+        title: AnimatedMapName(mapDisplayName: mapDisplayName),
         centerTitle: true,
+      ),
+    );
+  }
+}
+
+class AnimatedMapName extends StatelessWidget {
+  const AnimatedMapName({
+    super.key,
+    required this.mapDisplayName,
+  });
+
+  final String? mapDisplayName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: mapDisplayName ?? "",
+      child: FittedBox(
+        child: Text(
+          "$mapDisplayName ",
+          style: Theme.of(
+            context,
+          ).textTheme.displayLarge?.copyWith(fontSize: 40.0),
+        ),
+      ),
+    );
+  }
+}
+
+class AnimatedMapImage extends StatelessWidget {
+  const AnimatedMapImage({
+    super.key,
+    required this.mapImageUrl,
+  });
+
+  final String? mapImageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: mapImageUrl ?? "",
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
+        child: getFixedImage(),
+      ),
+    );
+  }
+
+  Widget getFixedImage() {
+    return Transform.scale(
+      scale: 1.02,
+      child: CachedNetworkImage(
+        imageUrl: mapImageUrl ?? "",
+        width: double.infinity,
+        filterQuality: FilterQuality.low,
+        height: double.infinity,
+        fit: BoxFit.cover,
       ),
     );
   }
