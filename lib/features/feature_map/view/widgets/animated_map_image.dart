@@ -36,13 +36,7 @@ class AnimatedMapImage extends StatelessWidget {
                     borderRadius: BorderRadius.all(
                       Radius.circular(borderAnimation.value),
                     ),
-                    child: CachedNetworkImage(
-                      imageUrl: mapImageUrl ?? "",
-                      width: double.infinity,
-                      filterQuality: FilterQuality.low,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
+                    child: getFixedImage(),
                   ),
                 );
               },
@@ -50,13 +44,20 @@ class AnimatedMapImage extends StatelessWidget {
           },
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(0)),
-        child: CachedNetworkImage(
-          imageUrl: mapImageUrl ?? "",
-          width: double.infinity,
-          filterQuality: FilterQuality.low,
-          height: 100,
-          fit: BoxFit.cover,
-        ),
+        child: getFixedImage(),
+      ),
+    );
+  }
+
+  Widget getFixedImage() {
+    return Transform.scale(
+      scale: 1.02,
+      child: CachedNetworkImage(
+        imageUrl: mapImageUrl ?? "",
+        width: double.infinity,
+        filterQuality: FilterQuality.low,
+        height: double.infinity,
+        fit: BoxFit.cover,
       ),
     );
   }

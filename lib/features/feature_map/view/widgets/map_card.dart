@@ -47,13 +47,7 @@ class MapCard extends StatelessWidget {
                             borderRadius: BorderRadius.all(
                               Radius.circular(borderAnimation.value),
                             ),
-                            child: CachedNetworkImage(
-                              imageUrl: map.listViewIcon ?? "",
-                              width: double.infinity,
-                              filterQuality: FilterQuality.low,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                            child: getFixedImage(),
                           ),
                         );
                       },
@@ -61,13 +55,7 @@ class MapCard extends StatelessWidget {
                   },
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(12)),
-                child: CachedNetworkImage(
-                  imageUrl: map.listViewIcon ?? "",
-                  width: double.infinity,
-                  filterQuality: FilterQuality.low,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+                child: getFixedImage(),
               ),
             ),
             Positioned(
@@ -132,6 +120,19 @@ class MapCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Transform getFixedImage() {
+    return Transform.scale(
+      scale: 1.02,
+      child: CachedNetworkImage(
+        imageUrl: map.listViewIcon ?? "",
+        width: double.infinity,
+        filterQuality: FilterQuality.low,
+        height: double.infinity,
+        fit: BoxFit.cover,
       ),
     );
   }
