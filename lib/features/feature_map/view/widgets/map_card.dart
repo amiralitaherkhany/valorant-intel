@@ -69,11 +69,11 @@ class AnimatedMapImage extends StatelessWidget {
       tag: map.listViewIcon ?? "",
       flightShuttleBuilder:
           (
-            flightContext,
+            _,
             animation,
-            flightDirection,
-            fromHeroContext,
-            toHeroContext,
+            _,
+            _,
+            _,
           ) {
             final borderAnimation = Tween<double>(
               begin: 12,
@@ -83,26 +83,23 @@ class AnimatedMapImage extends StatelessWidget {
             return AnimatedBuilder(
               animation: borderAnimation,
               builder: (context, child) {
-                return Material(
-                  color: Colors.transparent,
-                  surfaceTintColor: Colors.transparent,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(borderAnimation.value),
-                    ),
-                    child: Transform.scale(
-                      scale: 1.02,
-                      child: CachedNetworkImage(
-                        imageUrl: map.listViewIcon ?? "",
-                        width: double.infinity,
-                        filterQuality: FilterQuality.low,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                return ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(borderAnimation.value),
+                  ),
+                  child: Transform.scale(
+                    scale: 1.02,
+                    child: child,
                   ),
                 );
               },
+              child: CachedNetworkImage(
+                imageUrl: map.listViewIcon ?? "",
+                width: double.infinity,
+                filterQuality: FilterQuality.low,
+                height: double.infinity,
+                fit: BoxFit.cover,
+              ),
             );
           },
       child: ClipRRect(
