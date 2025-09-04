@@ -68,20 +68,16 @@ class AnimatedMapImage extends StatelessWidget {
       tag: mapImageUrl ?? "",
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(0)),
-        child: getFixedImage(),
-      ),
-    );
-  }
-
-  Widget getFixedImage() {
-    return Transform.scale(
-      scale: 1.02,
-      child: CachedNetworkImage(
-        imageUrl: mapImageUrl ?? "",
-        width: double.infinity,
-        filterQuality: FilterQuality.low,
-        height: double.infinity,
-        fit: BoxFit.cover,
+        child: Transform.scale(
+          scale: 1.02,
+          child: CachedNetworkImage(
+            imageUrl: mapImageUrl ?? "",
+            width: double.infinity,
+            filterQuality: FilterQuality.low,
+            height: double.infinity,
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }
