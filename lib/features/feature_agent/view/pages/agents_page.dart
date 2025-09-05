@@ -35,20 +35,22 @@ class AgentsPage extends StatelessWidget {
               height: 150,
               radius: 12,
             ),
-            AgentSuccessState(agentList: final agentList) => AgentSuccessView(
+            AgentSuccessState(:final agentList) => AgentSuccessView(
               agentList: agentList,
             ),
             AgentErrorState(
-              message: final message,
-              cachedAgentList: final cachedAgentList,
+              :final message,
+              :final cachedAgentList,
             ) =>
-              state.cachedAgentList == null
+              cachedAgentList == null
                   ? CustomErrorView(
                       message: message,
                       onTryAgain: () =>
                           context.read<AgentBloc>().add(GetAllAgentsEvent()),
                     )
-                  : AgentSuccessView(agentList: cachedAgentList!),
+                  : AgentSuccessView(
+                      agentList: cachedAgentList,
+                    ),
           };
         },
       ),

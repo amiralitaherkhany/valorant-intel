@@ -35,12 +35,12 @@ class MapsPage extends StatelessWidget {
               height: 100,
               radius: 12,
             ),
-            MapSuccessState(mapList: final mapList) => MapSuccessView(
+            MapSuccessState(:final mapList) => MapSuccessView(
               mapList: mapList,
             ),
             MapErrorState(
-              message: final message,
-              cachedMapList: final cachedMapList,
+              :final message,
+              :final cachedMapList,
             ) =>
               cachedMapList == null
                   ? CustomErrorView(
