@@ -56,17 +56,6 @@ class MapsPage extends StatelessWidget {
   }
 }
 
-class MapLoadingView extends StatelessWidget {
-  const MapLoadingView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-}
-
 class MapSuccessView extends StatelessWidget {
   final List<GameMap> mapList;
   const MapSuccessView({super.key, required this.mapList});
