@@ -4,11 +4,11 @@ import 'ads_stats.dart';
 import 'damage_range.dart';
 
 class WeaponStats extends Equatable {
-  final int? fireRate;
+  final double? fireRate;
   final int? magazineSize;
   final double? runSpeedMultiplier;
   final double? equipTimeSeconds;
-  final int? reloadTimeSeconds;
+  final double? reloadTimeSeconds;
   final double? firstBulletAccuracy;
   final int? shotgunPelletCount;
   final String? wallPenetration;
@@ -39,11 +39,11 @@ class WeaponStats extends Equatable {
   });
 
   factory WeaponStats.fromMap(Map<String, dynamic> data) => WeaponStats(
-    fireRate: data['fireRate'] as int?,
+    fireRate: (data['fireRate'] as num?)?.toDouble(),
     magazineSize: data['magazineSize'] as int?,
     runSpeedMultiplier: (data['runSpeedMultiplier'] as num?)?.toDouble(),
     equipTimeSeconds: (data['equipTimeSeconds'] as num?)?.toDouble(),
-    reloadTimeSeconds: data['reloadTimeSeconds'] as int?,
+    reloadTimeSeconds: (data['reloadTimeSeconds'] as num?)?.toDouble(),
     firstBulletAccuracy: (data['firstBulletAccuracy'] as num?)?.toDouble(),
     shotgunPelletCount: data['shotgunPelletCount'] as int?,
     wallPenetration: data['wallPenetration'] as String?,
