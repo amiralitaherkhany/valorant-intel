@@ -65,6 +65,7 @@ class WeaponSuccessView extends StatelessWidget {
       itemBuilder: (context, index) => ListTile(
         title: Text(weaponList[index].displayName ?? ""),
       ),
+      itemCount: weaponList.length,
     );
   }
 }
