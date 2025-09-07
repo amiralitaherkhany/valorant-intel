@@ -17,25 +17,28 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        clipBehavior: Clip.hardEdge,
         padding: const EdgeInsets.all(0),
         width: double.infinity,
         margin: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(45),
+            ),
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.primary,
+              width: 2,
+            ),
+          ),
           color: Theme.of(context).colorScheme.surface,
-          border: Border.all(
-            color: Theme.of(context).colorScheme.primary,
-            width: 2.5,
-          ),
-          borderRadius: BorderRadius.circular(
-            20,
-          ),
         ),
         child: Stack(
           fit: StackFit.expand,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(
-                16,
+            ClipRSuperellipse(
+              borderRadius: BorderRadius.all(
+                Radius.circular(45),
               ),
               child: ImageFiltered(
                 imageFilter: ImageFilter.blur(
