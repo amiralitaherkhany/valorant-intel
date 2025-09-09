@@ -15,7 +15,7 @@ class AgentAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       flexibleSpace: FlexibleSpaceBar(
-        title: AnimatedAgentName(agent: agent),
+        title: AnimatedAgentName(agentDisplayName: agent.displayName),
         background: Container(
           padding: EdgeInsets.only(
             top: MediaQuery.viewPaddingOf(context).top,
@@ -79,18 +79,18 @@ class AgentAppBar extends StatelessWidget {
 class AnimatedAgentName extends StatelessWidget {
   const AnimatedAgentName({
     super.key,
-    required this.agent,
+    required this.agentDisplayName,
   });
 
-  final Agent agent;
+  final String agentDisplayName;
 
   @override
   Widget build(BuildContext context) {
     return Hero(
-      tag: agent.displayName,
+      tag: agentDisplayName,
       child: FittedBox(
         child: Text(
-          "${agent.displayName} ",
+          "$agentDisplayName ",
           style: Theme.of(
             context,
           ).textTheme.bodyMedium?.copyWith(fontSize: 20.0),
