@@ -11,7 +11,6 @@ class Weapon extends Equatable {
   final String? defaultSkinUuid;
   final String? displayIcon;
   final String? killStreamIcon;
-  final String? assetPath;
   final WeaponStats? weaponStats;
   final ShopData? shopData;
   final List<Skin>? skins;
@@ -23,7 +22,6 @@ class Weapon extends Equatable {
     this.defaultSkinUuid,
     this.displayIcon,
     this.killStreamIcon,
-    this.assetPath,
     this.weaponStats,
     this.shopData,
     this.skins,
@@ -36,7 +34,6 @@ class Weapon extends Equatable {
     defaultSkinUuid: data['defaultSkinUuid'] as String?,
     displayIcon: data['displayIcon'] as String?,
     killStreamIcon: data['killStreamIcon'] as String?,
-    assetPath: data['assetPath'] as String?,
     weaponStats: data['weaponStats'] == null
         ? null
         : WeaponStats.fromMap(data['weaponStats'] as Map<String, dynamic>),
@@ -55,7 +52,6 @@ class Weapon extends Equatable {
     'defaultSkinUuid': defaultSkinUuid,
     'displayIcon': displayIcon,
     'killStreamIcon': killStreamIcon,
-    'assetPath': assetPath,
     'weaponStats': weaponStats?.toMap(),
     'shopData': shopData?.toMap(),
     'skins': skins?.map((e) => e.toMap()).toList(),
@@ -70,7 +66,6 @@ class Weapon extends Equatable {
       defaultSkinUuid,
       displayIcon,
       killStreamIcon,
-      assetPath,
       weaponStats,
       shopData,
       skins,
