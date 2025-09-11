@@ -23,23 +23,23 @@ class CustomShimmerGridView extends StatelessWidget {
             vertical: 30,
           ),
           sliver: SliverToBoxAdapter(
-            child: Shimmer.fromColors(
-              baseColor: AppColorScheme.grey,
-              highlightColor: AppColorScheme.white,
-              child: GridView.builder(
-                addRepaintBoundaries: true,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: context.width > width
-                      ? context.width ~/ width
-                      : 1,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  mainAxisExtent: height.toDouble(),
-                ),
-                itemBuilder: (context, index) => Container(
+            child: GridView.builder(
+              addRepaintBoundaries: true,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 10,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: context.width > width
+                    ? context.width ~/ width
+                    : 1,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                mainAxisExtent: height.toDouble(),
+              ),
+              itemBuilder: (context, index) => Shimmer.fromColors(
+                baseColor: AppColorScheme.grey,
+                highlightColor: AppColorScheme.white,
+                child: Container(
                   width: double.infinity,
                   height: double.infinity,
                   decoration: BoxDecoration(
