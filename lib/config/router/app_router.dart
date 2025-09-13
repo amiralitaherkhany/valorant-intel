@@ -15,6 +15,8 @@ import 'package:valorant_intel/features/feature_map/view/pages/map_detail_page.d
 import 'package:valorant_intel/features/feature_map/view/pages/maps_page.dart';
 import 'package:valorant_intel/features/feature_settings/view/pages/settings_page.dart';
 import 'package:valorant_intel/features/feature_weapon/bloc/weapon_bloc.dart';
+import 'package:valorant_intel/features/feature_weapon/data/models/weapon.dart';
+import 'package:valorant_intel/features/feature_weapon/view/pages/weapon_detail_page.dart';
 import 'package:valorant_intel/features/feature_weapon/view/pages/weapons_page.dart';
 import 'package:valorant_intel/service_locator.dart';
 
@@ -99,6 +101,19 @@ class AppRouter {
                   child: const WeaponsPage(),
                 ),
               ),
+              routes: [
+                GoRoute(
+                  path: 'WeaponDetail',
+                  pageBuilder: (context, state) {
+                    return MaterialPage(
+                      key: state.pageKey,
+                      child: WeaponDetailPage(
+                        weapon: state.extra as Weapon,
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),

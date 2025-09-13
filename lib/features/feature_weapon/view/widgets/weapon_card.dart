@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:valorant_intel/config/theme/app_color_scheme.dart';
 import 'package:valorant_intel/features/feature_weapon/data/models/weapon.dart';
@@ -10,7 +11,8 @@ class WeaponCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () =>
+          context.go('/Collections/Weapons/WeaponDetail', extra: weapon),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(
