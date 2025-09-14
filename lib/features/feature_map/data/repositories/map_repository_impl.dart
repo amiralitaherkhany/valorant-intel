@@ -27,7 +27,7 @@ class MapRepositoryImpl implements MapRepository {
             ].contains(element.uuid),
           )
           .toList();
-      await _mapLocalDatasource.saveMaps(filteredMaps);
+      await _mapLocalDatasource.saveAllMaps(filteredMaps);
       return right(filteredMaps);
     } on ApiException catch (exception) {
       final mapList = await _mapLocalDatasource.getAllMaps();

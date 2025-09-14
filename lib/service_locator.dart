@@ -13,7 +13,9 @@ import 'package:valorant_intel/features/feature_agent/data/repositories/agent_re
 import 'package:valorant_intel/features/feature_agent/data/repositories/agent_repository_impl.dart';
 import 'package:valorant_intel/features/feature_map/bloc/map_bloc.dart';
 import 'package:valorant_intel/features/feature_map/data/datasources/local/map_local_datasource.dart';
+import 'package:valorant_intel/features/feature_map/data/datasources/local/map_local_datasource_impl.dart';
 import 'package:valorant_intel/features/feature_map/data/datasources/remote/map_remote_datasource.dart';
+import 'package:valorant_intel/features/feature_map/data/datasources/remote/map_remote_datasource_impl.dart';
 import 'package:valorant_intel/features/feature_map/data/repositories/map_repository.dart';
 import 'package:valorant_intel/features/feature_map/data/repositories/map_repository_impl.dart';
 import 'package:valorant_intel/features/feature_settings/bloc/settings_bloc.dart';
@@ -93,12 +95,12 @@ void registerDatasources() {
     ),
   );
   locator.registerFactory<MapRemoteDatasource>(
-    () => MapRemoteDatasource(
+    () => MapRemoteDatasourceImpl(
       dioClient: locator(),
     ),
   );
   locator.registerFactory<MapLocalDatasource>(
-    () => MapLocalDatasource(
+    () => MapLocalDatasourceImpl(
       database: locator(),
     ),
   );
