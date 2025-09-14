@@ -6,7 +6,9 @@ import 'package:valorant_intel/core/network/dio_client.dart';
 import 'package:valorant_intel/core/utils/network_utils.dart';
 import 'package:valorant_intel/features/feature_agent/bloc/agent_bloc.dart';
 import 'package:valorant_intel/features/feature_agent/data/datasources/local/agent_local_datasource.dart';
+import 'package:valorant_intel/features/feature_agent/data/datasources/local/agent_local_datasource_impl.dart';
 import 'package:valorant_intel/features/feature_agent/data/datasources/remote/agent_remote_datasource.dart';
+import 'package:valorant_intel/features/feature_agent/data/datasources/remote/agent_remote_datasource_impl.dart';
 import 'package:valorant_intel/features/feature_agent/data/repositories/agent_repository.dart';
 import 'package:valorant_intel/features/feature_agent/data/repositories/agent_repository_impl.dart';
 import 'package:valorant_intel/features/feature_map/bloc/map_bloc.dart';
@@ -81,12 +83,12 @@ void registerRepositories() {
 
 void registerDatasources() {
   locator.registerFactory<AgentRemoteDatasource>(
-    () => AgentRemoteDatasource(
+    () => AgentRemoteDatasourceImpl(
       dioClient: locator(),
     ),
   );
   locator.registerFactory<AgentLocalDatasource>(
-    () => AgentLocalDatasource(
+    () => AgentLocalDatasourceImpl(
       database: locator(),
     ),
   );

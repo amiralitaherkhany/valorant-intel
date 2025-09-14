@@ -19,7 +19,7 @@ class AgentRepositoryImpl implements AgentRepository {
   Future<Either<(String, List<Agent>?), List<Agent>>> getAllAgents() async {
     try {
       final agentList = await _agentRemoteDatasource.getAllAgents();
-      await _agentLocalDatasource.saveAgents(agentList);
+      await _agentLocalDatasource.saveAllAgents(agentList);
       return Right(agentList);
     } on ApiException catch (exception) {
       final agentList = await _agentLocalDatasource.getAllAgents();
