@@ -21,7 +21,9 @@ import 'package:valorant_intel/features/feature_map/data/repositories/map_reposi
 import 'package:valorant_intel/features/feature_settings/bloc/settings_bloc.dart';
 import 'package:valorant_intel/features/feature_weapon/bloc/weapon_bloc.dart';
 import 'package:valorant_intel/features/feature_weapon/data/datasources/local/weapon_local_datasource.dart';
+import 'package:valorant_intel/features/feature_weapon/data/datasources/local/weapon_local_datasource_impl.dart';
 import 'package:valorant_intel/features/feature_weapon/data/datasources/remote/weapon_remote_datasource.dart';
+import 'package:valorant_intel/features/feature_weapon/data/datasources/remote/weapon_remote_datasource_impl.dart';
 import 'package:valorant_intel/features/feature_weapon/data/repositories/weapon_repository.dart';
 import 'package:valorant_intel/features/feature_weapon/data/repositories/weapon_repository_impl.dart';
 
@@ -105,12 +107,12 @@ void registerDatasources() {
     ),
   );
   locator.registerFactory<WeaponRemoteDatasource>(
-    () => WeaponRemoteDatasource(
+    () => WeaponRemoteDatasourceImpl(
       dioClient: locator(),
     ),
   );
   locator.registerFactory<WeaponLocalDatasource>(
-    () => WeaponLocalDatasource(
+    () => WeaponLocalDatasourceImpl(
       database: locator(),
     ),
   );

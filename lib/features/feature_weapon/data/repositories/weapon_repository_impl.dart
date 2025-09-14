@@ -19,7 +19,7 @@ class WeaponRepositoryImpl implements WeaponRepository {
   Future<Either<(String, List<Weapon>?), List<Weapon>>> getAllWeapons() async {
     try {
       final weaponList = await _weaponRemoteDatasource.getAllWeapons();
-      await _weaponLocalDatasource.saveWeapons(weaponList);
+      await _weaponLocalDatasource.saveAllWeapons(weaponList);
       return Right(weaponList);
     } on ApiException catch (exception) {
       final weaponList = await _weaponLocalDatasource.getAllWeapons();
