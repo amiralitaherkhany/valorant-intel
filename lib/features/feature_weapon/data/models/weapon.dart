@@ -71,4 +71,9 @@ class Weapon extends Equatable {
       skins,
     ];
   }
+
+  String get getCategory {
+    final c = category ?? "";
+    return c.substring(c.indexOf("::") + 2);
+  }
 }
