@@ -14,53 +14,7 @@ class WeaponDetailPage extends StatelessWidget {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          SliverAppBar(
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: EdgeInsets.all(5),
-              title: Text(
-                weapon.displayName ?? "",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: 40,
-                ),
-              ),
-              background: Container(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.viewPaddingOf(context).top,
-                  bottom: 50,
-                ),
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF3E5151),
-                      Color(0xFFDECBA4),
-                    ],
-                    begin: AlignmentDirectional.topStart,
-                    end: AlignmentDirectional.bottomEnd,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: CachedNetworkImage(
-                    imageUrl: weapon.displayIcon ?? "",
-                    fit: BoxFit.contain,
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
-                ),
-              ),
-              centerTitle: true,
-            ),
-            elevation: 0,
-            scrolledUnderElevation: 0,
-            pinned: true,
-            floating: false,
-            snap: false,
-            stretch: true,
-            expandedHeight: 200,
-          ),
+          WeaponAppBar(weapon: weapon),
           SliverPadding(
             padding: EdgeInsetsGeometry.all(10),
             sliver: SliverToBoxAdapter(
@@ -81,16 +35,15 @@ class WeaponDetailPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: CachedNetworkImage(
                         imageUrl: weapon.killStreamIcon ?? "",
-                        width: 300,
                         height: 100,
                         placeholder: (context, url) {
                           return Shimmer.fromColors(
                             baseColor: AppColorScheme.grey,
                             highlightColor: AppColorScheme.white,
                             child: Container(
-                              width: 300,
                               height: 100,
                               decoration: BoxDecoration(
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                             ),
@@ -105,6 +58,9 @@ class WeaponDetailPage extends StatelessWidget {
               ),
             ),
           ),
+          const SliverToBoxAdapter(
+            child: Divider(indent: 20, endIndent: 20),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               childCount: 50,
@@ -113,6 +69,68 @@ class WeaponDetailPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class WeaponAppBar extends StatelessWidget {
+  const WeaponAppBar({
+    super.key,
+    required this.weapon,
+  });
+
+  final Weapon weapon;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      flexibleSpace: FlexibleSpaceBar(
+        titlePadding: EdgeInsets.all(6),
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            weapon.displayName ?? "",
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+              fontSize: 35,
+            ),
+          ),
+        ),
+        background: Container(
+          padding: EdgeInsets.only(
+            top: MediaQuery.viewPaddingOf(context).top,
+            bottom: 30,
+          ),
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF3E5151),
+                Color(0xFFDECBA4),
+              ],
+              begin: AlignmentDirectional.topStart,
+              end: AlignmentDirectional.bottomEnd,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(30),
+            child: CachedNetworkImage(
+              imageUrl: weapon.displayIcon ?? "",
+              fit: BoxFit.contain,
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
+          ),
+        ),
+        centerTitle: true,
+      ),
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      pinned: true,
+      floating: false,
+      snap: false,
+      stretch: true,
+      expandedHeight: 200,
     );
   }
 }
