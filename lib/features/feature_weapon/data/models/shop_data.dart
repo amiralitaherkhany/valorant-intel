@@ -12,7 +12,6 @@ class ShopData extends Equatable {
   final dynamic image;
   final String? newImage;
   final dynamic newImage2;
-  final String? assetPath;
 
   const ShopData({
     this.cost,
@@ -24,7 +23,6 @@ class ShopData extends Equatable {
     this.image,
     this.newImage,
     this.newImage2,
-    this.assetPath,
   });
 
   factory ShopData.fromMap(Map<String, dynamic> data) => ShopData(
@@ -39,7 +37,6 @@ class ShopData extends Equatable {
     image: data['image'] as dynamic,
     newImage: data['newImage'] as String?,
     newImage2: data['newImage2'] as dynamic,
-    assetPath: data['assetPath'] as String?,
   );
 
   Map<String, dynamic> toMap() => {
@@ -52,7 +49,6 @@ class ShopData extends Equatable {
     'image': image,
     'newImage': newImage,
     'newImage2': newImage2,
-    'assetPath': assetPath,
   };
 
   @override
@@ -67,7 +63,6 @@ class ShopData extends Equatable {
       image,
       newImage,
       newImage2,
-      assetPath,
     ];
   }
 }
