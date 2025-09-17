@@ -73,7 +73,9 @@ class Weapon extends Equatable {
   }
 
   String get getCategory {
-    final c = category ?? "";
-    return c.substring(c.indexOf("::") + 2);
+    if (category != null) {
+      return category!.substring(category!.indexOf("::") + 2);
+    }
+    return "";
   }
 }
