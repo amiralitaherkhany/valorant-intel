@@ -10,7 +10,6 @@ class Skin extends Equatable {
   final String? contentTierUuid;
   final String? displayIcon;
   final dynamic wallpaper;
-  final String? assetPath;
   final List<Chroma>? chromas;
   final List<Level>? levels;
 
@@ -21,7 +20,6 @@ class Skin extends Equatable {
     this.contentTierUuid,
     this.displayIcon,
     this.wallpaper,
-    this.assetPath,
     this.chromas,
     this.levels,
   });
@@ -33,7 +31,6 @@ class Skin extends Equatable {
     contentTierUuid: data['contentTierUuid'] as String?,
     displayIcon: data['displayIcon'] as String?,
     wallpaper: data['wallpaper'] as dynamic,
-    assetPath: data['assetPath'] as String?,
     chromas: (data['chromas'] as List<dynamic>?)
         ?.map((e) => Chroma.fromMap(e as Map<String, dynamic>))
         .toList(),
@@ -49,7 +46,6 @@ class Skin extends Equatable {
     'contentTierUuid': contentTierUuid,
     'displayIcon': displayIcon,
     'wallpaper': wallpaper,
-    'assetPath': assetPath,
     'chromas': chromas?.map((e) => e.toMap()).toList(),
     'levels': levels?.map((e) => e.toMap()).toList(),
   };
@@ -63,7 +59,6 @@ class Skin extends Equatable {
       contentTierUuid,
       displayIcon,
       wallpaper,
-      assetPath,
       chromas,
       levels,
     ];
