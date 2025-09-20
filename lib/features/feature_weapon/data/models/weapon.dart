@@ -25,22 +25,32 @@ class Weapon extends Equatable {
     this.skins,
   });
 
-  factory Weapon.fromMap(Map<String, dynamic> data) => Weapon(
-    uuid: data['uuid'] as String?,
-    displayName: data['displayName'] as String?,
-    category: data['category'] as String?,
-    displayIcon: data['displayIcon'] as String?,
-    killStreamIcon: data['killStreamIcon'] as String?,
-    weaponStats: data['weaponStats'] == null
-        ? null
-        : WeaponStats.fromMap(data['weaponStats'] as Map<String, dynamic>),
-    shopData: data['shopData'] == null
-        ? null
-        : ShopData.fromMap(data['shopData'] as Map<String, dynamic>),
-    skins: (data['skins'] as List<dynamic>?)
-        ?.map((e) => Skin.fromMap(e as Map<String, dynamic>))
-        .toList(),
-  );
+  factory Weapon.fromMap(Map<String, dynamic> data) {
+    return Weapon(
+      uuid: data['uuid'] as String?,
+      displayName: data['displayName'] as String?,
+      category: data['category'] as String?,
+      displayIcon: data['displayIcon'] as String?,
+      killStreamIcon: data['killStreamIcon'] as String?,
+      weaponStats: data['weaponStats'] == null
+          ? null
+          : WeaponStats.fromMap(data['weaponStats'] as Map<String, dynamic>),
+      shopData: data['shopData'] == null
+          ? null
+          : ShopData.fromMap(data['shopData'] as Map<String, dynamic>),
+      skins: (data['skins'] as List<dynamic>?)
+          ?.map((e) => Skin.fromMap(e as Map<String, dynamic>))
+          .toList()
+          .where(
+            (element) =>
+                element.displayName != "Random Favorite Skin" &&
+                element.displayName != null &&
+                !element.displayName!.contains("Standard ") &&
+                element.displayName != data['displayName'],
+          )
+          .toList(),
+    );
+  }
 
   Map<String, dynamic> toMap() => {
     'uuid': uuid,
