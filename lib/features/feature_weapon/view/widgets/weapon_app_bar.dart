@@ -22,6 +22,7 @@ class WeaponAppBar extends StatelessWidget {
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
               fontSize: 35,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),
