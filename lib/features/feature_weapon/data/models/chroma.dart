@@ -7,7 +7,6 @@ class Chroma extends Equatable {
   final String? fullRender;
   final dynamic swatch;
   final dynamic streamedVideo;
-  final String? assetPath;
 
   const Chroma({
     this.uuid,
@@ -16,7 +15,6 @@ class Chroma extends Equatable {
     this.fullRender,
     this.swatch,
     this.streamedVideo,
-    this.assetPath,
   });
 
   factory Chroma.fromMap(Map<String, dynamic> data) => Chroma(
@@ -26,7 +24,6 @@ class Chroma extends Equatable {
     fullRender: data['fullRender'] as String?,
     swatch: data['swatch'] as dynamic,
     streamedVideo: data['streamedVideo'] as dynamic,
-    assetPath: data['assetPath'] as String?,
   );
 
   Map<String, dynamic> toMap() => {
@@ -36,7 +33,6 @@ class Chroma extends Equatable {
     'fullRender': fullRender,
     'swatch': swatch,
     'streamedVideo': streamedVideo,
-    'assetPath': assetPath,
   };
 
   @override
@@ -48,7 +44,6 @@ class Chroma extends Equatable {
       fullRender,
       swatch,
       streamedVideo,
-      assetPath,
     ];
   }
 }
