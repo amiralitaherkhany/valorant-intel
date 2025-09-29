@@ -6,7 +6,6 @@ class Level extends Equatable {
   final dynamic levelItem;
   final String? displayIcon;
   final dynamic streamedVideo;
-  final String? assetPath;
 
   const Level({
     this.uuid,
@@ -14,7 +13,6 @@ class Level extends Equatable {
     this.levelItem,
     this.displayIcon,
     this.streamedVideo,
-    this.assetPath,
   });
 
   factory Level.fromMap(Map<String, dynamic> data) => Level(
@@ -23,7 +21,6 @@ class Level extends Equatable {
     levelItem: data['levelItem'] as dynamic,
     displayIcon: data['displayIcon'] as String?,
     streamedVideo: data['streamedVideo'] as dynamic,
-    assetPath: data['assetPath'] as String?,
   );
 
   Map<String, dynamic> toMap() => {
@@ -32,7 +29,6 @@ class Level extends Equatable {
     'levelItem': levelItem,
     'displayIcon': displayIcon,
     'streamedVideo': streamedVideo,
-    'assetPath': assetPath,
   };
 
   @override
@@ -43,7 +39,6 @@ class Level extends Equatable {
       levelItem,
       displayIcon,
       streamedVideo,
-      assetPath,
     ];
   }
 }
