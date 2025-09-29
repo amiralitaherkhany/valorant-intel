@@ -71,8 +71,8 @@ class WeaponDetailPage extends StatelessWidget {
             child: Divider(indent: 20, endIndent: 20),
           ),
           SliverPadding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 10),
-            sliver: WeaponSkinViewer(weapon: weapon),
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+            sliver: WeaponSkinViewer(skinList: weapon.skins ?? []),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
