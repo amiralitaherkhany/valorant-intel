@@ -12,7 +12,6 @@ A visually rich Flutter app that brings all Valorant in-game assets—agents, gu
 - Dependency Injection with **Get_It**
 - Caching with **Sembast Local Database**
 - HTTP Requests with **Dio**
-- **MVB** (Model-View-Bloc) Architecture
 
 ## 🚀 Features
 
